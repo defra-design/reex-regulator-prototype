@@ -1,0 +1,30 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+//
+
+@import "components/autocomplete";
+@import "components/header";
+@import "components/organisation-logo";
+@import "components/service-banner";
+
+code {
+	@include govuk-font($size: 19);
+	color: #d13118;
+	background-color: govuk-colour("light-grey");
+	padding: 0 govuk-spacing(1);
+}
+
+.unbranded {
+	background-color: govuk-functional-colour('surface-background');
+
+	.govuk-main-wrapper {
+		background-color: govuk-functional-colour('body-background');
+		padding: 40px 60px;
+		margin: 40px;
+	}
+
+	.govuk-width-container {
+		max-width: 1130px;
+	}
+}

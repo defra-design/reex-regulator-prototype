@@ -1,0 +1,15 @@
+.app-organisation-logo {
+	&__container {
+		text-transform: none;
+		display: block;
+		color: rgb(11, 12, 12);
+		height: auto;
+		width: auto;
+		direction: ltr;
+		text-decoration: none;
+		padding-top: 35px;
+		padding-left: 8px;
+		border-left: 2px solid rgb(11, 12, 12);//rgb(0, 163, 59);
+		background: url(/plugin-assets/govuk-frontend/dist/govuk/assets/images/govuk-crest.svg) 8px 0px / auto 32px no-repeat;
+	}
+}

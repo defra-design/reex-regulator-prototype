@@ -1,0 +1,128 @@
+{#
+For guidance on how to use layouts see:
+https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
+#}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
+
+
+{# Add the title(h1) to page title if it's set, add to each page with:
+{% set title = 'Example' %} #}
+{% block pageTitle %}
+	{{ (title+' –' if title) | striptags | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
+{% endblock %}
+
+
+{% block header %}
+	<div class="govuk-header">
+		<div class="govuk-header__container govuk-width-container">
+			<div class="govuk-header__logo">
+				<a href="#" class="govuk-header__homepage-link">
+					{{ serviceName }}
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="app-service-banner">
+		<div class="app-service-banner__container govuk-width-container">
+
+			{# Add a back link block to just override that and not the phase banner #}
+			{% block backLink %}
+				{# Add a javascript back link, remove on pages that don't need it with:
+				{% set back = false %} #}
+				{{ govukBackLink({
+					html: 'Back',
+					href: 'javascript:history.back()'
+				}) if back != false }}
+			{% endblock %}
+
+			{% block bannerContent %}{% endblock %}
+
+		</div>
+	</div>
+{% endblock %}
+
+
+{# Setup form question pages by default, override by using content block if not needed #}
+{% block content %}
+	<div class="govuk-grid-row">
+		<div class="govuk-grid-column-three-quarters govuk-grid-column-two-thirds-from-desktop">
+
+			{# Forms all post to themselves, action controlled by _routes.js in each prototype #}
+			<form method="post" novalidate>
+
+				{# Use the questions block on each page without needing to add in the rest of form structure #}
+				{% block questions %}{% endblock %}
+
+				{# Set default button to continue, use buttons block to override #}
+				{% block buttons %}
+					{{ govukButton({
+						text: 'Continue'
+					}) }}
+				{% endblock %}
+
+			</form>
+
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block footer %}
+	<div class="govuk-footer">
+		<div class="govuk-width-container">
+			<div class="govuk-footer__meta">
+				<div class="govuk-footer__meta-item">
+					<div class="app-organisation-logo">
+						<div class="app-organisation-logo__container">
+							<span class="app-organisation-logo__name">Department<br>for Environment,<br>Food &amp; Rural Affairs</span>
+						</div>
+					</div>
+				</div>
+				<div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+					<h2 class="govuk-visually-hidden">Support links</h2>
+					<ul class="govuk-footer__inline-list">
+						{% if local %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="/manage-prototype">
+								Manage prototype
+							</a>
+						</li>
+						{% endif %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="/manage-prototype/clear-data">
+								Clear data
+							</a>
+						</li>
+						{% if local and data['prototype-url'] %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="https://example-prototype.up.railway.app/" target="blank">
+								View hosted page (opens in new tab)
+							</a>
+						</li>
+						{% endif %}
+						{% if data['repository-url'] %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="https://github.com/chrisadesign/govuk-prototype-kit" target="blank">
+								View repository (opens in new tab)
+							</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{# Import scrips #}
+{% block bodyEnd %}
+	{% block scripts %}
+		{# Add autocomplete #}
+		<script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+
+		{% include 'govuk-prototype-kit/includes/scripts.html' %}
+		{% block pageScripts %}{% endblock %}
+	{% endblock %}
+{% endblock %}

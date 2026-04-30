@@ -1,0 +1,25 @@
+// Override some setting as we're not using the GOV.UK brand
+.app-service-banner {
+	background: linear-gradient(0deg, govuk-functional-colour('body-background') 75%, govuk-functional-colour('surface-border') 0);
+	border: 0;
+
+	* {
+		color: white;
+	}
+
+	.govuk-width-container {
+		background: var(--govuk-brand-colour);
+		padding: 0 40px 5px;
+	}
+
+	.govuk-back-link,
+	.govuk-breadcrumbs__link,
+	.govuk-breadcrumbs__list-item {
+		color: white;
+		@include govuk-link-style-inverse;
+
+		&:before {
+			border-color: white;
+		}
+	}
+}

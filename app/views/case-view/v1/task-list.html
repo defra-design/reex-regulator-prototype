@@ -1,0 +1,123 @@
+{% extends "layouts/unbranded.html" %}
+
+{% set title = 'Tasks' %}
+
+{% block backLink %}
+  {{ govukBreadcrumbs({
+    classes: 'govuk-!-display-inline-block',
+    items: [
+      {
+        html: 'Home',
+        href: '#0'
+      },
+      {
+        html: 'Registration and accreditiation',
+        href: '#0'
+      }
+    ]
+  }) }}
+
+{% endblock %}
+
+{% block bannerContent %}
+  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+    Acme Ltd
+  </h2>
+
+  <div style="display: flex; gap: 20px;">
+    <div><p><strong class="govuk-!-margin-right-1">ID:</strong> 100300</p></div>
+    <div><p><strong class="govuk-!-margin-right-1">Application type :</strong> Renew accreditation</p></div>
+    <div><p><strong class="govuk-!-margin-right-1">Material :</strong> Plastic</p></div>
+    <div><p><strong class="govuk-!-margin-right-1">Status:</strong> In progress</p></div>
+  </div>
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  <h2 class="govuk-heading-m">
+    Preliminary checks
+  </h2>
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          html: 'Address check'
+        },
+        href: '#0',
+        status: {
+          tag: {
+            html: 'Not started' if ,
+            classes: 'govuk-tag--blue'
+          }
+        }
+      }
+    ]
+  }) }}
+
+
+  <h2 class="govuk-heading-m">
+    Accreditation checks
+  </h2>
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          html: 'New task'
+        },
+        href: '#0',
+        status: {
+          tag: {
+            html: 'Not started',
+            classes: 'govuk-tag--blue'
+          }
+        }
+      },
+      {
+        title: {
+          html: 'New task'
+        },
+        href: '#0',
+        status: {
+          tag: {
+            html: 'Not started',
+            classes: 'govuk-tag--blue'
+          }
+        }
+      },
+      {
+        title: {
+          html: 'New task'
+        },
+        href: '#0',
+        status: {
+          tag: {
+            html: 'Not started',
+            classes: 'govuk-tag--blue'
+          }
+        }
+      }
+    ]
+  }) }}
+
+  <h2 class="govuk-heading-m">
+    Determination
+  </h2>
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          text: "Make a determination"
+        },
+        status: {
+          text: "Cannot complete yet",
+          classes: "govuk-task-list__status--cannot-start-yet"
+        }
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block buttons %}{% endblock %}

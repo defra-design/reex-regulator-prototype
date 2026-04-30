@@ -1,0 +1,8 @@
+// Override some setting as we're not using the GOV.UK logo
+.govuk-header__logo {
+	padding-top: 12px;
+}
+
+.govuk-header__homepage-link {
+	word-spacing: initial;
+}
