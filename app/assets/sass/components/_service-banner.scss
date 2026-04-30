@@ -7,9 +7,14 @@
 		color: white;
 	}
 
-	.govuk-width-container {
+	&__container {
 		background: var(--govuk-brand-colour);
-		padding: 0 40px 5px;
+		// padding: 1px 40px 5px;
+		padding-top: 1px;
+		@include govuk-responsive-padding(6, "right");
+		@include govuk-responsive-padding(1, "bottom");
+		@include govuk-responsive-padding(6, "left");
+		margin-top: -1px;
 	}
 
 	.govuk-back-link,

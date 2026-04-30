@@ -1,41 +1,35 @@
-{% extends "layouts/unbranded.html" %}
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
 
 {% set title = 'Tasks' %}
 
 {% block backLink %}
-  {{ govukBreadcrumbs({
-    classes: 'govuk-!-display-inline-block',
-    items: [
-      {
-        html: 'Home',
-        href: '#0'
-      },
-      {
-        html: 'Registration and accreditiation',
-        href: '#0'
-      }
-    ]
+  {{ govukBackLink({
+    html: 'Go back to all requests',
+    href: './'
   }) }}
-
 {% endblock %}
 
 {% block bannerContent %}
-  <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
-    Acme Ltd
-  </h2>
-
-  <div style="display: flex; gap: 20px;">
-    <div><p><strong class="govuk-!-margin-right-1">ID:</strong> 100300</p></div>
-    <div><p><strong class="govuk-!-margin-right-1">Application type :</strong> Renew accreditation</p></div>
-    <div><p><strong class="govuk-!-margin-right-1">Material :</strong> Plastic</p></div>
-    <div><p><strong class="govuk-!-margin-right-1">Status:</strong> In progress</p></div>
-  </div>
+  {% include './_banner.html' %}
 {% endblock %}
 
 {% block questions %}
   <h1 class="govuk-heading-l">
     {{ title }}
   </h1>
+
+
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download sampling and inspection report',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download business plan',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+  </div>
 
   <h2 class="govuk-heading-m">
     Preliminary checks
@@ -44,14 +38,28 @@
     items: [
       {
         title: {
-          html: 'Address check'
+          html: 'Check the addresses match'
         },
-        href: '#0',
+        href: 'address-check',
         status: {
+          html: 'Completed' if data['address-check-complete'],
           tag: {
-            html: 'Not started' if ,
+            html: 'Not started',
             classes: 'govuk-tag--blue'
-          }
+          } if not data['address-check-complete']
+        }
+      },
+      {
+        title: {
+          html: 'Confirm operator has passed fit and proper checks'
+        },
+        href: 'fit-and-proper-check',
+        status: {
+          html: 'Completed' if data['fit-and-proper-check-complete'],
+          tag: {
+            html: 'Not started',
+            classes: 'govuk-tag--blue'
+          } if not data['fit-and-proper-check-complete']
         }
       }
     ]

@@ -8,8 +8,9 @@ router.get('*', function(req, res, next){
   next()
 })
 
-router.post('/question', function (req, res) {
-  res.redirect('../');
+router.post('/address-check', function (req, res) {
+  req.session.data['address-check-complete'] = true
+  res.redirect('fit-and-proper-check');
 })
 
 

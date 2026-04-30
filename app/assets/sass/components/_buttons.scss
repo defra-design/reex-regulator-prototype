@@ -1,0 +1,35 @@
+.app-button--download {
+	$border-width: 1px;
+
+	@include govuk-font($size: 16);
+	background-color: govuk-functional-colour("body-background");
+	border-width: $border-width;
+	border-color: govuk-functional-colour("input-border");
+	padding: (govuk-spacing(2) - $border-width) govuk-spacing(2)
+	govuk-spacing(2);
+
+	&,
+	&:link,
+	&:visited,
+	&:active,
+	&:hover {
+		color: govuk-functional-colour("link");
+		box-shadow: none;
+	}
+
+	&:hover {
+		background-color: govuk-colour("black", $variant: "tint-95");
+
+		&[disabled] {
+			background-color: govuk-functional-colour("body-background");
+		}
+	}
+}
+
+.app-button__icon {
+	width: 20px;
+	height: 20px;
+	vertical-align: bottom;
+	margin-right: 5px;
+	color: govuk-functional-colour("text");
+}

@@ -1,0 +1,55 @@
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+
+{% set title = 'Has the Fit and Proper Person Assessment been carried out for this operator?' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all requests',
+    href: './'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  {{ govukRadios({
+    idPrefix: 'fit-and-proper-check',
+    name: 'fit-and-proper-check',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('fit-and-proper-check','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('fit-and-proper-check','No')
+      }
+    ]
+  }) }}
+
+  {{ govukTextarea({
+    name: 'fit-and-proper-check-notes',
+    id: 'fit-and-proper-check-notes',
+    value: data['fit-and-proper-check-notes'],
+    rows: 3,
+    label: {
+      html: 'Notes (optional)',
+      classes: 'govuk-label--s'
+    }
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  {% include './_buttons.html' %}
+{% endblock %}

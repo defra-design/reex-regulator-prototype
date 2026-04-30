@@ -36,8 +36,10 @@
 
       {{ govukButton({
         text: 'View prototype',
-        href: 'v'+version+'/task-list'
+        href: 'v'+version+'/?branded=true'
       }) }}
+
+      <p><a href="v{{version}}/?branded=false">View unbranded version</a></p>
 
 
 

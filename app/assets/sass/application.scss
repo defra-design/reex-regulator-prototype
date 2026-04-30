@@ -4,6 +4,7 @@
 //
 
 @import "components/autocomplete";
+@import "components/buttons";
 @import "components/header";
 @import "components/organisation-logo";
 @import "components/service-banner";
@@ -11,7 +12,7 @@
 code {
 	@include govuk-font($size: 19);
 	color: #d13118;
-	background-color: govuk-colour("light-grey");
+	background-color: govuk-colour("black", $variant: "tint-95");
 	padding: 0 govuk-spacing(1);
 }
 
@@ -27,4 +28,9 @@ code {
 	.govuk-width-container {
 		max-width: 1130px;
 	}
+}
+
+// Updated breadcrumbs margin to match back link
+.govuk-breadcrumbs {
+	margin-top: 10px;
 }

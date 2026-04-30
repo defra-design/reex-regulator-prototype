@@ -11,7 +11,6 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 	{{ (title+' –' if title) | striptags | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
 {% endblock %}
 
-
 {% block header %}
 	<div class="govuk-header">
 		<div class="govuk-header__container govuk-width-container">
@@ -23,23 +22,16 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 		</div>
 	</div>
 
-	<div class="app-service-banner">
-		<div class="app-service-banner__container govuk-width-container">
+	{% block serviceBanner %}
+		<div class="app-service-banner {{ 'app-service-banner--visibile' if showBanner == true }}">
+			<div class="app-service-banner__container govuk-width-container">
 
-			{# Add a back link block to just override that and not the phase banner #}
-			{% block backLink %}
-				{# Add a javascript back link, remove on pages that don't need it with:
-				{% set back = false %} #}
-				{{ govukBackLink({
-					html: 'Back',
-					href: 'javascript:history.back()'
-				}) if back != false }}
-			{% endblock %}
+				{% block backLink %}{% endblock %}
+				{% block bannerContent %}{% endblock %}
 
-			{% block bannerContent %}{% endblock %}
-
+			</div>
 		</div>
-	</div>
+	{% endblock %}
 {% endblock %}
 
 
@@ -96,14 +88,14 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 						</li>
 						{% if local and data['prototype-url'] %}
 						<li class="govuk-footer__inline-list-item">
-							<a class="govuk-footer__link" href="https://example-prototype.up.railway.app/" target="blank">
+							<a class="govuk-footer__link" href="{{data['prototype-url'] + currentURL}}" target="blank">
 								View hosted page (opens in new tab)
 							</a>
 						</li>
 						{% endif %}
 						{% if data['repository-url'] %}
 						<li class="govuk-footer__inline-list-item">
-							<a class="govuk-footer__link" href="https://github.com/chrisadesign/govuk-prototype-kit" target="blank">
+							<a class="govuk-footer__link" href="{{data['repository-url']}}" target="blank">
 								View repository (opens in new tab)
 							</a>
 						</li>

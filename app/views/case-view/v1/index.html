@@ -1,0 +1,65 @@
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+
+{% set title = 'All requests' %}
+
+{% block serviceBanner %}{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {{ govukTable({
+        caption: title,
+        captionClasses: 'govuk-table__caption--l',
+        firstCellIsHeader: true,
+        head: [
+          {
+            html: 'Request ID'
+          },
+          {
+            html: 'Request type'
+          },
+          {
+            html: 'Organisation name'
+          },
+          {
+            html: 'Organisation ID'
+          },
+          {
+            html: 'Status'
+          },
+          {
+            html: 'Due date',
+            format: 'numeric'
+          }
+        ],
+        rows: [
+          [
+            {
+              html: '<a href="task-list">00000489</a>'
+            },
+            {
+              html: 'Renew accreditation'
+            },
+            {
+              html: 'Acme Ltd'
+            },
+            {
+              html: '100300'
+            },
+            {
+              html: 'In progress'
+            },
+            {
+              html: 12 | daysInFuture,
+              format: 'numeric'
+            }
+          ]
+        ]
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

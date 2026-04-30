@@ -1,6 +1,7 @@
 {% extends "layouts/main.html" %}
 
-{% set back = false %}
+{% block serviceBanner %}{% endblock %}
+
 {% set title = 'Prototypes' %}
 
 {% block content %}
@@ -13,7 +14,7 @@
 
       <ul class="govuk-list govuk-list--bullet">
         <li>
-          <a href="case-view/">View a case</a>
+          <a class="govuk-link--no-visited-state" href="case-view/">View a case</a>
         </li>
       </ul>
 
