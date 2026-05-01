@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator ensure that the recorded weight of recycled material is accurate? Has the operator included: What checks will be carried out on this data? The frequency of the checks that will be carried out? Who actually carries out these checks?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'weight-recorded-notes',
+      id: 'weight-recorded-notes',
+      value: data['weight-recorded-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'weight-recorded',
+    name: 'weight-recorded',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('weight-recorded','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('weight-recorded','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('weight-recorded','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

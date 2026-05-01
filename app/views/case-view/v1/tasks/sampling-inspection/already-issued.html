@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator check that the material they receive from their supplier has not already had PERNs/PRNs issued on it? What documentation will they hold to show this?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'already-issued-notes',
+      id: 'already-issued-notes',
+      value: data['already-issued-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'already-issued',
+    name: 'already-issued',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('already-issued','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('already-issued','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('already-issued','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

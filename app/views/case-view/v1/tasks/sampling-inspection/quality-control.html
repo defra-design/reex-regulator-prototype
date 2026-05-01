@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> If packaging waste will be recycled in line with a quality protocol (such as NPPP) to demonstrate end of waste, what records will the operator hold to evidence meeting the conditions of the quality protocol?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'quality-control-notes',
+      id: 'quality-control-notes',
+      value: data['quality-control-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'quality-control',
+    name: 'quality-control',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('quality-control','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('quality-control','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('quality-control','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

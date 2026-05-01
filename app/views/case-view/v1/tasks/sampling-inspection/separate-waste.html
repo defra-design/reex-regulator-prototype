@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will they identify and separate any waste not eligible for issuing PRNs? How is this waste accounted for within their waste recording?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'separate-waste-notes',
+      id: 'separate-waste-notes',
+      value: data['separate-waste-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'separate-waste',
+    name: 'separate-waste',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('separate-waste','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('separate-waste','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('separate-waste','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

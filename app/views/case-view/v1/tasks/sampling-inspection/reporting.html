@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Who will be responsible for compliance with the reporting requirements detailed within Schedule 8 Part 3 (26)? What training and/or experience does this person have to make them suitable for this responsibility? What contingencies will be in place should there be any staff absence or departure? How will this data be quality checked?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'reporting-notes',
+      id: 'reporting-notes',
+      value: data['reporting-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'reporting',
+    name: 'reporting',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('reporting','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('reporting','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('reporting','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What records will the operator keep to verify that PRNs have only been issued in accordance with the method described to calculate the recyclable portion in the S&I plan.' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'method-described-notes',
+      id: 'method-described-notes',
+      value: data['method-described-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'method-described',
+    name: 'method-described',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('method-described','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('method-described','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('method-described','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

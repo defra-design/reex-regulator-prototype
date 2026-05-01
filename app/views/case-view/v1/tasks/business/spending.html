@@ -1,0 +1,70 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Business plan<span class="govuk-visually-hidden"> - </span></span> Review spending' %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p class="govuk-!-margin-bottom-2">The operator will need to show how they propose to use their income from PERNs, setting out the proportion of the income that they intend to spend on each of the following activities:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>investment in infrastructure for recycling or exporting, including both the development of new infrastructure, and support and maintenance of existing infrastructure</li>
+    <li>price support provided for buying packaging waste or selling recycled packaging waste</li>
+    <li>support for business collections</li>
+    <li>communications, including national and local information campaigns, and direct contacts with suppliers</li>
+    <li>the development of new markets for materials or goods made from recycled packaging waste in the UK and overseas</li>
+    <li>the development of new uses for recycled packaging waste</li>
+    <li>other activities</li>
+  </ul>
+
+  <p>They will then need to supply a short explanation of what they propose to do with the PRNs or PERNs income on each of the activities that they've said they intend to spend on.</p>
+
+
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'spending-notes',
+      id: 'spending-notes',
+      value: data['spending-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'spending',
+    name: 'spending',
+    fieldset: {
+      legend: {
+        html: 'Has the operator told us how they will spend their PRN money in the areas stated in the regulations? ',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('spending','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('spending','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('spending','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

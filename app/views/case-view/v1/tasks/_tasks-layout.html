@@ -1,0 +1,26 @@
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all requests',
+    href: '../'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include '../_banner.html' %}
+{% endblock %}
+
+{% block sideNav %}
+  {% include '../_side-nav.html' %}
+{% endblock %}
+
+{% block buttons %}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      text: 'Save and continue'
+    }) }}
+
+    {# <a class="govuk-link govuk-link--no-visited-state" href="task-list">Return to task list</a> #}
+  </div>
+{% endblock %}

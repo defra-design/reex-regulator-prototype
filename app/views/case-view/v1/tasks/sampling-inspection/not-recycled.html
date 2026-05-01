@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What will the operator\'s process be if PRNs are claimed on packaging waste which has not been recycled by the end of the following year from the date it was received on site? Have they included: How the material is identified? How this is recorded? ' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'not-recycled-notes',
+      id: 'not-recycled-notes',
+      value: data['not-recycled-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'not-recycled',
+    name: 'not-recycled',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('not-recycled','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('not-recycled','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('not-recycled','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

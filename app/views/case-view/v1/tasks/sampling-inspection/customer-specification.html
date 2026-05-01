@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> If packaging waste will be recycled in line with a customer specification, how the operator record this? How will the operator inform customers that PRNs have been claimed on any material or product they receive?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'customer-specification-notes',
+      id: 'customer-specification-notes',
+      value: data['customer-specification-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'customer-specification',
+    name: 'customer-specification',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('customer-specification','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('customer-specification','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('customer-specification','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

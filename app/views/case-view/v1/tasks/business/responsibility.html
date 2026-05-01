@@ -1,0 +1,64 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Business plan<span class="govuk-visually-hidden"> - </span></span> Check responsibility' %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p class="govuk-!-margin-bottom-2">The business plan should cover:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>who will be responsible for ensuring compliance with the business plan</li>
+    <li>what training and/or experience does that person has to make them suitable</li>
+    <li>what contingencies will be in place should there be any staff absence or departure</li>
+  </ul>
+
+
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'responsibility-notes',
+      id: 'responsibility-notes',
+      value: data['responsibility-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'responsibility',
+    name: 'responsibility',
+    fieldset: {
+      legend: {
+        html: 'Does the plan cover who will be responsible? ',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('responsibility','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('responsibility','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('responsibility','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

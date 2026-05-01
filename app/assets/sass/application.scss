@@ -8,6 +8,7 @@
 @import "components/header";
 @import "components/organisation-logo";
 @import "components/service-banner";
+@import "components/side-nav";
 
 code {
 	@include govuk-font($size: 19);

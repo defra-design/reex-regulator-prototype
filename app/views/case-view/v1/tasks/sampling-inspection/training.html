@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Who will be responsible for ensuring adequate training of staff has been carried out to ensure compliance with the Conditions of Accreditation detailed within Schedule 8 Part 3 and processes detailed within the Sampling and Inspection plan? How will you ensure the training is kept up to date and what records will be available to demonstrate this training has taken place?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'trainging-notes',
+      id: 'trainging-notes',
+      value: data['trainging-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'trainging',
+    name: 'trainging',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('trainging','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('trainging','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('trainging','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

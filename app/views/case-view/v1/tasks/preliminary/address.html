@@ -1,0 +1,63 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = 'Does the application address and the address on the Sampling and inspection plan match?' %}
+
+{% block questions %}
+  {% set applicationAddress %}
+    {{ govukInsetText({
+      html: '<strong>Application address:</strong> 1 Wyld Court, Addingrove, AA3 1AB',
+      classes: 'govuk-!-margin-0'
+    }) }}
+  {% endset -%}
+
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'address-notes',
+      id: 'address-notes',
+      value: data['address-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'address',
+    name: 'address',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    hint: {
+      html: applicationAddress
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('address','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('address','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('address','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

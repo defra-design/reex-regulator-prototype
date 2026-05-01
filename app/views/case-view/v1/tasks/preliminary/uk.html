@@ -1,0 +1,64 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = 'Established in the UK' %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p>If an overseas company has physical presence in the UK, they will need to be registered with Companies House.</p>
+
+  {{ govukInsetText({
+    html: 'This was confirmed automatically with Companies House, you can override the decision if neccessary'
+  }) }}
+
+
+
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'uk-notes',
+      id: 'uk-notes',
+      value: data['uk-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'uk',
+    name: 'uk',
+    fieldset: {
+      legend: {
+        html: 'Is the operator registered in the UK or have their head office or principle place of business in the UK?',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('uk','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('uk','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('uk','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

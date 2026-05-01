@@ -1,0 +1,28 @@
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+
+{% set title = 'Contact log' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all requests',
+    href: './'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block sideNav %}
+  {% include './_side-nav.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  <p>TBC</p>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

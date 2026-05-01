@@ -1,0 +1,17 @@
+<div class="govuk-grid-column-full govuk-grid-column-one-quarter-from-desktop">
+  {{
+    dwpSideNavigation({
+      selectedItem: currentPage,
+      items: [
+        {
+          text: 'Tasks',
+          href: currentPrototype+'/task-list'
+        },
+        {
+          text: 'Contact log',
+          href: currentPrototype+'/contact-log'
+        }
+      ]
+    })
+  }}
+</div>

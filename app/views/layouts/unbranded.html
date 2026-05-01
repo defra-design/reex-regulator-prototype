@@ -1,37 +1,23 @@
-{#
-For guidance on how to use layouts see:
-https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
-#}
-{% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
+{% extends "./main.html" %}
 {% set bodyClasses = "unbranded" %}
 
+{% block header %}
+	<div class="govuk-width-container">
+		<div class="govuk-grid-row">
+			<div class="govuk-grid-column-full govuk-!-margin-left-9 govuk-!-margin-right-9">
+				{% block backLink %}{% endblock %}
 
-{# Add the title(h1) to page title if it's set, add to each page with:
-{% set title = 'Example' %} #}
-{% block pageTitle %}
-	{{ (title+' –' if title) | striptags | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
+				{% block bannerContent %}{% endblock %}
+			</div>
+		</div>
+	</div>
 {% endblock %}
-
-
-{% block header %}{% endblock %}
 
 {# Setup form question pages by default, override by using content block if not needed #}
 {% block content %}
 	<div class="govuk-grid-row">
-		<div class="govuk-grid-column-full">
-			{% block backLink %}
-				{# Add a javascript back link, remove on pages that don't need it with:
-				{% set back = false %} #}
-				{{ govukBackLink({
-					html: 'Back',
-					href: 'javascript:history.back()'
-				}) if back != false }}
-			{% endblock %}
-
-			{% block bannerContent %}{% endblock %}
-		</div>
-
-		<div class="govuk-grid-column-three-quarters govuk-grid-column-two-thirds-from-desktop">
+		{% block sideNav %}{% endblock %}
+		<div class="govuk-grid-column-full govuk-grid-column-three-quarters-from-desktop">
 
 			{# Forms all post to themselves, action controlled by _routes.js in each prototype #}
 			<form method="post" novalidate>
@@ -53,16 +39,47 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {% endblock %}
 
 
-{% block footer %}{% endblock %}
-
-
-{# Import scrips #}
-{% block bodyEnd %}
-	{% block scripts %}
-		{# Add autocomplete #}
-		<script src="/public/javascripts/accessible-autocomplete.min.js"></script>
-
-		{% include 'govuk-prototype-kit/includes/scripts.html' %}
-		{% block pageScripts %}{% endblock %}
-	{% endblock %}
+{% block footer %}
+	<div class="govuk-!-padding-top-9">
+		<div class="govuk-width-container">
+			<div class="govuk-footer__meta govuk-!-margin-left-9 govuk-!-margin-right-9">
+				<div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+					<h2 class="govuk-visually-hidden">Support links</h2>
+					<ul class="govuk-footer__inline-list">
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="/">
+								Prototype homepage
+							</a>
+						</li>
+						{% if local %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="/manage-prototype">
+								Manage prototype
+							</a>
+						</li>
+						{% endif %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="/manage-prototype/clear-data">
+								Clear data
+							</a>
+						</li>
+						{% if local and data['prototype-url'] %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="{{data['prototype-url'] + currentURL}}" target="blank">
+								View hosted page (opens in new tab)
+							</a>
+						</li>
+						{% endif %}
+						{% if data['repository-url'] %}
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="{{data['repository-url']}}" target="blank">
+								View repository (opens in new tab)
+							</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

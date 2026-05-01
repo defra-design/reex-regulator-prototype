@@ -11,6 +11,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 	{{ (title+' –' if title) | striptags | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
 {% endblock %}
 
+
 {% block header %}
 	<div class="govuk-header">
 		<div class="govuk-header__container govuk-width-container">
@@ -22,10 +23,12 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 		</div>
 	</div>
 
+	{# Create a service banner following the header with a toggle to show #}
 	{% block serviceBanner %}
 		<div class="app-service-banner {{ 'app-service-banner--visibile' if showBanner == true }}">
 			<div class="app-service-banner__container govuk-width-container">
 
+				{# Setup blocks for back link and banner content #}
 				{% block backLink %}{% endblock %}
 				{% block bannerContent %}{% endblock %}
 
@@ -38,7 +41,8 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {# Setup form question pages by default, override by using content block if not needed #}
 {% block content %}
 	<div class="govuk-grid-row">
-		<div class="govuk-grid-column-three-quarters govuk-grid-column-two-thirds-from-desktop">
+		{% block sideNav %}{% endblock %}
+		<div class="govuk-grid-column-full govuk-grid-column-three-quarters-from-desktop">
 
 			{# Forms all post to themselves, action controlled by _routes.js in each prototype #}
 			<form method="post" novalidate>
@@ -61,6 +65,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 
 {% block footer %}
+	{# Remove GOVUK/crown items and add in Defra logo #}
 	<div class="govuk-footer">
 		<div class="govuk-width-container">
 			<div class="govuk-footer__meta">
@@ -74,6 +79,11 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 				<div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
 					<h2 class="govuk-visually-hidden">Support links</h2>
 					<ul class="govuk-footer__inline-list">
+						<li class="govuk-footer__inline-list-item">
+							<a class="govuk-footer__link" href="/">
+								Prototype homepage
+							</a>
+						</li>
 						{% if local %}
 						<li class="govuk-footer__inline-list-item">
 							<a class="govuk-footer__link" href="/manage-prototype">

@@ -1,0 +1,62 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Who will be responsible for ensuring compliance with the processes detailed within the Sampling and Inspection plan uploaded as part of this application for accreditation? ' %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+  <p>What training and/or experience does this person have to make them suitable for this responsibility?</p>
+
+  <p>What contingencies will be in place should there be any staff absence or departure?</p>
+
+  <p>This also includes the processes and procedures outlined within the Sampling and Inspection plan - Part 1 that has been approved by the regulator in writing for the corresponding registration.</p>
+
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'compliance-responsibility-notes',
+      id: 'compliance-responsibility-notes',
+      value: data['compliance-responsibility-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'compliance-responsibility',
+    name: 'compliance-responsibility',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('compliance-responsibility','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('compliance-responsibility','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('compliance-responsibility','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}

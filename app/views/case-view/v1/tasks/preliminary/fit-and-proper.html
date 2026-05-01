@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = 'Has the Fit and Proper Person Assessment been carried out for this operator?' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'fit-and-proper-notes',
+      id: 'fit-and-proper-notes',
+      value: data['fit-and-proper-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'fit-and-proper',
+    name: 'fit-and-proper',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('fit-and-proper','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('fit-and-proper','No'),
+          conditional: {
+            html: notes
+          }
+        },
+        {
+          divider: 'or'
+        },
+        {
+          html: 'More information needed',
+          value: 'More information needed',
+          checked: checked('fit-and-proper','More information needed')
+        }
+    ]
+  }) }}
+{% endblock %}

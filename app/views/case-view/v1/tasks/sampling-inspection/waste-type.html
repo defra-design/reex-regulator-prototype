@@ -1,0 +1,53 @@
+{% extends '../_tasks-layout.html' %}
+
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What documentation will the operator hold to confirm the original type and form of that waste? Does it confirm the original producer of the waste? Will they receive any waste packaging of which the original type and form isn\'t readily identifiable, such as plastic regrind or glass cullet? If the waste isn\'t readily identifiable, the documentation must confirm the original type and form of that material is packaging waste and that it became waste in the UK.' %}
+
+{% block questions %}
+  {% set notes %}
+    {{ govukTextarea({
+      name: 'waste-type-notes',
+      id: 'waste-type-notes',
+      value: data['waste-type-notes'],
+      rows: 3,
+      label: {
+        html: 'Notes',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'waste-type',
+    name: 'waste-type',
+    fieldset: {
+      legend: {
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        checked: checked('waste-type','Yes')
+      },
+      {
+        html: 'No',
+        value: 'No',
+        checked: checked('waste-type','No'),
+        conditional: {
+          html: notes
+        }
+      },
+      {
+        divider: 'or'
+      },
+      {
+        html: 'More information needed',
+        value: 'More information needed',
+        checked: checked('waste-type','More information needed')
+      }
+    ]
+  }) }}
+{% endblock %}
