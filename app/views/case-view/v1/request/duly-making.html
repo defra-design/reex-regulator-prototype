@@ -1,0 +1,159 @@
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+
+{% set title = 'Duly making' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all requests',
+    href: currentPrototype+'/'
+  }) }}
+{% endblock %}
+
+{# {% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %} #}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  <h2 class="govuk-heading-m">
+    Application details
+  </h2>
+
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: {
+          html: 'Organisation name'
+        },
+        value: {
+          html: request.orgName
+        }
+      },
+      {
+        key: {
+          html: 'Organisation ID'
+        },
+        value: {
+          html: request.orgId
+        }
+      },
+      {
+        key: {
+          html: 'Application type'
+        },
+        value: {
+          html: request.type
+        }
+      },
+      {
+        key: {
+          html: 'Organisation type'
+        },
+        value: {
+          html: request.orgType
+        }
+      },
+      {
+        key: {
+          html: 'Repocessor address'
+        },
+        value: {
+          html: request.reprocessorAddress
+        }
+      },
+      {
+        key: {
+          html: 'Material'
+        },
+        value: {
+          html: request.material
+        }
+      },
+      {
+        key: {
+          html: 'Tonnage band'
+        },
+        value: {
+          html: request.tonnageBand
+        }
+      },
+      {
+        key: {
+          html: 'Regulator'
+        },
+        value: {
+          html: request.regulator
+        }
+      },
+      {
+        key: {
+          html: 'Charge'
+        },
+        value: {
+          html: request.charge | currency
+        }
+      },
+      {
+        key: {
+          html: 'Paid online'
+        },
+        value: {
+          html: 'Yes'
+        }
+      } if request.chargePaidOnline == 'Yes' else {
+        key: {
+          html: 'Payment reference'
+        },
+        value: {
+          html: request.chargeRef
+        }
+      }
+    ]
+  }) }}
+
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download business plan',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download sampling and inspection report',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+  </div>
+
+
+
+
+  {{ govukCheckboxes({
+    idPrefix: 'duly-making',
+    name: 'duly-making',
+    fieldset: {
+      legend: {
+        html: 'Duly making checks',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    },
+    items: [
+      {
+        html: 'Payment made',
+        value: 'Payment made'
+      } if request.chargePaidOnline == 'No',
+      {
+        html: 'Application and plans in acceptable state',
+        value: 'Application and plans in acceptable state',
+        checked: checked('duly-making','Application and plans in acceptable state')
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  {{ govukButton({
+    html: 'Save and start request'
+  }) }}
+{% endblock %}

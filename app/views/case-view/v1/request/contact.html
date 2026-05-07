@@ -1,6 +1,6 @@
 {% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
 
-{% set title = 'Contact log' %}
+{% set title = 'Add contact to log' %}
 
 {% block backLink %}
   {{ govukBackLink({
@@ -19,10 +19,13 @@
 
 {% block questions %}
   <h1 class="govuk-heading-l">
-    {{ title }}
+    {{ title | safe }}
   </h1>
-
   <p>TBC</p>
 {% endblock %}
 
-{% block buttons %}{% endblock %}
+{% block buttons %}
+  {{ govukButton({
+    html: 'Save and continue'
+  }) }}
+{% endblock %}

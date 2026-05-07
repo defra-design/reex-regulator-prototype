@@ -23,9 +23,9 @@
 
   {% set notes %}
     {{ govukTextarea({
-      name: 'spending-notes',
-      id: 'spending-notes',
-      value: data['spending-notes'],
+      name: 'spendingNotes',
+      id: 'spendingNotes',
+      value: request.spendingNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -37,6 +37,7 @@
   {{ govukRadios({
     idPrefix: 'spending',
     name: 'spending',
+    value: request.spending,
     fieldset: {
       legend: {
         html: 'Has the operator told us how they will spend their PRN money in the areas stated in the regulations? ',
@@ -46,13 +47,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('spending','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('spending','No'),
         conditional: {
           html: notes
         }
@@ -62,8 +61,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('spending','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

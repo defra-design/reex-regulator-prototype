@@ -12,9 +12,9 @@
 
   {% set notes %}
     {{ govukTextarea({
-      name: 'quality-responsibility-notes',
-      id: 'quality-responsibility-notes',
-      value: data['quality-responsibility-notes'],
+      name: 'qualityResponsibilityNotes',
+      id: 'qualityResponsibilityNotes',
+      value: data['qualityResponsibilityNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -24,8 +24,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'quality-responsibility',
-    name: 'quality-responsibility',
+    idPrefix: 'qualityResponsibility',
+    name: 'qualityResponsibility',
     fieldset: {
       legend: {
         html: title,
@@ -37,12 +37,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('quality-responsibility','Yes')
+        checked: checked('qualityResponsibility','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('quality-responsibility','No'),
+        checked: checked('qualityResponsibility','No'),
         conditional: {
           html: notes
         }
@@ -53,7 +53,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('quality-responsibility','More information needed')
+        checked: checked('qualityResponsibility','More information needed')
       }
     ]
   }) }}

@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What evidence will the operator hold to demonstrate a full audit trail from the point of receiving the UK Packaging waste, up to issuing PRNs and that the material has been recycled, including the date of which this has occurred?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> If packaging waste will be recycled in line with a quality protocol (such as NPPP) to demonstrate end of waste, what records will the operator hold to evidence meeting the conditions of the quality protocol?' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'audit-trail-notes',
-      id: 'audit-trail-notes',
-      value: data['audit-trail-notes'],
+      name: 'qualityControlNotes',
+      id: 'qualityControlNotes',
+      value: data['qualityControlNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'audit-trail',
-    name: 'audit-trail',
+    idPrefix: 'qualityControl',
+    name: 'qualityControl',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('audit-trail','Yes')
+        checked: checked('qualityControl','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('audit-trail','No'),
+        checked: checked('qualityControl','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('audit-trail','More information needed')
+        checked: checked('qualityControl','More information needed')
       }
     ]
   }) }}

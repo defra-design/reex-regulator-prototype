@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator check that the material they receive from their supplier has not already had PERNs/PRNs issued on it? What documentation will they hold to show this?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What will the operator\'s process be if PRNs are claimed on packaging waste which has not been recycled by the end of the following year from the date it was received on site? Have they included: How the material is identified? How this is recorded? ' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'already-issued-notes',
-      id: 'already-issued-notes',
-      value: data['already-issued-notes'],
+      name: 'notRecycledNotes',
+      id: 'notRecycledNotes',
+      value: data['notRecycledNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'already-issued',
-    name: 'already-issued',
+    idPrefix: 'notRecycled',
+    name: 'notRecycled',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('already-issued','Yes')
+        checked: checked('notRecycled','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('already-issued','No'),
+        checked: checked('notRecycled','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('already-issued','More information needed')
+        checked: checked('notRecycled','More information needed')
       }
     ]
   }) }}

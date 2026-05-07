@@ -1,0 +1,355 @@
+{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+
+{% set title = 'Tasks' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all requests',
+    href: currentPrototype+'/'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block sideNav %}
+  {% include './_side-nav.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download business plan',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download sampling and inspection report',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+  </div>
+
+  <h2 class="govuk-heading-m">
+    Preliminary checks
+  </h2>
+
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          html: 'Check the addresses match'
+        },
+        href: 'tasks/preliminary/address',
+        status: {
+          html: 'Completed' if request.address == 'Yes',
+          tag: {
+            html: ('Failed' if request.address == 'No')+('Queried' if request.address == 'More information needed')+('Not started' if not request.address),
+            classes: 'govuk-tag--'+('red' if request.address == 'No')+('orange' if request.address == 'More information needed')+('govuk-tag--blue' if not request.address)
+          } if request.address != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Confirm operator has passed fit and proper checks'
+        },
+        href: 'tasks/preliminary/fitAndProper',
+        status: {
+          html: 'Completed' if request.fitAndProper == 'Yes',
+          tag: {
+            html: ('Failed' if request.fitAndProper == 'No')+('Queried' if request.fitAndProper == 'More information needed')+('Not started' if not request.fitAndProper),
+            classes: 'govuk-tag--'+('red' if request.fitAndProper == 'No')+('orange' if request.fitAndProper == 'More information needed')+('govuk-tag--blue' if not request.fitAndProper)
+          } if request.fitAndProper != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Confirm estabilished in UK'
+        },
+        href: 'tasks/preliminary/uk',
+        status: {
+          html: 'Completed' if request.uk == 'Yes',
+          tag: {
+            html: ('Failed' if request.uk == 'No')+('Queried' if request.uk == 'More information needed')+('Not started' if not request.uk),
+            classes: 'govuk-tag--'+('red' if request.uk == 'No')+('orange' if request.uk == 'More information needed')+('govuk-tag--blue' if not request.uk)
+          } if request.uk != 'Yes'
+        }
+      }
+    ]
+  }) }}
+
+
+  <h2 class="govuk-heading-m">
+    Business plan
+  </h2>
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          html: 'Review spending'
+        },
+        href: 'tasks/business/spending',
+        status: {
+          html: 'Completed' if request.spending == 'Yes',
+          tag: {
+            html: ('Failed' if request.spending == 'No')+('Queried' if request.spending == 'More information needed')+('Not started' if not request.spending),
+            classes: 'govuk-tag--'+('red' if request.spending == 'No')+('orange' if request.spending == 'More information needed')+('govuk-tag--blue' if not request.spending)
+          } if request.spending != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Evidenced revenue'
+        },
+        href: 'tasks/business/revenue',
+        status: {
+          html: 'Completed' if request.revenue == 'Yes',
+          tag: {
+            html: ('Failed' if request.revenue == 'No')+('Queried' if request.revenue == 'More information needed')+('Not started' if not request.revenue),
+            classes: 'govuk-tag--'+('red' if request.revenue == 'No')+('orange' if request.revenue == 'More information needed')+('govuk-tag--blue' if not request.revenue)
+          } if request.revenue != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Check responsibility'
+        },
+        href: 'tasks/business/responsibility',
+        status: {
+          html: 'Completed' if request.responsibility == 'Yes',
+          tag: {
+            html: ('Failed' if request.responsibility == 'No')+('Queried' if request.responsibility == 'More information needed')+('Not started' if not request.responsibility),
+            classes: 'govuk-tag--'+('red' if request.responsibility == 'No')+('orange' if request.responsibility == 'More information needed')+('govuk-tag--blue' if not request.responsibility)
+          } if request.responsibility != 'Yes'
+        }
+      }
+    ]
+  }) }}
+
+
+  <h2 class="govuk-heading-m">
+    Sampling and inspection plan
+  </h2>
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          html: 'PRN/PERNs already issued'
+        },
+        href: 'tasks/sampling-inspection/alreadyIssued',
+        status: {
+          html: 'Completed' if request.alreadyIssued == 'Yes',
+          tag: {
+            html: ('Failed' if request.alreadyIssued == 'No')+('Queried' if request.alreadyIssued == 'More information needed')+('Not started' if not request.alreadyIssued),
+            classes: 'govuk-tag--'+('red' if request.alreadyIssued == 'No')+('orange' if request.alreadyIssued == 'More information needed')+('govuk-tag--blue' if not request.alreadyIssued)
+          } if request.alreadyIssued != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Separate waste'
+        },
+        href: 'tasks/sampling-inspection/separateWaste',
+        status: {
+          html: 'Completed' if request.separateWaste == 'Yes',
+          tag: {
+            html: ('Failed' if request.separateWaste == 'No')+('Queried' if request.separateWaste == 'More information needed')+('Not started' if not request.separateWaste),
+            classes: 'govuk-tag--'+('red' if request.separateWaste == 'No')+('orange' if request.separateWaste == 'More information needed')+('govuk-tag--blue' if not request.separateWaste)
+          } if request.separateWaste != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Waste type'
+        },
+        href: 'tasks/sampling-inspection/wasteType',
+        status: {
+          html: 'Completed' if request.wasteType == 'Yes',
+          tag: {
+            html: ('Failed' if request.wasteType == 'No')+('Queried' if request.wasteType == 'More information needed')+('Not started' if not request.wasteType),
+            classes: 'govuk-tag--'+('red' if request.wasteType == 'No')+('orange' if request.wasteType == 'More information needed')+('govuk-tag--blue' if not request.wasteType)
+          } if request.wasteType != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'PRN weight'
+        },
+        href: 'tasks/sampling-inspection/prnWeight',
+        status: {
+          html: 'Completed' if request.prnWeight == 'Yes',
+          tag: {
+            html: ('Failed' if request.prnWeight == 'No')+('Queried' if request.prnWeight == 'More information needed')+('Not started' if not request.prnWeight),
+            classes: 'govuk-tag--'+('red' if request.prnWeight == 'No')+('orange' if request.prnWeight == 'More information needed')+('govuk-tag--blue' if not request.prnWeight)
+          } if request.prnWeight != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Method described'
+        },
+        href: 'tasks/sampling-inspection/methodDescribed',
+        status: {
+          html: 'Completed' if request.methodDescribed == 'Yes',
+          tag: {
+            html: ('Failed' if request.methodDescribed == 'No')+('Queried' if request.methodDescribed == 'More information needed')+('Not started' if not request.methodDescribed),
+            classes: 'govuk-tag--'+('red' if request.methodDescribed == 'No')+('orange' if request.methodDescribed == 'More information needed')+('govuk-tag--blue' if not request.methodDescribed)
+          } if request.methodDescribed != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Quality control'
+        },
+        href: 'tasks/sampling-inspection/qualityControl',
+        status: {
+          html: 'Completed' if request.qualityControl == 'Yes',
+          tag: {
+            html: ('Failed' if request.qualityControl == 'No')+('Queried' if request.qualityControl == 'More information needed')+('Not started' if not request.qualityControl),
+            classes: 'govuk-tag--'+('red' if request.qualityControl == 'No')+('orange' if request.qualityControl == 'More information needed')+('govuk-tag--blue' if not request.qualityControl)
+          } if request.qualityControl != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Customer specification'
+        },
+        href: 'tasks/sampling-inspection/customerSpecification',
+        status: {
+          html: 'Completed' if request.customerSpecification == 'Yes',
+          tag: {
+            html: ('Failed' if request.customerSpecification == 'No')+('Queried' if request.customerSpecification == 'More information needed')+('Not started' if not request.customerSpecification),
+            classes: 'govuk-tag--'+('red' if request.customerSpecification == 'No')+('orange' if request.customerSpecification == 'More information needed')+('govuk-tag--blue' if not request.customerSpecification)
+          } if request.customerSpecification != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Weight recorded'
+        },
+        href: 'tasks/sampling-inspection/weightRecorded',
+        status: {
+          html: 'Completed' if request.weightRecorded == 'Yes',
+          tag: {
+            html: ('Failed' if request.weightRecorded == 'No')+('Queried' if request.weightRecorded == 'More information needed')+('Not started' if not request.weightRecorded),
+            classes: 'govuk-tag--'+('red' if request.weightRecorded == 'No')+('orange' if request.weightRecorded == 'More information needed')+('govuk-tag--blue' if not request.weightRecorded)
+          } if request.weightRecorded != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Departure and destination'
+        },
+        href: 'tasks/sampling-inspection/departureDestination',
+        status: {
+          html: 'Completed' if request.departureDestination == 'Yes',
+          tag: {
+            html: ('Failed' if request.departureDestination == 'No')+('Queried' if request.departureDestination == 'More information needed')+('Not started' if not request.departureDestination),
+            classes: 'govuk-tag--'+('red' if request.departureDestination == 'No')+('orange' if request.departureDestination == 'More information needed')+('govuk-tag--blue' if not request.departureDestination)
+          } if request.departureDestination != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'PRN/PERNs already issued'
+        },
+        href: 'tasks/sampling-inspection/alreadyIssued',
+        status: {
+          html: 'Completed' if request.alreadyIssued == 'Yes',
+          tag: {
+            html: ('Failed' if request.alreadyIssued == 'No')+('Queried' if request.alreadyIssued == 'More information needed')+('Not started' if not request.alreadyIssued),
+            classes: 'govuk-tag--'+('red' if request.alreadyIssued == 'No')+('orange' if request.alreadyIssued == 'More information needed')+('govuk-tag--blue' if not request.alreadyIssued)
+          } if request.alreadyIssued != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Not recycled'
+        },
+        href: 'tasks/sampling-inspection/notRecycled',
+        status: {
+          html: 'Completed' if request.notRecycled == 'Yes',
+          tag: {
+            html: ('Failed' if request.notRecycled == 'No')+('Queried' if request.notRecycled == 'More information needed')+('Not started' if not request.notRecycled),
+            classes: 'govuk-tag--'+('red' if request.notRecycled == 'No')+('orange' if request.notRecycled == 'More information needed')+('govuk-tag--blue' if not request.notRecycled)
+          } if request.notRecycled != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Compliance responsibility'
+        },
+        href: 'tasks/sampling-inspection/complianceResponsibility',
+        status: {
+          html: 'Completed' if request.complianceResponsibility == 'Yes',
+          tag: {
+            html: ('Failed' if request.complianceResponsibility == 'No')+('Queried' if request.complianceResponsibility == 'More information needed')+('Not started' if not request.complianceResponsibility),
+            classes: 'govuk-tag--'+('red' if request.complianceResponsibility == 'No')+('orange' if request.complianceResponsibility == 'More information needed')+('govuk-tag--blue' if not request.complianceResponsibility)
+          } if request.complianceResponsibility != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Quality responsibility'
+        },
+        href: 'tasks/sampling-inspection/qualityResponsibility',
+        status: {
+          html: 'Completed' if request.qualityResponsibility == 'Yes',
+          tag: {
+            html: ('Failed' if request.qualityResponsibility == 'No')+('Queried' if request.qualityResponsibility == 'More information needed')+('Not started' if not request.qualityResponsibility),
+            classes: 'govuk-tag--'+('red' if request.qualityResponsibility == 'No')+('orange' if request.qualityResponsibility == 'More information needed')+('govuk-tag--blue' if not request.qualityResponsibility)
+          } if request.qualityResponsibility != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Training'
+        },
+        href: 'tasks/sampling-inspection/training',
+        status: {
+          html: 'Completed' if request.training == 'Yes',
+          tag: {
+            html: ('Failed' if request.training == 'No')+('Queried' if request.training == 'More information needed')+('Not started' if not request.training),
+            classes: 'govuk-tag--'+('red' if request.training == 'No')+('orange' if request.training == 'More information needed')+('govuk-tag--blue' if not request.training)
+          } if request.training != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Reporting'
+        },
+        href: 'tasks/sampling-inspection/reporting',
+        status: {
+          html: 'Completed' if request.reporting == 'Yes',
+          tag: {
+            html: ('Failed' if request.reporting == 'No')+('Queried' if request.reporting == 'More information needed')+('Not started' if not request.reporting),
+            classes: 'govuk-tag--'+('red' if request.reporting == 'No')+('orange' if request.reporting == 'More information needed')+('govuk-tag--blue' if not request.reporting)
+          } if request.reporting != 'Yes'
+        }
+      }
+    ]
+  }) }}
+
+  <h2 class="govuk-heading-m">
+    Determination
+  </h2>
+  {{ govukTaskList({
+    items: [
+      {
+        title: {
+          text: 'Make a determination'
+        },
+        status: {
+          text: 'Cannot complete yet',
+          classes: 'govuk-task-list__status--cannot-start-yet'
+        }
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block buttons %}{% endblock %}

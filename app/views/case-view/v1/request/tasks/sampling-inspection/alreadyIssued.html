@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What records will the operator keep to verify that PRNs have only been issued in accordance with the method described to calculate the recyclable portion in the S&I plan.' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator check that the material they receive from their supplier has not already had PERNs/PRNs issued on it? What documentation will they hold to show this?' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'method-described-notes',
-      id: 'method-described-notes',
-      value: data['method-described-notes'],
+      name: 'alreadyIssuedNotes',
+      id: 'alreadyIssuedNotes',
+      value: data['alreadyIssuedNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'method-described',
-    name: 'method-described',
+    idPrefix: 'alreadyIssued',
+    name: 'alreadyIssued',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('method-described','Yes')
+        checked: checked('alreadyIssued','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('method-described','No'),
+        checked: checked('alreadyIssued','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('method-described','More information needed')
+        checked: checked('alreadyIssued','More information needed')
       }
     ]
   }) }}

@@ -1,6 +1,10 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const router = govukPrototypeKit.requests.setupRouter()
 
+// Import functions
+const func = require('./_functions.js')
+
+// Setup the prototype
 router.get('*', function(req, res, next){
   // Change the service name for this whole feature
   res.locals['serviceName'] = 'Manage regulator requests'
@@ -10,144 +14,167 @@ router.get('*', function(req, res, next){
   next()
 })
 
-router.get('/tasks/*', function(req, res, next){
-  res.locals.currentPage = res.locals.currentPrototype+'/task-list'
+// Start links in prototype index setup the default data
+router.get('/start', function(req, res){
+  func.defaultData(req)
+  res.redirect('./')
+})
+
+
+// REQUEST
+// Search for and render the current request
+router.all('/request*', function (req, res, next) {
+  // If current request exists render the data else redirect to all requests page
+  if (req.session.data['current-request']) {
+    let requestToFind = req.session.data['current-request']
+    let requests = req.session.data['requests'] || []
+    let current = requests.filter(request => request.id === requestToFind)
+    res.locals.request = current[0]
+    req.request = current
+
+    next()
+  } else {
+    res.redirect(res.locals.currentPrototype+'/')
+  }
+})
+
+// Handle logic for all tasks
+router.post('/request/duly-making', function (req, res) {
+  let requestToEdit = req.request
+  requestToEdit.status = 'In progress'
+  res.redirect('task-list');
+})
+
+
+
+// Set the current page in the side nave to tasks for all questions
+router.get('/request/tasks/*', function(req, res, next){
+  res.locals.currentPage = res.locals.currentPrototype+'/request/task-list'
 
   next()
 })
 
-router.get('/start', function(req, res){
-  // Setup default data
-  req.session.data['address-status'] = 'Not started'
-  req.session.data['fit-and-proper-status'] = 'Not started'
-  req.session.data['uk'] = 'Yes'
-  req.session.data['uk-status'] = 'Completed'
-  req.session.data['spending-status'] = 'Not started'
-  req.session.data['revenue-status'] = 'Not started'
-  req.session.data['responsibility-status'] = 'Not started'
-  req.session.data['already-issued-status'] = 'Not started'
-  req.session.data['separate-waste-status'] = 'Not started'
-  req.session.data['waste-type-status'] = 'Not started'
-  req.session.data['prn-weight-status'] = 'Not started'
-  req.session.data['method-described-status'] = 'Not started'
-  req.session.data['audit-trail-status'] = 'Not started'
-  req.session.data['quality-control-status'] = 'Not started'
-  req.session.data['customer-specification-status'] = 'Not started'
-  req.session.data['weight-recorded-status'] = 'Not started'
-  req.session.data['departure-destination-status'] = 'Not started'
-  req.session.data['not-recycled-status'] = 'Not started'
-  req.session.data['compliance-responsibility-status'] = 'Not started'
-  req.session.data['quality-responsibility-status'] = 'Not started'
-  req.session.data['training-status'] = 'Not started'
-  req.session.data['reporting-status'] = 'Not started'
+router.get('/request/contact', function (req, res, next) {
+  res.locals.currentPage = res.locals.currentPrototype+'/contact-log'
 
-
-  res.redirect('./')
+  next()
 })
 
-router.post('/contact', function (req, res) {
+router.post('/request/contact', function (req, res) {
   res.redirect('contact-log');
 })
 
 // Handle logic for all tasks
-router.post('/tasks/:section/:question', function (req, res, next) {
-  let question = req.session.data[`${req.params.question}`]
+router.post('/request/tasks/:section/:question', function (req, res, next) {
+  // Get each question and notes answer
+  let currentQuestion = req.session.data[`${req.params.question}`]
+  let currentNotes = req.session.data[`${req.params.question}Notes`]
 
-  if (question == 'No') {
-    req.session.data[`${req.params.question}-status`] = 'Failed'
+  // Find the current request id
+  let requestToFind = req.session.data['current-request']
+  let requests = req.session.data['requests'] || []
+  let requestId = requests.findIndex(request => request.id === requestToFind)
+
+  // Save the question answer to the current request
+  req.session.data['requests'][requestId][`${req.params.question}`] = currentQuestion
+
+  if (currentQuestion == 'No') {
+    // If the current question is No:
+    // Save the notes and redirect back to the task list
+    req.session.data['requests'][requestId][`${req.params.question}Notes`] = currentNotes
     res.redirect('../../task-list');
-  } else if (question == 'More information needed') {
-    req.session.data[`${req.params.question}-status`] = 'Queried'
+  } else if (currentQuestion == 'More information needed') {
+    // If the current question needs more info:
+    // Redirect to contact form to log it
     res.redirect('../../contact');
   } else {
-    req.session.data[`${req.params.question}`] = 'Yes'
-    req.session.data[`${req.params.question}-status`] = 'Completed'
+    // If the current question is Yes continue to the next route to move to next question
     next()
   }
 })
 
 // Handle all next questions if answer is Yes
-router.post('/tasks/preliminary/address', function (req, res) {
-  res.redirect('fit-and-proper');
+router.post('/request/tasks/preliminary/address', function (req, res) {
+  res.redirect('fitAndProper');
 })
 
-router.post('/tasks/preliminary/fit-and-proper', function (req, res) {
+router.post('/request/tasks/preliminary/fitAndProper', function (req, res) {
   res.redirect('uk');
 })
 
-router.post('/tasks/preliminary/uk', function (req, res) {
+router.post('/request/tasks/preliminary/uk', function (req, res) {
   res.redirect('../business/spending');
 })
 
-router.post('/tasks/business/spending', function (req, res) {
+router.post('/request/tasks/business/spending', function (req, res) {
   res.redirect('revenue');
 })
 
-router.post('/tasks/business/revenue', function (req, res) {
+router.post('/request/tasks/business/revenue', function (req, res) {
   res.redirect('responsibility');
 })
 
-router.post('/tasks/business/responsibility', function (req, res) {
-  res.redirect('../sampling-inspection/already-issued');
+router.post('/request/tasks/business/responsibility', function (req, res) {
+  res.redirect('../sampling-inspection/alreadyIssued');
 })
 
-router.post('/tasks/sampling-inspection/already-issued', function (req, res) {
-  res.redirect('separate-waste');
+router.post('/request/tasks/sampling-inspection/alreadyIssued', function (req, res) {
+  res.redirect('separateWaste');
 })
 
-router.post('/tasks/sampling-inspection/separate-waste', function (req, res) {
-  res.redirect('waste-type');
+router.post('/request/tasks/sampling-inspection/separateWaste', function (req, res) {
+  res.redirect('wasteType');
 })
 
-router.post('/tasks/sampling-inspection/waste-type', function (req, res) {
-  res.redirect('prn-weight');
+router.post('/request/tasks/sampling-inspection/wasteType', function (req, res) {
+  res.redirect('prnWeight');
 })
 
-router.post('/tasks/sampling-inspection/prn-weight', function (req, res) {
+router.post('/request/tasks/sampling-inspection/prnWeight', function (req, res) {
   res.redirect('method-described');
 })
 
-router.post('/tasks/sampling-inspection/method-described', function (req, res) {
-  res.redirect('audit-trail');
+router.post('/request/tasks/sampling-inspection/method-described', function (req, res) {
+  res.redirect('auditTrail');
 })
 
-router.post('/tasks/sampling-inspection/audit-trail', function (req, res) {
-  res.redirect('quality-control');
+router.post('/request/tasks/sampling-inspection/auditTrail', function (req, res) {
+  res.redirect('qualityControl');
 })
 
-router.post('/tasks/sampling-inspection/quality-control', function (req, res) {
-  res.redirect('customer-specification');
+router.post('/request/tasks/sampling-inspection/qualityControl', function (req, res) {
+  res.redirect('customerSpecification');
 })
 
-router.post('/tasks/sampling-inspection/customer-specification', function (req, res) {
-  res.redirect('weight-recorded');
+router.post('/request/tasks/sampling-inspection/customerSpecification', function (req, res) {
+  res.redirect('weightRecorded');
 })
 
-router.post('/tasks/sampling-inspection/weight-recorded', function (req, res) {
-  res.redirect('departure-destination');
+router.post('/request/tasks/sampling-inspection/weightRecorded', function (req, res) {
+  res.redirect('departureDestination');
 })
 
-router.post('/tasks/sampling-inspection/departure-destination', function (req, res) {
-  res.redirect('not-recycled');
+router.post('/request/tasks/sampling-inspection/departureDestination', function (req, res) {
+  res.redirect('notRecycled');
 })
 
-router.post('/tasks/sampling-inspection/not-recycled', function (req, res) {
-  res.redirect('compliance-responsibility');
+router.post('/request/tasks/sampling-inspection/notRecycled', function (req, res) {
+  res.redirect('complianceResponsibility');
 })
 
-router.post('/tasks/sampling-inspection/compliance-responsibility', function (req, res) {
-  res.redirect('quality-responsibility');
+router.post('/request/tasks/sampling-inspection/complianceResponsibility', function (req, res) {
+  res.redirect('qualityResponsibility');
 })
 
-router.post('/tasks/sampling-inspection/quality-responsibility', function (req, res) {
+router.post('/request/tasks/sampling-inspection/qualityResponsibility', function (req, res) {
   res.redirect('training');
 })
 
-router.post('/tasks/sampling-inspection/training', function (req, res) {
+router.post('/request/tasks/sampling-inspection/training', function (req, res) {
   res.redirect('reporting');
 })
 
-router.post('/tasks/sampling-inspection/reporting', function (req, res) {
+router.post('/request/tasks/sampling-inspection/reporting', function (req, res) {
   res.redirect('../../task-list');
 })
 

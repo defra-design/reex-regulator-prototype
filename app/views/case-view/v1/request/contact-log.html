@@ -1,6 +1,6 @@
 {% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
 
-{% set title = 'Contact questions' %}
+{% set title = 'Contact log' %}
 
 {% block backLink %}
   {{ govukBackLink({
@@ -13,12 +13,22 @@
   {% include './_banner.html' %}
 {% endblock %}
 
+{% block sideNav %}
+  {% include './_side-nav.html' %}
+{% endblock %}
+
 {% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  {{ govukButton({
+    html: 'Add contact',
+    classes: 'govuk-button--secondary',
+    href: 'contact'
+  }) }}
+
   <p>TBC</p>
 {% endblock %}
 
-{% block buttons %}
-  {{ govukButton({
-    html: 'Save and continue'
-  }) }}
-{% endblock %}
+{% block buttons %}{% endblock %}

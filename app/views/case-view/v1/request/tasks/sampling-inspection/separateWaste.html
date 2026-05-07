@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What will the operator\'s process be if PRNs are claimed on packaging waste which has not been recycled by the end of the following year from the date it was received on site? Have they included: How the material is identified? How this is recorded? ' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will they identify and separate any waste not eligible for issuing PRNs? How is this waste accounted for within their waste recording?' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'not-recycled-notes',
-      id: 'not-recycled-notes',
-      value: data['not-recycled-notes'],
+      name: 'separateWasteNotes',
+      id: 'separateWasteNotes',
+      value: data['separateWasteNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'not-recycled',
-    name: 'not-recycled',
+    idPrefix: 'separateWaste',
+    name: 'separateWaste',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('not-recycled','Yes')
+        checked: checked('separateWaste','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('not-recycled','No'),
+        checked: checked('separateWaste','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('not-recycled','More information needed')
+        checked: checked('separateWaste','More information needed')
       }
     ]
   }) }}

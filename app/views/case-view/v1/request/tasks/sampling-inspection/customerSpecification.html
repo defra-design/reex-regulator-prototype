@@ -5,9 +5,9 @@
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'customer-specification-notes',
-      id: 'customer-specification-notes',
-      value: data['customer-specification-notes'],
+      name: 'customerSpecificationNotes',
+      id: 'customerSpecificationNotes',
+      value: data['customerSpecificationNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'customer-specification',
-    name: 'customer-specification',
+    idPrefix: 'customerSpecification',
+    name: 'customerSpecification',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('customer-specification','Yes')
+        checked: checked('customerSpecification','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('customer-specification','No'),
+        checked: checked('customerSpecification','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('customer-specification','More information needed')
+        checked: checked('customerSpecification','More information needed')
       }
     ]
   }) }}

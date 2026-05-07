@@ -1,13 +1,20 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator ensure that the recorded weight of recycled material is accurate? Has the operator included: What checks will be carried out on this data? The frequency of the checks that will be carried out? Who actually carries out these checks?' %}
+{% set title = 'Does this application address and the address on the Sampling and inspection plan match?' %}
 
 {% block questions %}
+  {% set applicationAddress %}
+    {{ govukInsetText({
+      html: '<strong>Application address:</strong> 1 Wyld Court, Addingrove, AA3 1AB',
+      classes: 'govuk-!-margin-0'
+    }) }}
+  {% endset -%}
+
   {% set notes %}
     {{ govukTextarea({
-      name: 'weight-recorded-notes',
-      id: 'weight-recorded-notes',
-      value: data['weight-recorded-notes'],
+      name: 'addressNotes',
+      id: 'addressNotes',
+      value: data['addressNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +24,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'weight-recorded',
-    name: 'weight-recorded',
+    idPrefix: 'address',
+    name: 'address',
     fieldset: {
       legend: {
         html: title,
@@ -26,16 +33,19 @@
         isPageHeading: true
       }
     },
+    hint: {
+      html: applicationAddress
+    },
     items: [
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('weight-recorded','Yes')
+        checked: checked('address','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('weight-recorded','No'),
+        checked: checked('address','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +56,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('weight-recorded','More information needed')
+        checked: checked('address','More information needed')
       }
     ]
   }) }}

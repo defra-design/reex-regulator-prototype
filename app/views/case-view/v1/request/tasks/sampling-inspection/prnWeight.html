@@ -5,9 +5,9 @@
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'prn-weight-notes',
-      id: 'prn-weight-notes',
-      value: data['prn-weight-notes'],
+      name: 'prnWeightNotes',
+      id: 'prnWeightNotes',
+      value: data['prnWeightNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'prn-weight',
-    name: 'prn-weight',
+    idPrefix: 'prnWeight',
+    name: 'prnWeight',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('prn-weight','Yes')
+        checked: checked('prnWeight','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('prn-weight','No'),
+        checked: checked('prnWeight','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('prn-weight','More information needed')
+        checked: checked('prnWeight','More information needed')
       }
     ]
   }) }}

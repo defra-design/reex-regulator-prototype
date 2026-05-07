@@ -17,9 +17,9 @@
 
   {% set notes %}
     {{ govukTextarea({
-      name: 'responsibility-notes',
-      id: 'responsibility-notes',
-      value: data['responsibility-notes'],
+      name: 'responsibilityNotes',
+      id: 'responsibilityNotes',
+      value: request.responsibilityNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -31,6 +31,7 @@
   {{ govukRadios({
     idPrefix: 'responsibility',
     name: 'responsibility',
+    value: request.responsibility,
     fieldset: {
       legend: {
         html: 'Does the plan cover who will be responsible? ',
@@ -40,13 +41,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('responsibility','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('responsibility','No'),
         conditional: {
           html: notes
         }
@@ -56,8 +55,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('responsibility','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

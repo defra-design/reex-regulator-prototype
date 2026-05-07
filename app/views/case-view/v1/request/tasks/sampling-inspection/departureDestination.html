@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> If packaging waste will be recycled in line with a quality protocol (such as NPPP) to demonstrate end of waste, what records will the operator hold to evidence meeting the conditions of the quality protocol?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator record the material that leaves site? What records and documentation will the operator hold to show the destination of finished product?' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'quality-control-notes',
-      id: 'quality-control-notes',
-      value: data['quality-control-notes'],
+      name: 'departureDestinationNotes',
+      id: 'departureDestinationNotes',
+      value: data['departureDestinationNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'quality-control',
-    name: 'quality-control',
+    idPrefix: 'departureDestination',
+    name: 'departureDestination',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('quality-control','Yes')
+        checked: checked('departureDestination','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('quality-control','No'),
+        checked: checked('departureDestination','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('quality-control','More information needed')
+        checked: checked('departureDestination','More information needed')
       }
     ]
   }) }}

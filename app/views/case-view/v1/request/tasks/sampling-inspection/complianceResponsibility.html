@@ -14,9 +14,9 @@
 
   {% set notes %}
     {{ govukTextarea({
-      name: 'compliance-responsibility-notes',
-      id: 'compliance-responsibility-notes',
-      value: data['compliance-responsibility-notes'],
+      name: 'complianceResponsibilityNotes',
+      id: 'complianceResponsibilityNotes',
+      value: data['complianceResponsibilityNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -26,8 +26,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'compliance-responsibility',
-    name: 'compliance-responsibility',
+    idPrefix: 'complianceResponsibility',
+    name: 'complianceResponsibility',
     fieldset: {
       legend: {
         html: title,
@@ -39,12 +39,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('compliance-responsibility','Yes')
+        checked: checked('complianceResponsibility','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('compliance-responsibility','No'),
+        checked: checked('complianceResponsibility','No'),
         conditional: {
           html: notes
         }
@@ -55,7 +55,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('compliance-responsibility','More information needed')
+        checked: checked('complianceResponsibility','More information needed')
       }
     ]
   }) }}

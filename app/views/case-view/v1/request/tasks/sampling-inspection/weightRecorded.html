@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will they identify and separate any waste not eligible for issuing PRNs? How is this waste accounted for within their waste recording?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator ensure that the recorded weight of recycled material is accurate? Has the operator included: What checks will be carried out on this data? The frequency of the checks that will be carried out? Who actually carries out these checks?' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'separate-waste-notes',
-      id: 'separate-waste-notes',
-      value: data['separate-waste-notes'],
+      name: 'weightRecordedNotes',
+      id: 'weightRecordedNotes',
+      value: data['weightRecordedNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'separate-waste',
-    name: 'separate-waste',
+    idPrefix: 'weightRecorded',
+    name: 'weightRecorded',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('separate-waste','Yes')
+        checked: checked('weightRecorded','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('separate-waste','No'),
+        checked: checked('weightRecorded','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('separate-waste','More information needed')
+        checked: checked('weightRecorded','More information needed')
       }
     ]
   }) }}

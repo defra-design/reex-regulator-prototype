@@ -8,6 +8,36 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
 
+      {# Create empty object for radios #}
+      {% set requests = [] %}
+
+      {# Loop through types and add into the object #}
+      {% for request in data['requests'] %}
+        {% set requests = requests | push (
+          [
+            {
+              html: '<a href="request/duly-making?current-request='+request.id+'">'+request.id+'</a>'
+            },
+            {
+              html: request.type
+            },
+            {
+              html: request.orgName
+            },
+            {
+              html: request.orgId
+            },
+            {
+              html: request.status
+            },
+            {
+              html: request.sla | daysInFuture,
+              format: 'numeric'
+            }
+          ]
+        ) %}
+      {% endfor %}
+
       {{ govukTable({
         caption: title,
         captionClasses: 'govuk-table__caption--l',
@@ -33,29 +63,7 @@
             format: 'numeric'
           }
         ],
-        rows: [
-          [
-            {
-              html: '<a href="task-list">00000489</a>'
-            },
-            {
-              html: 'Renew accreditation'
-            },
-            {
-              html: 'Acme Ltd'
-            },
-            {
-              html: '100300'
-            },
-            {
-              html: 'In progress'
-            },
-            {
-              html: 12 | daysInFuture,
-              format: 'numeric'
-            }
-          ]
-        ]
+        rows: requests
       }) }}
 
     </div>

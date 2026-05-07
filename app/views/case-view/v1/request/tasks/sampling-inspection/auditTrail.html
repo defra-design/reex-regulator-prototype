@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Business plan<span class="govuk-visually-hidden"> - </span></span> Has the operator evidenced that revenue will be spent in line with the business plan and records will be kept?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What evidence will the operator hold to demonstrate a full audit trail from the point of receiving the UK Packaging waste, up to issuing PRNs and that the material has been recycled, including the date of which this has occurred?' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'revenue-notes',
-      id: 'revenue-notes',
-      value: data['revenue-notes'],
+      name: 'auditTrailNotes',
+      id: 'auditTrailNotes',
+      value: data['auditTrailNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'revenue',
-    name: 'revenue',
+    idPrefix: 'auditTrail',
+    name: 'auditTrail',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('revenue','Yes')
+        checked: checked('auditTrail','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('revenue','No'),
+        checked: checked('auditTrail','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('revenue','More information needed')
+        checked: checked('auditTrail','More information needed')
       }
     ]
   }) }}

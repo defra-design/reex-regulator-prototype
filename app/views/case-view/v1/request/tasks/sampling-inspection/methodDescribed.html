@@ -1,13 +1,13 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator record the material that leaves site? What records and documentation will the operator hold to show the destination of finished product?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What records will the operator keep to verify that PRNs have only been issued in accordance with the method described to calculate the recyclable portion in the S&I plan.' %}
 
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'departure-destination-notes',
-      id: 'departure-destination-notes',
-      value: data['departure-destination-notes'],
+      name: 'methodDescribedNotes',
+      id: 'methodDescribedNotes',
+      value: data['methodDescribedNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'departure-destination',
-    name: 'departure-destination',
+    idPrefix: 'methodDescribed',
+    name: 'methodDescribed',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('departure-destination','Yes')
+        checked: checked('methodDescribed','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('departure-destination','No'),
+        checked: checked('methodDescribed','No'),
         conditional: {
           html: notes
         }
@@ -46,7 +46,7 @@
       {
         html: 'More information needed',
         value: 'More information needed',
-        checked: checked('departure-destination','More information needed')
+        checked: checked('methodDescribed','More information needed')
       }
     ]
   }) }}

@@ -5,9 +5,9 @@
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'fit-and-proper-notes',
-      id: 'fit-and-proper-notes',
-      value: data['fit-and-proper-notes'],
+      name: 'fitAndProperNotes',
+      id: 'fitAndProperNotes',
+      value: data['fitAndProperNotes'],
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,8 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'fit-and-proper',
-    name: 'fit-and-proper',
+    idPrefix: 'fitAndProper',
+    name: 'fitAndProper',
     fieldset: {
       legend: {
         html: title,
@@ -30,12 +30,12 @@
       {
         html: 'Yes',
         value: 'Yes',
-        checked: checked('fit-and-proper','Yes')
+        checked: checked('fitAndProper','Yes')
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('fit-and-proper','No'),
+        checked: checked('fitAndProper','No'),
           conditional: {
             html: notes
           }
@@ -46,7 +46,7 @@
         {
           html: 'More information needed',
           value: 'More information needed',
-          checked: checked('fit-and-proper','More information needed')
+          checked: checked('fitAndProper','More information needed')
         }
     ]
   }) }}
