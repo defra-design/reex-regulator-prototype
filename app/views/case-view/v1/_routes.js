@@ -41,7 +41,7 @@ router.all('/request*', function (req, res, next) {
 // Handle logic for all tasks
 router.post('/request/duly-making', function (req, res) {
   let requestToEdit = req.request
-  requestToEdit.status = 'In progress'
+  requestToEdit[0].status = 'In progress'
   res.redirect('task-list');
 })
 

@@ -16,7 +16,7 @@
         {% set requests = requests | push (
           [
             {
-              html: '<a href="request/duly-making?current-request='+request.id+'">'+request.id+'</a>'
+              html: '<a href="request/'+('duly-making' if reqest.status == 'Not started' else 'task-list')+'?current-request='+request.id+'">'+request.id+'</a>'
             },
             {
               html: request.type
