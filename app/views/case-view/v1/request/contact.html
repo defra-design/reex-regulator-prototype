@@ -21,11 +21,60 @@
   <h1 class="govuk-heading-l">
     {{ title | safe }}
   </h1>
-  <p>TBC</p>
+
+  {{ govukRadios({
+    idPrefix: 'contact-type',
+    name: 'contact-type',
+    fieldset: {
+      legend: {
+        html: 'Contact method',
+        classes: 'govuk-fieldset__legend--s'
+      }
+    },
+    items: [
+      {
+        html: 'Email',
+        value: 'Email'
+      },
+      {
+        html: 'Telephone',
+        value: 'Telephone'
+      },
+      {
+        html: 'Letter',
+        value: 'Letter'
+      }
+    ]
+  }) }}
+
+  {{ govukDateInput({
+    id: 'contact-response-due',
+    namePrefix: 'contact-response-due',
+    fieldset: {
+      legend: {
+        html: 'Response due date',
+        classes: 'govuk-fieldset__legend--s'
+      }
+    }
+  }) }}
+
+  {{ govukTextarea({
+    name: 'contact-reason',
+    id: 'contact-reason',
+    rows: '3',
+    label: {
+      html: 'Reason',
+      classes: 'govuk-label--s'
+    }
+  }) }}
 {% endblock %}
 
 {% block buttons %}
-  {{ govukButton({
-    html: 'Save and continue'
-  }) }}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Save and continue'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
 {% endblock %}

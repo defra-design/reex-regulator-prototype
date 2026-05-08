@@ -28,7 +28,21 @@
     href: 'contact'
   }) }}
 
-  <p>TBC</p>
+  <ul class="govuk-task-list">
+    {% for contact in request.contacts %}
+      <li class="govuk-task-list__item g//ovuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          {{ contact.type }} ({{ contact.date | formatDate }})
+
+          <div class="govuk-task-list__hint">
+            Response due: {{ contact.due | formatDate }}
+            <br>
+            {{ contact.reason }}
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock %}
 
 {% block buttons %}{% endblock %}

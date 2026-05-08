@@ -14,6 +14,11 @@ addFilter('cleanArray', (array) => {
 	})
 })
 
+addFilter('formatDate', (date) => {
+	var date = moment(date)
+	return date.format('D MMMM YYYY')
+})
+
 addFilter('daysInFuture', (number) => {
 	var date = moment().add(number,"days").format("D MMMM YYYY")
 	return date

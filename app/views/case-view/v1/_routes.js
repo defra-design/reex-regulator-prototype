@@ -38,8 +38,8 @@ router.all('/request*', function (req, res, next) {
   }
 })
 
-// Handle logic for all tasks
 router.post('/request/duly-making', function (req, res) {
+  // On duly making complete update request to in progress and move to task list
   let requestToEdit = req.request
   requestToEdit[0].status = 'In progress'
   res.redirect('task-list');
@@ -50,7 +50,6 @@ router.post('/request/duly-making', function (req, res) {
 // Set the current page in the side nave to tasks for all questions
 router.get('/request/tasks/*', function(req, res, next){
   res.locals.currentPage = res.locals.currentPrototype+'/request/task-list'
-
   next()
 })
 
@@ -60,7 +59,32 @@ router.get('/request/contact', function (req, res, next) {
   next()
 })
 
+router.get('/request/contact', function (req, res, next) {
+  res.locals.currentPage = res.locals.currentPrototype+'/request/contact-log'
+  next()
+})
+
 router.post('/request/contact', function (req, res) {
+  // Setup the object with a new ID and the answers given by user
+  const newContact = Object.assign({
+    type: req.session.data['contact-type'],
+    date: new Date(),
+    due: req.session.data['contact-response-due-year']+'-'+req.session.data['contact-response-due-month']+'-'+req.session.data['contact-response-due-day'],
+    reason: req.session.data['contact-reason']
+  })
+
+  // Grab the current request
+  let requestToEdit = req.request
+
+  // If there are no contacts create an empty object
+  if (!requestToEdit[0].contacts) {
+    requestToEdit[0].contacts = []
+  }
+
+  // Pass the new contact into the request
+  requestToEdit[0].contacts.unshift(newContact)
+
+  // Move onto the contact log
   res.redirect('contact-log');
 })
 
