@@ -14,7 +14,7 @@
     {{ govukTextarea({
       name: 'addressNotes',
       id: 'addressNotes',
-      value: data['addressNotes'],
+      value: request.addressNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -26,6 +26,7 @@
   {{ govukRadios({
     idPrefix: 'address',
     name: 'address',
+    value: request.address,
     fieldset: {
       legend: {
         html: title,
@@ -39,13 +40,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('address','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('address','No'),
         conditional: {
           html: notes
         }
@@ -55,8 +54,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('address','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

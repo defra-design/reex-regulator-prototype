@@ -16,7 +16,7 @@
     {{ govukTextarea({
       name: 'complianceResponsibilityNotes',
       id: 'complianceResponsibilityNotes',
-      value: data['complianceResponsibilityNotes'],
+      value: request.complianceResponsibilityNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -28,6 +28,7 @@
   {{ govukRadios({
     idPrefix: 'complianceResponsibility',
     name: 'complianceResponsibility',
+    value: request.complianceResponsibility,
     fieldset: {
       legend: {
         html: title,
@@ -38,13 +39,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('complianceResponsibility','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('complianceResponsibility','No'),
         conditional: {
           html: notes
         }
@@ -54,8 +53,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('complianceResponsibility','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

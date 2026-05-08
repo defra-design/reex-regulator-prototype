@@ -5,9 +5,9 @@
 {% block questions %}
   {% set notes %}
     {{ govukTextarea({
-      name: 'traingingNotes',
-      id: 'traingingNotes',
-      value: data['traingingNotes'],
+      name: 'trainingNotes',
+      id: 'trainingNotes',
+      value: request.trainingNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -17,8 +17,9 @@
   {% endset -%}
 
   {{ govukRadios({
-    idPrefix: 'trainging',
-    name: 'trainging',
+    idPrefix: 'training',
+    name: 'training',
+    value: request.training,
     fieldset: {
       legend: {
         html: title,
@@ -29,13 +30,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('trainging','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('trainging','No'),
         conditional: {
           html: notes
         }
@@ -45,8 +44,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('trainging','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

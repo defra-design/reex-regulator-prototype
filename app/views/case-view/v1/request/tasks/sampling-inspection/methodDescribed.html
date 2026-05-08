@@ -7,7 +7,7 @@
     {{ govukTextarea({
       name: 'methodDescribedNotes',
       id: 'methodDescribedNotes',
-      value: data['methodDescribedNotes'],
+      value: request.methodDescribedNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -19,6 +19,7 @@
   {{ govukRadios({
     idPrefix: 'methodDescribed',
     name: 'methodDescribed',
+    value: request.methodDescribed,
     fieldset: {
       legend: {
         html: title,
@@ -29,13 +30,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('methodDescribed','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('methodDescribed','No'),
         conditional: {
           html: notes
         }
@@ -45,8 +44,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('methodDescribed','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

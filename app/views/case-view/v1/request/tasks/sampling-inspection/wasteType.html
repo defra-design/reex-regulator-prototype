@@ -7,7 +7,7 @@
     {{ govukTextarea({
       name: 'wasteTypeNotes',
       id: 'wasteTypeNotes',
-      value: data['wasteTypeNotes'],
+      value: request.wasteTypeNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -19,6 +19,7 @@
   {{ govukRadios({
     idPrefix: 'wasteType',
     name: 'wasteType',
+    value: request.wasteType,
     fieldset: {
       legend: {
         html: title,
@@ -29,13 +30,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('wasteType','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('wasteType','No'),
         conditional: {
           html: notes
         }
@@ -45,8 +44,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('wasteType','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

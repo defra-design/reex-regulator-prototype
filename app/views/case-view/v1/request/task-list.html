@@ -346,10 +346,51 @@
         status: {
           text: 'Cannot complete yet',
           classes: 'govuk-task-list__status--cannot-start-yet'
-        }
+        },
+        classes: 'js-no-determination'
+      },
+      {
+        title: {
+          text: 'Make a determination'
+        },
+        href: 'tasks/determination',
+        status: {
+          tag: {
+            html: 'Ready',
+            classes: 'govuk-tag--green'
+          }
+        },
+        classes: 'js-determination govuk-!-display-none'
       }
     ]
   }) }}
 {% endblock %}
 
 {% block buttons %}{% endblock %}
+
+{#
+Add a hacky way to make determination if either:
+- any checks are failed
+- all 21 checks are complete
+#}
+{% block pageScripts %}
+<script>
+  const statuses = document.getElementsByClassName('govuk-task-list__status');
+  const determination = document.getElementsByClassName('js-determination');
+  const noDetermination = document.getElementsByClassName('js-no-determination');
+
+  let completed = 0;
+  for (let i = 0; i < statuses.length; i++) {
+    if (statuses[i].textContent.includes('Failed')) {
+      determination[0].classList.remove('govuk-!-display-none');
+      noDetermination[0].classList.add('govuk-!-display-none');
+    } else if (statuses[i].textContent.includes('Completed')) {
+      completed++
+      if (completed === 21) {
+        determination[0].classList.remove('govuk-!-display-none');
+        noDetermination[0].classList.add('govuk-!-display-none');
+      }
+    }
+  }
+</script>
+{% endblock %}

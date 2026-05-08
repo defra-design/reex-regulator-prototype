@@ -7,7 +7,7 @@
     {{ govukTextarea({
       name: 'qualityControlNotes',
       id: 'qualityControlNotes',
-      value: data['qualityControlNotes'],
+      value: request.qualityControlNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -19,6 +19,7 @@
   {{ govukRadios({
     idPrefix: 'qualityControl',
     name: 'qualityControl',
+    value: request.qualityControl,
     fieldset: {
       legend: {
         html: title,
@@ -29,13 +30,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('qualityControl','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('qualityControl','No'),
         conditional: {
           html: notes
         }
@@ -45,8 +44,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('qualityControl','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

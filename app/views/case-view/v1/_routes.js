@@ -26,12 +26,14 @@ router.get('/start', function(req, res){
 router.all('/request*', function (req, res, next) {
   // If current request exists render the data else redirect to all requests page
   if (req.session.data['current-request']) {
+    // Find the current request
     let requestToFind = req.session.data['current-request']
     let requests = req.session.data['requests'] || []
     let current = requests.filter(request => request.id === requestToFind)
+    // Pass it through to each page as local data
     res.locals.request = current[0]
+    // Store it for use in later routes
     req.request = current
-
     next()
   } else {
     res.redirect(res.locals.currentPrototype+'/')
@@ -45,47 +47,20 @@ router.post('/request/duly-making', function (req, res) {
   res.redirect('task-list');
 })
 
-
-
 // Set the current page in the side nave to tasks for all questions
 router.get('/request/tasks/*', function(req, res, next){
   res.locals.currentPage = res.locals.currentPrototype+'/request/task-list'
   next()
 })
 
-router.get('/request/contact', function (req, res, next) {
-  res.locals.currentPage = res.locals.currentPrototype+'/contact-log'
-
-  next()
-})
-
-router.get('/request/contact', function (req, res, next) {
-  res.locals.currentPage = res.locals.currentPrototype+'/request/contact-log'
-  next()
-})
-
-router.post('/request/contact', function (req, res) {
-  // Setup the object with a new ID and the answers given by user
-  const newContact = Object.assign({
-    type: req.session.data['contact-type'],
-    date: new Date(),
-    due: req.session.data['contact-response-due-year']+'-'+req.session.data['contact-response-due-month']+'-'+req.session.data['contact-response-due-day'],
-    reason: req.session.data['contact-reason']
-  })
-
-  // Grab the current request
+router.post('/request/tasks/determination', function (req, res) {
   let requestToEdit = req.request
-
-  // If there are no contacts create an empty object
-  if (!requestToEdit[0].contacts) {
-    requestToEdit[0].contacts = []
+  if (req.session.data['determination'] == 'No') {
+    requestToEdit[0].status = 'Rejected'
+  } else {
+    requestToEdit[0].status = 'Completed'
   }
-
-  // Pass the new contact into the request
-  requestToEdit[0].contacts.unshift(newContact)
-
-  // Move onto the contact log
-  res.redirect('contact-log');
+  res.redirect('../confirmation');
 })
 
 // Handle logic for all tasks
@@ -112,7 +87,9 @@ router.post('/request/tasks/:section/:question', function (req, res, next) {
     // Redirect to contact form to log it
     res.redirect('../../contact');
   } else {
-    // If the current question is Yes continue to the next route to move to next question
+    // Resave the answer as yes so the form can be left blank for lazy demos
+    req.session.data['requests'][requestId][`${req.params.question}`] = 'Yes'
+    // Continue to the next route to move to next question
     next()
   }
 })
@@ -155,10 +132,10 @@ router.post('/request/tasks/sampling-inspection/wasteType', function (req, res) 
 })
 
 router.post('/request/tasks/sampling-inspection/prnWeight', function (req, res) {
-  res.redirect('method-described');
+  res.redirect('methodDescribed');
 })
 
-router.post('/request/tasks/sampling-inspection/method-described', function (req, res) {
+router.post('/request/tasks/sampling-inspection/methodDescribed', function (req, res) {
   res.redirect('auditTrail');
 })
 
@@ -200,6 +177,38 @@ router.post('/request/tasks/sampling-inspection/training', function (req, res) {
 
 router.post('/request/tasks/sampling-inspection/reporting', function (req, res) {
   res.redirect('../../task-list');
+})
+
+
+// Set contact log side nav as active while adding to log
+router.get('/request/contact', function (req, res, next) {
+  res.locals.currentPage = res.locals.currentPrototype+'/request/contact-log'
+  next()
+})
+
+// Store each contact in log
+router.post('/request/contact', function (req, res) {
+  // Setup the object with a new ID and the answers given by user
+  const newContact = Object.assign({
+    type: req.session.data['contact-type'],
+    date: new Date(),
+    due: req.session.data['contact-response-due-year']+'-'+req.session.data['contact-response-due-month']+'-'+req.session.data['contact-response-due-day'],
+    reason: req.session.data['contact-reason']
+  })
+
+  // Grab the current request
+  let requestToEdit = req.request
+
+  // If there are no contacts create an empty object
+  if (!requestToEdit[0].contacts) {
+    requestToEdit[0].contacts = []
+  }
+
+  // Pass the new contact into the request
+  requestToEdit[0].contacts.unshift(newContact)
+
+  // Move onto the contact log
+  res.redirect('contact-log');
 })
 
 

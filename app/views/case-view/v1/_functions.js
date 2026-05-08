@@ -15,7 +15,8 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2921",
       "chargePaidOnline": "Yes",
-      "chargeRef": "PR/PK/EXP 000568587647654"
+      "chargeRef": "PR/PK/EXP 000568587647654",
+      "tasks": []
     },
     {
       "id": "00001003",
@@ -31,7 +32,8 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2921",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654"
+      "chargeRef": "PR/PK/EXP 000568587647654",
+      "tasks": []
     }
   ]
 }

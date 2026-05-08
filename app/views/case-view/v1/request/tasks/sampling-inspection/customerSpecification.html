@@ -7,7 +7,7 @@
     {{ govukTextarea({
       name: 'customerSpecificationNotes',
       id: 'customerSpecificationNotes',
-      value: data['customerSpecificationNotes'],
+      value: request.customerSpecificationNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -19,6 +19,7 @@
   {{ govukRadios({
     idPrefix: 'customerSpecification',
     name: 'customerSpecification',
+    value: request.customerSpecification,
     fieldset: {
       legend: {
         html: title,
@@ -29,13 +30,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('customerSpecification','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('customerSpecification','No'),
         conditional: {
           html: notes
         }
@@ -45,8 +44,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('customerSpecification','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}

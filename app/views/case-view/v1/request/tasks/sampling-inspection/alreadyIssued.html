@@ -7,7 +7,7 @@
     {{ govukTextarea({
       name: 'alreadyIssuedNotes',
       id: 'alreadyIssuedNotes',
-      value: data['alreadyIssuedNotes'],
+      value: request.alreadyIssuedNotes,
       rows: 3,
       label: {
         html: 'Notes',
@@ -19,6 +19,7 @@
   {{ govukRadios({
     idPrefix: 'alreadyIssued',
     name: 'alreadyIssued',
+    value: request.alreadyIssued,
     fieldset: {
       legend: {
         html: title,
@@ -29,13 +30,11 @@
     items: [
       {
         html: 'Yes',
-        value: 'Yes',
-        checked: checked('alreadyIssued','Yes')
+        value: 'Yes'
       },
       {
         html: 'No',
         value: 'No',
-        checked: checked('alreadyIssued','No'),
         conditional: {
           html: notes
         }
@@ -45,8 +44,7 @@
       },
       {
         html: 'More information needed',
-        value: 'More information needed',
-        checked: checked('alreadyIssued','More information needed')
+        value: 'More information needed'
       }
     ]
   }) }}
