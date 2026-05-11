@@ -95,86 +95,109 @@ router.post('/request/tasks/:section/:question', function (req, res, next) {
 })
 
 // Handle all next questions if answer is Yes
+
+// Prelim 1
 router.post('/request/tasks/preliminary/address', function (req, res) {
   res.redirect('fitAndProper');
 })
 
+// Prelim 2
 router.post('/request/tasks/preliminary/fitAndProper', function (req, res) {
+  res.redirect('businessPlan');
+})
+
+// Prelim 3
+router.post('/request/tasks/preliminary/businessPlan', function (req, res) {
   res.redirect('uk');
 })
 
+// Prelim 4
 router.post('/request/tasks/preliminary/uk', function (req, res) {
-  res.redirect('../business/spending');
-})
-
-router.post('/request/tasks/business/spending', function (req, res) {
-  res.redirect('revenue');
-})
-
-router.post('/request/tasks/business/revenue', function (req, res) {
-  res.redirect('responsibility');
-})
-
-router.post('/request/tasks/business/responsibility', function (req, res) {
   res.redirect('../sampling-inspection/alreadyIssued');
 })
 
+
+// SIP 1
 router.post('/request/tasks/sampling-inspection/alreadyIssued', function (req, res) {
   res.redirect('separateWaste');
 })
 
+// SIP 2
 router.post('/request/tasks/sampling-inspection/separateWaste', function (req, res) {
   res.redirect('wasteType');
 })
 
+// SIP 3
 router.post('/request/tasks/sampling-inspection/wasteType', function (req, res) {
   res.redirect('prnWeight');
 })
 
+// SIP 4
 router.post('/request/tasks/sampling-inspection/prnWeight', function (req, res) {
   res.redirect('methodDescribed');
 })
 
+// SIP 5
 router.post('/request/tasks/sampling-inspection/methodDescribed', function (req, res) {
   res.redirect('auditTrail');
 })
 
+// SIP 6
 router.post('/request/tasks/sampling-inspection/auditTrail', function (req, res) {
   res.redirect('qualityControl');
 })
 
+// SIP 7
 router.post('/request/tasks/sampling-inspection/qualityControl', function (req, res) {
   res.redirect('customerSpecification');
 })
 
+// SIP 8
 router.post('/request/tasks/sampling-inspection/customerSpecification', function (req, res) {
   res.redirect('weightRecorded');
 })
 
+// SIP 9
 router.post('/request/tasks/sampling-inspection/weightRecorded', function (req, res) {
   res.redirect('departureDestination');
 })
 
+// SIP 10
 router.post('/request/tasks/sampling-inspection/departureDestination', function (req, res) {
   res.redirect('notRecycled');
 })
 
+// SIP 11
 router.post('/request/tasks/sampling-inspection/notRecycled', function (req, res) {
+  res.redirect('revenue');
+})
+
+// SIP 12
+router.post('/request/tasks/sampling-inspection/revenue', function (req, res) {
+  res.redirect('responsibility');
+})
+
+// SIP 13
+router.post('/request/tasks/sampling-inspection/responsibility', function (req, res) {
   res.redirect('complianceResponsibility');
 })
 
+// SIP 14
 router.post('/request/tasks/sampling-inspection/complianceResponsibility', function (req, res) {
   res.redirect('qualityResponsibility');
 })
 
+// SIP 15
 router.post('/request/tasks/sampling-inspection/qualityResponsibility', function (req, res) {
   res.redirect('training');
 })
 
+// SIP 16
 router.post('/request/tasks/sampling-inspection/training', function (req, res) {
   res.redirect('reporting');
 })
 
+// SIP 17
 router.post('/request/tasks/sampling-inspection/reporting', function (req, res) {
   res.redirect('../../task-list');
 })

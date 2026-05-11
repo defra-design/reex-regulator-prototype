@@ -22,18 +22,6 @@
     {{ title }}
   </h1>
 
-  <div class="govuk-button-group">
-    {{ govukButton({
-      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download business plan',
-      classes: 'govuk-button--secondary app-button--download'
-    }) }}
-
-    {{ govukButton({
-      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download sampling and inspection report',
-      classes: 'govuk-button--secondary app-button--download'
-    }) }}
-  </div>
-
   <h2 class="govuk-heading-m">
     Preliminary checks
   </h2>
@@ -68,6 +56,19 @@
       },
       {
         title: {
+          html: 'Review business plan'
+        },
+        href: 'tasks/preliminary/businessPlan',
+        status: {
+          html: 'Completed' if request.businessPlan == 'Yes',
+          tag: {
+            html: ('Failed' if request.businessPlan == 'No')+('Queried' if request.businessPlan == 'More information needed')+('Not started' if not request.businessPlan),
+            classes: 'govuk-tag--'+('red' if request.businessPlan == 'No')+('orange' if request.businessPlan == 'More information needed')+('govuk-tag--blue' if not request.businessPlan)
+          } if request.businessPlan != 'Yes'
+        }
+      },
+      {
+        title: {
           html: 'Confirm estabilished in UK'
         },
         href: 'tasks/preliminary/uk',
@@ -84,56 +85,15 @@
 
 
   <h2 class="govuk-heading-m">
-    Business plan
-  </h2>
-  {{ govukTaskList({
-    items: [
-      {
-        title: {
-          html: 'Review spending'
-        },
-        href: 'tasks/business/spending',
-        status: {
-          html: 'Completed' if request.spending == 'Yes',
-          tag: {
-            html: ('Failed' if request.spending == 'No')+('Queried' if request.spending == 'More information needed')+('Not started' if not request.spending),
-            classes: 'govuk-tag--'+('red' if request.spending == 'No')+('orange' if request.spending == 'More information needed')+('govuk-tag--blue' if not request.spending)
-          } if request.spending != 'Yes'
-        }
-      },
-      {
-        title: {
-          html: 'Evidenced revenue'
-        },
-        href: 'tasks/business/revenue',
-        status: {
-          html: 'Completed' if request.revenue == 'Yes',
-          tag: {
-            html: ('Failed' if request.revenue == 'No')+('Queried' if request.revenue == 'More information needed')+('Not started' if not request.revenue),
-            classes: 'govuk-tag--'+('red' if request.revenue == 'No')+('orange' if request.revenue == 'More information needed')+('govuk-tag--blue' if not request.revenue)
-          } if request.revenue != 'Yes'
-        }
-      },
-      {
-        title: {
-          html: 'Check responsibility'
-        },
-        href: 'tasks/business/responsibility',
-        status: {
-          html: 'Completed' if request.responsibility == 'Yes',
-          tag: {
-            html: ('Failed' if request.responsibility == 'No')+('Queried' if request.responsibility == 'More information needed')+('Not started' if not request.responsibility),
-            classes: 'govuk-tag--'+('red' if request.responsibility == 'No')+('orange' if request.responsibility == 'More information needed')+('govuk-tag--blue' if not request.responsibility)
-          } if request.responsibility != 'Yes'
-        }
-      }
-    ]
-  }) }}
-
-
-  <h2 class="govuk-heading-m">
     Sampling and inspection plan
   </h2>
+
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download sampling and inspection report',
+      classes: 'govuk-button--secondary app-button--download'
+    }) }}
+  </div>
   {{ govukTaskList({
     items: [
       {
@@ -277,6 +237,32 @@
             html: ('Failed' if request.notRecycled == 'No')+('Queried' if request.notRecycled == 'More information needed')+('Not started' if not request.notRecycled),
             classes: 'govuk-tag--'+('red' if request.notRecycled == 'No')+('orange' if request.notRecycled == 'More information needed')+('govuk-tag--blue' if not request.notRecycled)
           } if request.notRecycled != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Evidenced revenue'
+        },
+        href: 'tasks/sampling-inspection/revenue',
+        status: {
+          html: 'Completed' if request.revenue == 'Yes',
+          tag: {
+            html: ('Failed' if request.revenue == 'No')+('Queried' if request.revenue == 'More information needed')+('Not started' if not request.revenue),
+            classes: 'govuk-tag--'+('red' if request.revenue == 'No')+('orange' if request.revenue == 'More information needed')+('govuk-tag--blue' if not request.revenue)
+          } if request.revenue != 'Yes'
+        }
+      },
+      {
+        title: {
+          html: 'Check responsibility'
+        },
+        href: 'tasks/sampling-inspection/responsibility',
+        status: {
+          html: 'Completed' if request.responsibility == 'Yes',
+          tag: {
+            html: ('Failed' if request.responsibility == 'No')+('Queried' if request.responsibility == 'More information needed')+('Not started' if not request.responsibility),
+            classes: 'govuk-tag--'+('red' if request.responsibility == 'No')+('orange' if request.responsibility == 'More information needed')+('govuk-tag--blue' if not request.responsibility)
+          } if request.responsibility != 'Yes'
         }
       },
       {
