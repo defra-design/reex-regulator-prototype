@@ -163,6 +163,19 @@
       },
       {
         title: {
+          html: 'Audit trail'
+        },
+        href: 'tasks/sampling-inspection/auditTrail',
+        status: {
+          html: 'Completed' if request.auditTrail == 'Yes',
+          tag: {
+            html: ('Failed' if request.auditTrail == 'No')+('Queried' if request.auditTrail == 'More information needed')+('Not started' if not request.auditTrail),
+            classes: 'govuk-tag--'+('red' if request.auditTrail == 'No')+('orange' if request.auditTrail == 'More information needed')+('govuk-tag--blue' if not request.auditTrail)
+          } if request.auditTrail != 'Yes'
+        }
+      },
+      {
+        title: {
           html: 'Quality control'
         },
         href: 'tasks/sampling-inspection/qualityControl',
@@ -211,19 +224,6 @@
             html: ('Failed' if request.departureDestination == 'No')+('Queried' if request.departureDestination == 'More information needed')+('Not started' if not request.departureDestination),
             classes: 'govuk-tag--'+('red' if request.departureDestination == 'No')+('orange' if request.departureDestination == 'More information needed')+('govuk-tag--blue' if not request.departureDestination)
           } if request.departureDestination != 'Yes'
-        }
-      },
-      {
-        title: {
-          html: 'PRN/PERNs already issued'
-        },
-        href: 'tasks/sampling-inspection/alreadyIssued',
-        status: {
-          html: 'Completed' if request.alreadyIssued == 'Yes',
-          tag: {
-            html: ('Failed' if request.alreadyIssued == 'No')+('Queried' if request.alreadyIssued == 'More information needed')+('Not started' if not request.alreadyIssued),
-            classes: 'govuk-tag--'+('red' if request.alreadyIssued == 'No')+('orange' if request.alreadyIssued == 'More information needed')+('govuk-tag--blue' if not request.alreadyIssued)
-          } if request.alreadyIssued != 'Yes'
         }
       },
       {
