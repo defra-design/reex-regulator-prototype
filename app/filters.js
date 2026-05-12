@@ -32,3 +32,7 @@ addFilter('daysInFutureShort', (number) => {
 addFilter('currency', function(num) {
 	return new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(num).replace(/\.00$/, '')
 })
+
+addFilter('highlight', function (content) {
+	return '<span class="app-highlight">' + content + '</span>'
+}, { renderAsHtml: true })

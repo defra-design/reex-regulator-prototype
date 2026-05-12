@@ -1,4 +1,7 @@
 // Use this file to override the default settings used in Frontend, useful particularly if you want to rebrand the prototype
+$govuk-suppressed-warnings: (
+	"govuk-text-colour"
+);
 
 $govuk-font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 

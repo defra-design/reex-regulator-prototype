@@ -19,7 +19,7 @@
   </h1>
 
   <h2 class="govuk-heading-m">
-    Application details
+    Organisation details
   </h2>
 
   {{ govukSummaryList({
@@ -42,14 +42,6 @@
       },
       {
         key: {
-          html: 'Application type'
-        },
-        value: {
-          html: request.type
-        }
-      },
-      {
-        key: {
           html: 'Organisation type'
         },
         value: {
@@ -58,26 +50,18 @@
       },
       {
         key: {
-          html: 'Repocessor address'
+          html: 'Application type'
+        },
+        value: {
+          html: request.type
+        }
+      },
+      {
+        key: {
+          html: 'Site address'
         },
         value: {
           html: request.reprocessorAddress
-        }
-      },
-      {
-        key: {
-          html: 'Material'
-        },
-        value: {
-          html: request.material
-        }
-      },
-      {
-        key: {
-          html: 'Tonnage band'
-        },
-        value: {
-          html: request.tonnageBand
         }
       },
       {
@@ -87,7 +71,130 @@
         value: {
           html: request.regulator
         }
+      }
+    ]
+  }) }}
+
+  {{ govukTable({
+    caption: 'Application details',
+    captionClasses: 'govuk-table__caption--m',
+    firstCellIsHeader: true,
+    head: [
+      {
+        html: 'Field',
+        classes: 'govuk-!-width-one-half'
       },
+      {
+        html: 'Previous',
+        classes: 'govuk-!-width-one-quarter',
+        format: 'numeric'
+      },
+      {
+        html: 'New',
+        classes: 'govuk-!-width-one-quarter'
+      }
+    ],
+    rows: [
+      [
+        {
+          html: 'Material'
+        },
+        {
+          html: request.material,
+          format: 'numeric'
+        },
+        {
+          html: request.material
+        }
+      ],
+      [
+        {
+          html: 'Tonnage band'
+        },
+        {
+          html: 'Up to 500 tonnes' | highlight,
+          format: 'numeric'
+        },
+        {
+          html: request.tonnageBand | highlight
+        }
+      ]
+    ]
+  }) }}
+
+
+  <h2 class="govuk-heading-m">
+    Business plan
+  </h2>
+
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: {
+          html: 'New reprocessing infrastructure and maintining existing infrastructure'
+        },
+        value: {
+          html: '<strong>20%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      },
+      {
+        key: {
+          html: 'Price support'
+        },
+        value: {
+          html: '<strong>20%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      },
+      {
+        key: {
+          html: 'Support for business collections'
+        },
+        value: {
+          html: '<strong>10%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      },
+      {
+        key: {
+          html: 'Communications, including  informational campaigns'
+        },
+        value: {
+          html: '<strong>15%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      },
+      {
+        key: {
+          html: 'Developing new markets for products made from recycled packaging waste'
+        },
+        value: {
+          html: '<strong>10%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      },
+      {
+        key: {
+          html: 'Developing new users for recycled packaging waste'
+        },
+        value: {
+          html: '<strong>20%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      },
+      {
+        key: {
+          html: 'Other'
+        },
+        value: {
+          html: '<strong>5%</strong>: This is an example explanation of how the operator would spend their income on this category'
+        }
+      }
+    ]
+  }) }}
+
+
+  <h2 class="govuk-heading-m">
+    Payment details
+  </h2>
+
+  {{ govukSummaryList({
+    rows: [
       {
         key: {
           html: 'Charge'
@@ -115,10 +222,6 @@
   }) }}
 
   <div class="govuk-button-group">
-    {{ govukButton({
-      html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download business plan',
-      classes: 'govuk-button--secondary app-button--download'
-    }) }}
 
     {{ govukButton({
       html: '<svg class="app-button__icon" xmlns="http://www.w3.org/2000/svg" viewBox="31.48244797 57.8415657 195.36781609 257.43678161" width="35" height="35"><defs><path id="b" d="M38.48 64.84h164.37v226.44H38.48V64.84z"/></defs><filter id="a" width="246.37" height="308.44" x="9.48" y="35.84" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse"><feFlood/><feComposite in2="SourceAlpha" operator="in"/><feGaussianBlur/><feOffset dx="24" dy="24" result="afterOffset"/><feFlood flood-color="#000" flood-opacity="1"/><feComposite in2="afterOffset" operator="in"/><feMorphology operator="dilate"/><feComposite in2="SourceAlpha" operator="out"/></filter><path fill="#fff" d="M38.48 64.84h164.37v226.44H38.48V64.84z" filter="url(#a)"/><use xlink:href="#b"/><g><use fill-opacity="0" stroke="#fff" stroke-width="14" xlink:href="#b"/></g></svg>Download sampling and inspection report',

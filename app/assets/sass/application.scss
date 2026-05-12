@@ -6,16 +6,10 @@
 @import "components/autocomplete";
 @import "components/buttons";
 @import "components/header";
+@import "components/highlight";
 @import "components/organisation-logo";
 @import "components/service-banner";
 @import "components/side-nav";
-
-code {
-	@include govuk-font($size: 19);
-	color: #d13118;
-	background-color: govuk-colour("black", $variant: "tint-95");
-	padding: 0 govuk-spacing(1);
-}
 
 .unbranded {
 	background-color: govuk-functional-colour('surface-background');
