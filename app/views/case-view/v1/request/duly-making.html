@@ -22,6 +22,12 @@
     Organisation details
   </h2>
 
+  {{ mojAlert({
+    variant: "success",
+    title: "Details confirmed with Companies House",
+    dismissible: false
+  }) }}
+
   {{ govukSummaryList({
     rows: [
       {
@@ -119,72 +125,6 @@
           html: request.tonnageBand | highlight
         }
       ]
-    ]
-  }) }}
-
-
-  <h2 class="govuk-heading-m">
-    Business plan
-  </h2>
-
-  {{ govukSummaryList({
-    rows: [
-      {
-        key: {
-          html: 'New reprocessing infrastructure and maintining existing infrastructure'
-        },
-        value: {
-          html: '<strong>20%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      },
-      {
-        key: {
-          html: 'Price support'
-        },
-        value: {
-          html: '<strong>20%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      },
-      {
-        key: {
-          html: 'Support for business collections'
-        },
-        value: {
-          html: '<strong>10%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      },
-      {
-        key: {
-          html: 'Communications, including  informational campaigns'
-        },
-        value: {
-          html: '<strong>15%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      },
-      {
-        key: {
-          html: 'Developing new markets for products made from recycled packaging waste'
-        },
-        value: {
-          html: '<strong>10%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      },
-      {
-        key: {
-          html: 'Developing new users for recycled packaging waste'
-        },
-        value: {
-          html: '<strong>20%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      },
-      {
-        key: {
-          html: 'Other'
-        },
-        value: {
-          html: '<strong>5%</strong>: This is an example explanation of how the operator would spend their income on this category'
-        }
-      }
     ]
   }) }}
 

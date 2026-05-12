@@ -38,8 +38,10 @@
         ) %}
       {% endfor %}
 
+      {% set caption = title+'<span class="govuk-caption-m"><span class="govuk-visually-hidden"> - </span>Showing 1-10 of 277</span>' %}
+
       {{ govukTable({
-        caption: title,
+        caption: caption | safe,
         captionClasses: 'govuk-table__caption--l',
         firstCellIsHeader: true,
         head: [
@@ -64,6 +66,31 @@
           }
         ],
         rows: requests
+      }) }}
+
+
+      {{ govukPagination({
+        next: {
+          href: "#0"
+        },
+        items: [
+          {
+            number: 1,
+            href: "#0",
+            current: true
+          },
+          {
+            number: 2,
+            href: "#0"
+          },
+          {
+            ellipsis: true
+          },
+          {
+            number: 28,
+            href: "#"
+          }
+        ]
       }) }}
 
     </div>
