@@ -13,7 +13,7 @@ function defaultData(req) {
       "reprocessorAddress": "2 Wyld Court, Addingrove, AA3 1AB",
       "tonnageBand": "Up to 5,000 tonnes",
       "regulator": "England",
-      "charge": "5000",
+      "charge": "2184",
       "chargePaidOnline": "No",
       "chargeRef": "PR/PK/EXP 000568587647654",
       "tasks": []
@@ -28,9 +28,9 @@ function defaultData(req) {
       "orgId": "095521",
       "orgType": "Reprocessor",
       "reprocessorAddress": "2 Wyld Court, Addingrove, AA3 1AB",
-      "tonnageBand": "Up to 5,000 tonnes",
+      "tonnageBand": "Up to 10,000 tonnes",
       "regulator": "England",
-      "charge": "5000",
+      "charge": "3276",
       "chargePaidOnline": "No",
       "chargeRef": "PR/PK/EXP 000568587647654",
       "tasks": []
