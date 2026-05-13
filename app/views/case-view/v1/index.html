@@ -19,19 +19,27 @@
               html: '<a href="request/'+('duly-making' if request.status == 'Not started' else 'task-list')+'?current-request='+request.id+'">'+request.id+'</a>'
             },
             {
-              html: request.type
-            },
-            {
               html: request.orgName
             },
             {
-              html: request.orgId
+              html: request.type
             },
             {
-              html: request.status
+              html: request.material
             },
             {
               html: request.sla | daysInFuture,
+              format: 'numeric'
+            },
+            {
+              html: '<strong class="govuk-tag '
+              + ('govuk-tag--blue' if request.status == 'In progress' )
+              + ('govuk-tag--green' if request.status == 'Approved' )
+              + ('govuk-tag--red' if request.status == 'Rejected' )
+              + ('govuk-tag--grey' if request.status == 'Not started' )
+              +'">'
+              + request.status
+              +'</strong>',
               format: 'numeric'
             }
           ]
@@ -49,19 +57,20 @@
             html: 'Request ID'
           },
           {
-            html: 'Request type'
-          },
-          {
             html: 'Organisation name'
           },
           {
-            html: 'Organisation ID'
+            html: 'Request type'
           },
           {
-            html: 'Status'
+            html: 'Material'
           },
           {
             html: 'Due date',
+            format: 'numeric'
+          },
+          {
+            html: 'Status',
             format: 'numeric'
           }
         ],

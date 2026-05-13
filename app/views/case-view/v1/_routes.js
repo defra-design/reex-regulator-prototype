@@ -5,7 +5,7 @@ const router = govukPrototypeKit.requests.setupRouter()
 const func = require('./_functions.js')
 
 // Setup the prototype
-router.get('*', function(req, res, next){
+router.get('*', (req, res, next) => {
   // Change the service name for this whole feature
   res.locals['serviceName'] = 'Manage regulator requests'
 
@@ -15,7 +15,7 @@ router.get('*', function(req, res, next){
 })
 
 // Start links in prototype index setup the default data
-router.get('/start', function(req, res){
+router.get('/start', (req, res) => {
   func.defaultData(req)
   res.redirect('./')
 })
@@ -23,7 +23,7 @@ router.get('/start', function(req, res){
 
 // REQUEST
 // Search for and render the current request
-router.all('/request*', function (req, res, next) {
+router.all('/request*', (req, res, next) => {
   // If current request exists render the data else redirect to all requests page
   if (req.session.data['current-request']) {
     // Find the current request
@@ -40,7 +40,7 @@ router.all('/request*', function (req, res, next) {
   }
 })
 
-router.post('/request/duly-making', function (req, res) {
+router.post('/request/duly-making', (req, res) => {
   // On duly making complete update request to in progress and move to task list
   let requestToEdit = req.request
   requestToEdit[0].status = 'In progress'
@@ -48,23 +48,23 @@ router.post('/request/duly-making', function (req, res) {
 })
 
 // Set the current page in the side nave to tasks for all questions
-router.get('/request/tasks/*', function(req, res, next){
+router.get('/request/tasks/*', (req, res, next) => {
   res.locals.currentPage = res.locals.currentPrototype+'/request/task-list'
   next()
 })
 
-router.post('/request/tasks/determination', function (req, res) {
+router.post('/request/tasks/determination', (req, res) => {
   let requestToEdit = req.request
   if (req.session.data['determination'] == 'No') {
     requestToEdit[0].status = 'Rejected'
   } else {
-    requestToEdit[0].status = 'Completed'
+    requestToEdit[0].status = 'Approved'
   }
   res.redirect('../confirmation');
 })
 
 // Handle logic for all tasks
-router.post('/request/tasks/:section/:question', function (req, res, next) {
+router.post('/request/tasks/:section/:question', (req, res, next) => {
   // Get each question and notes answer
   let currentQuestion = req.session.data[`${req.params.question}`]
   let currentNotes = req.session.data[`${req.params.question}Notes`]
@@ -97,120 +97,120 @@ router.post('/request/tasks/:section/:question', function (req, res, next) {
 // Handle all next questions if answer is Yes
 
 // Prelim 1
-router.post('/request/tasks/preliminary/address', function (req, res) {
+router.post('/request/tasks/preliminary/address', (req, res) => {
   res.redirect('fitAndProper');
 })
 
 // Prelim 2
-router.post('/request/tasks/preliminary/fitAndProper', function (req, res) {
+router.post('/request/tasks/preliminary/fitAndProper', (req, res) => {
   res.redirect('businessPlan');
 })
 
 // Prelim 3
-router.post('/request/tasks/preliminary/businessPlan', function (req, res) {
+router.post('/request/tasks/preliminary/businessPlan', (req, res) => {
   res.redirect('uk');
 })
 
 // Prelim 4
-router.post('/request/tasks/preliminary/uk', function (req, res) {
+router.post('/request/tasks/preliminary/uk', (req, res) => {
   res.redirect('../sampling-inspection/alreadyIssued');
 })
 
 
 // SIP 1
-router.post('/request/tasks/sampling-inspection/alreadyIssued', function (req, res) {
+router.post('/request/tasks/sampling-inspection/alreadyIssued', (req, res) => {
   res.redirect('separateWaste');
 })
 
 // SIP 2
-router.post('/request/tasks/sampling-inspection/separateWaste', function (req, res) {
+router.post('/request/tasks/sampling-inspection/separateWaste', (req, res) => {
   res.redirect('wasteType');
 })
 
 // SIP 3
-router.post('/request/tasks/sampling-inspection/wasteType', function (req, res) {
+router.post('/request/tasks/sampling-inspection/wasteType', (req, res) => {
   res.redirect('prnWeight');
 })
 
 // SIP 4
-router.post('/request/tasks/sampling-inspection/prnWeight', function (req, res) {
+router.post('/request/tasks/sampling-inspection/prnWeight', (req, res) => {
   res.redirect('methodDescribed');
 })
 
 // SIP 5
-router.post('/request/tasks/sampling-inspection/methodDescribed', function (req, res) {
+router.post('/request/tasks/sampling-inspection/methodDescribed', (req, res) => {
   res.redirect('auditTrail');
 })
 
 // SIP 6
-router.post('/request/tasks/sampling-inspection/auditTrail', function (req, res) {
+router.post('/request/tasks/sampling-inspection/auditTrail', (req, res) => {
   res.redirect('qualityControl');
 })
 
 // SIP 7
-router.post('/request/tasks/sampling-inspection/qualityControl', function (req, res) {
+router.post('/request/tasks/sampling-inspection/qualityControl', (req, res) => {
   res.redirect('customerSpecification');
 })
 
 // SIP 8
-router.post('/request/tasks/sampling-inspection/customerSpecification', function (req, res) {
+router.post('/request/tasks/sampling-inspection/customerSpecification', (req, res) => {
   res.redirect('weightRecorded');
 })
 
 // SIP 9
-router.post('/request/tasks/sampling-inspection/weightRecorded', function (req, res) {
+router.post('/request/tasks/sampling-inspection/weightRecorded', (req, res) => {
   res.redirect('departureDestination');
 })
 
 // SIP 10
-router.post('/request/tasks/sampling-inspection/departureDestination', function (req, res) {
+router.post('/request/tasks/sampling-inspection/departureDestination', (req, res) => {
   res.redirect('notRecycled');
 })
 
 // SIP 11
-router.post('/request/tasks/sampling-inspection/notRecycled', function (req, res) {
+router.post('/request/tasks/sampling-inspection/notRecycled', (req, res) => {
   res.redirect('revenue');
 })
 
 // SIP 12
-router.post('/request/tasks/sampling-inspection/revenue', function (req, res) {
+router.post('/request/tasks/sampling-inspection/revenue', (req, res) => {
   res.redirect('responsibility');
 })
 
 // SIP 13
-router.post('/request/tasks/sampling-inspection/responsibility', function (req, res) {
+router.post('/request/tasks/sampling-inspection/responsibility', (req, res) => {
   res.redirect('complianceResponsibility');
 })
 
 // SIP 14
-router.post('/request/tasks/sampling-inspection/complianceResponsibility', function (req, res) {
+router.post('/request/tasks/sampling-inspection/complianceResponsibility', (req, res) => {
   res.redirect('qualityResponsibility');
 })
 
 // SIP 15
-router.post('/request/tasks/sampling-inspection/qualityResponsibility', function (req, res) {
+router.post('/request/tasks/sampling-inspection/qualityResponsibility', (req, res) => {
   res.redirect('training');
 })
 
 // SIP 16
-router.post('/request/tasks/sampling-inspection/training', function (req, res) {
+router.post('/request/tasks/sampling-inspection/training', (req, res) => {
   res.redirect('reporting');
 })
 
 // SIP 17
-router.post('/request/tasks/sampling-inspection/reporting', function (req, res) {
+router.post('/request/tasks/sampling-inspection/reporting', (req, res) => {
   res.redirect('../../task-list');
 })
 
 
 // Set contact log side nav as active while adding to log
-router.get('/request/contact', function (req, res, next) {
+router.get('/request/contact', (req, res, next) => {
   res.locals.currentPage = res.locals.currentPrototype+'/request/contact-log'
   next()
 })
 
 // Store each contact in log
-router.post('/request/contact', function (req, res) {
+router.post('/request/contact', (req, res) => {
   // Setup the object with a new ID and the answers given by user
   const newContact = Object.assign({
     type: req.session.data['contact-type'],
