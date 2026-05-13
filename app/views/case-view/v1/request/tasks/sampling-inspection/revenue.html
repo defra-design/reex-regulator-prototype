@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Has the operator evidenced that revenue will be spent in line with the business plan and records will be kept?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator demonstrate that revenue will be spent in line with the business plan and that records will be kept?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,7 +22,7 @@
     value: request.revenue,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }

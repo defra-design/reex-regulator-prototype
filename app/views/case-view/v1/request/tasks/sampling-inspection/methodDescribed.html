@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What records will the operator keep to verify that PRNs have only been issued in accordance with the method described to calculate the recyclable portion in the S&I plan.' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will the operator keep records to verify that PRNs have only been issued in accordance with the method described to calculate the recyclable portion in the sampling and inspection plan?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,7 +22,7 @@
     value: request.methodDescribed,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }

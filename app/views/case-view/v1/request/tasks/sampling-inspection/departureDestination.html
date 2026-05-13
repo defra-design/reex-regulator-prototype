@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator record the material that leaves site? What records and documentation will the operator hold to show the destination of finished product?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will the operator record what material that leaves site and include the destination of finished product?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,7 +22,7 @@
     value: request.departureDestination,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }

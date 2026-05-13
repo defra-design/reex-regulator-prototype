@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What evidence will the operator hold to demonstrate a full audit trail from the point of receiving the UK Packaging waste, up to issuing PRNs and that the material has been recycled, including the date of which this has occurred?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator demonstrate a full audit trail from the point of receiving the UK packaging waste, up to issuing PRNs for recycled material (including dates)?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,7 +22,7 @@
     value: request.auditTrail,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }

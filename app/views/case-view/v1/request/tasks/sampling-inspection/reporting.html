@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Who will be responsible for compliance with the reporting requirements detailed within Schedule 8 Part 3 (26)? What training and/or experience does this person have to make them suitable for this responsibility? What contingencies will be in place should there be any staff absence or departure? How will this data be quality checked?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will somebody be responsible for compliance with the reporting requirements detailed within Schedule 8 Part 3 (26)?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,7 +22,7 @@
     value: request.reporting,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }

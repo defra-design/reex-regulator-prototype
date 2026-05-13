@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What will the operator\'s process be if PRNs are claimed on packaging waste which has not been recycled by the end of the following year from the date it was received on site? Have they included: How the material is identified? How this is recorded? ' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> If PRNs are claimed on packaging waste which has not been recycled by the end of the year that follows the date it was received on site, will the operator be able to demonstrate how the material can be identified?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,7 +22,7 @@
     value: request.notRecycled,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }

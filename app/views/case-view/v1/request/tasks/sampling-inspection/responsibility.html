@@ -1,9 +1,9 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Check responsibility' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Does the plan cover who will be responsible for ensuring compliance with the business plan?' %}
 
 {% block questions %}
-  <h1 class="govuk-heading-l">
+  {# <h1 class="govuk-heading-l">
     {{ title | safe }}
   </h1>
 
@@ -12,7 +12,7 @@
     <li>who will be responsible for ensuring compliance with the business plan</li>
     <li>what training and/or experience does that person has to make them suitable</li>
     <li>what contingencies will be in place should there be any staff absence or departure</li>
-  </ul>
+  </ul> #}
 
 
   {% set notes %}
@@ -34,8 +34,9 @@
     value: request.responsibility,
     fieldset: {
       legend: {
-        html: 'Does the plan cover who will be responsible? ',
-        classes: 'govuk-fieldset__legend--m'
+        html: title,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
       }
     },
     items: [

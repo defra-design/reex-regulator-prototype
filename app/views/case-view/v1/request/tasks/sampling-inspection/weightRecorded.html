@@ -1,6 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> How will the operator ensure that the recorded weight of recycled material is accurate? Has the operator included: What checks will be carried out on this data? The frequency of the checks that will be carried out? Who actually carries out these checks?' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator ensure and demonstrate that the recorded weight of recycled material is accurate?' %}
 
 {% block questions %}
   {% set notes %}
@@ -22,10 +22,13 @@
     value: request.weightRecorded,
     fieldset: {
       legend: {
-        html: title,
+        html: title | safe,
         classes: 'govuk-fieldset__legend--l',
         isPageHeading: true
       }
+    },
+    hint: {
+      html: 'Consider what checks will be carried out, the frequency and who actually carries them out.'
     },
     items: [
       {

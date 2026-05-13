@@ -1,8 +1,14 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> What documentation will the operator hold to confirm the original type and form of that waste? Does it confirm the original producer of the waste? Will they receive any waste packaging of which the original type and form isn\'t readily identifiable, such as plastic regrind or glass cullet? If the waste isn\'t readily identifiable, the documentation must confirm the original type and form of that material is packaging waste and that it became waste in the UK.' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Waste type' %}
 
 {% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p>Waste packaging documentation where the original type and form of the waste is not readily identifiable, such as plastic regrind or glass cullet, must confirm that the original type and form of the material is packaging waste and that it became waste in the UK.</p>
+
   {% set notes %}
     {{ govukTextarea({
       name: 'wasteTypeNotes',
@@ -22,9 +28,8 @@
     value: request.wasteType,
     fieldset: {
       legend: {
-        html: title,
-        classes: 'govuk-fieldset__legend--l',
-        isPageHeading: true
+        html: 'Does the operator have documentation to confirm the original waste type and form, and confirm the original producer?',
+        classes: 'govuk-fieldset__legend--m'
       }
     },
     items: [
