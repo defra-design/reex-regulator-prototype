@@ -1,6 +1,7 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator prove that the material they receive from their supplier has not already had PRNs or PERNs issued on it?' %}
+{% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator prove that the material they receive from their supplier has not already had '+pErn+'s issued on it?' %}
 
 {% block questions %}
   {% set notes %}

@@ -1,6 +1,7 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will the operator record how customer specified waste is recycled and inform customers that PRNs have been claimed on any material or product received?' %}
+{% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will the operator record how customer specified waste is recycled and inform customers that '+pErn+'s have been claimed on any material or product received?' %}
 
 {% block questions %}
   {% set notes %}

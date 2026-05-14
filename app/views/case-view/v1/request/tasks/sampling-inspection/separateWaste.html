@@ -1,5 +1,6 @@
 {% extends '../_tasks-layout.html' %}
 
+{% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
 {% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator identify, separate and account for waste that&rsquo;s not eligible for issuing PRNs?' %}
 
 {% block questions %}

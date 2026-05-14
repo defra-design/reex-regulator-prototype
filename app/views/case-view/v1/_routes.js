@@ -11,12 +11,15 @@ router.get('*', (req, res, next) => {
 
   res.locals.currentPage = res.locals.currentPrototype+req.path
 
+  if (!req.session.data['requests']) {
+    func.defaultData(req)
+  }
+
   next()
 })
 
 // Start links in prototype index setup the default data
 router.get('/start', (req, res) => {
-  func.defaultData(req)
   res.redirect('./')
 })
 
@@ -24,20 +27,15 @@ router.get('/start', (req, res) => {
 // REQUEST
 // Search for and render the current request
 router.all('/request*', (req, res, next) => {
-  // If current request exists render the data else redirect to all requests page
-  if (req.session.data['current-request']) {
-    // Find the current request
-    let requestToFind = req.session.data['current-request']
-    let requests = req.session.data['requests'] || []
-    let current = requests.filter(request => request.id === requestToFind)
-    // Pass it through to each page as local data
-    res.locals.request = current[0]
-    // Store it for use in later routes
-    req.request = current
-    next()
-  } else {
-    res.redirect(res.locals.currentPrototype+'/')
-  }
+  // Find the current request
+  let requestToFind = req.session.data['current-request'] || '00000489'
+  let requests = req.session.data['requests'] || []
+  let current = requests.filter(request => request.id === requestToFind)
+  // Pass it through to each page as local data
+  res.locals.request = current[0]
+  // Store it for use in later routes
+  req.request = current
+  next()
 })
 
 router.post('/request/duly-making', (req, res) => {

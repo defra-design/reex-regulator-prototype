@@ -1,5 +1,6 @@
 {% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
 
+{% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
 {% set title = 'Tasks' %}
 
 {% block backLink %}
@@ -101,7 +102,7 @@
     items: [
       {
         title: {
-          html: 'Issued PRNs or PERNs'
+          html: 'Issued '+pErn+'s'
         },
         href: 'tasks/sampling-inspection/alreadyIssued',
         status: {
@@ -140,7 +141,7 @@
       },
       {
         title: {
-          html: 'PRN weight'
+          html: pErn+' weight'
         },
         href: 'tasks/sampling-inspection/prnWeight',
         status: {

@@ -1,13 +1,14 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> PRN weight' %}
+{% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> '+pErn+' weight' %}
 
 {% block questions %}
   <h1 class="govuk-heading-l">
     {{ title | safe }}
   </h1>
 
-  <p>A PRN may only be issued on the recyclable proportion of the weight of UK packaging waste received for recycling (as calculated by the method detailed within part 1 of the sampling and inspection plan), that&rsquo;s been approved by their regulator in writing for the corresponding registration.</p>
+  <p>A {{pErn}} may only be issued on the recyclable proportion of the weight of UK packaging waste received for recycling (as calculated by the method detailed within part 1 of the sampling and inspection plan), that&rsquo;s been approved by their regulator in writing for the corresponding registration.</p>
 
   {% set notes %}
     {{ govukTextarea({
@@ -28,7 +29,7 @@
     value: request.prnWeight,
     fieldset: {
       legend: {
-        html: 'Can the operator record an accurate weight for PRN waste recording?',
+        html: 'Can the operator record an accurate weight for '+PRN+' waste recording?',
         classes: 'govuk-fieldset__legend--m'
       }
     },

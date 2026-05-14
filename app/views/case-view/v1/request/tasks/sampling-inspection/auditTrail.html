@@ -1,6 +1,7 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator demonstrate a full audit trail from the point of receiving the UK packaging waste, up to issuing PRNs for recycled material (including dates)?' %}
+{% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Can the operator demonstrate a full audit trail from the point of receiving the UK packaging waste, up to issuing '+pErn+'s for recycled material (including dates)?' %}
 
 {% block questions %}
   {% set notes %}
