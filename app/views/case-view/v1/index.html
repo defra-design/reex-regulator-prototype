@@ -1,4 +1,4 @@
-{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
 
 {% set title = 'All requests' %}
 
@@ -12,7 +12,7 @@
       {% set requests = [] %}
 
       {# Loop through types and add into the object #}
-      {% for request in data['requests'] %}
+      {% for request in data['requests'] | sort(attribute='payment') %}
         {% set requests = requests | push (
           [
             {
@@ -22,13 +22,10 @@
               html: request.orgName
             },
             {
-              html: request.type
+              html: request.type+': <br>'+request.material
             },
             {
-              html: request.material
-            },
-            {
-              html: request.sla | daysInFuture,
+              html: (request.payment | addDays(84)) | formatDateShort if request.payment else '',
               format: 'numeric'
             },
             {
@@ -48,6 +45,11 @@
 
       {% set caption = title+'<span class="govuk-caption-m"><span class="govuk-visually-hidden"> - </span>Showing 1-10 of 277</span>' %}
 
+      <style>
+        .govuk-table__header:last-of-type {
+          min-width: 112px;
+        }
+      </style>
       {{ govukTable({
         caption: caption | safe,
         captionClasses: 'govuk-table__caption--l',
@@ -61,9 +63,6 @@
           },
           {
             html: 'Request type'
-          },
-          {
-            html: 'Material'
           },
           {
             html: 'Due date',

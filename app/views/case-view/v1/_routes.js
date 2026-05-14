@@ -41,7 +41,14 @@ router.all('/request*', (req, res, next) => {
 router.post('/request/duly-making', (req, res) => {
   // On duly making complete update request to in progress and move to task list
   let requestToEdit = req.request
+  if (req.session.data['payment-year'] && req.session.data['payment-month'] && req.session.data['payment-day']) {
+    paymentDate = req.session.data['payment-year']+'-'+parseInt(req.session.data['payment-month']).toLocaleString(undefined, {minimumIntegerDigits: 2})+'-'+parseInt(req.session.data['payment-day']).toLocaleString(undefined, {minimumIntegerDigits: 2})
+  } else {
+    paymentDate = new Date().toISOString().slice(0, 10)
+  }
+
   requestToEdit[0].status = 'In progress'
+  requestToEdit[0].payment = paymentDate
   res.redirect('task-list');
 })
 

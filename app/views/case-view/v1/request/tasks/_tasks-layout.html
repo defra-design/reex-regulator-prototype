@@ -1,4 +1,4 @@
-{% extends 'layouts/unbranded.html' if data['branded'] == 'false' else 'layouts/main.html' %}
+{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
 
 {% block backLink %}
   {{ govukBackLink({

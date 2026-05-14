@@ -19,6 +19,16 @@ addFilter('formatDate', (date) => {
 	return date.format('D MMMM YYYY')
 })
 
+addFilter('formatDateShort', (date) => {
+	var date = moment(date)
+	return date.format('D MMM YYYY')
+})
+
+addFilter('addDays', (start, number) => {
+	var date = moment(start).add(number,"days").format("D MMMM YYYY")
+	return date
+})
+
 addFilter('daysInFuture', (number) => {
 	var date = moment().add(number,"days").format("D MMMM YYYY")
 	return date
