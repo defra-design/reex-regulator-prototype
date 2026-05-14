@@ -1,7 +1,9 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
-const moment = require('moment')
+const dateFilter = require('nunjucks-date-filter')
 
+addFilter('date', dateFilter)
+dateFilter.setDefaultFormat('D MMMM YYYY')
 
 addFilter('push', (array, item) => {
 	array.push(item)
@@ -12,31 +14,6 @@ addFilter('cleanArray', (array) => {
 	return array.filter(item => {
 		return (item && (item !==""))
 	})
-})
-
-addFilter('formatDate', (date) => {
-	var date = moment(date)
-	return date.format('D MMMM YYYY')
-})
-
-addFilter('formatDateShort', (date) => {
-	var date = moment(date)
-	return date.format('D MMM YYYY')
-})
-
-addFilter('addDays', (start, number) => {
-	var date = moment(start).add(number,"days").format("D MMMM YYYY")
-	return date
-})
-
-addFilter('daysInFuture', (number) => {
-	var date = moment().add(number,"days").format("D MMMM YYYY")
-	return date
-})
-
-addFilter('daysInFutureShort', (number) => {
-	var date = moment().add(number,"days").format("D MMM YYYY")
-	return date
 })
 
 addFilter('currency', function(num) {

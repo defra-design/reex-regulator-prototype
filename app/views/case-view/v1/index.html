@@ -25,7 +25,7 @@
               html: request.type+': <br>'+request.material
             },
             {
-              html: (request.payment | addDays(84)) | formatDateShort if request.payment else '',
+              html: (request.payment | date('add', 84, 'days')) | date('D MMM YYYY') if request.payment else '',
               format: 'numeric'
             },
             {
