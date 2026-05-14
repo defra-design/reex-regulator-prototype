@@ -28,8 +28,8 @@ router.get('/start', (req, res) => {
 // Search for and render the current request
 router.all('/request*', (req, res, next) => {
   // Find the current request
-  let requestToFind = req.session.data['current-request'] || '00000489'
-  let requests = req.session.data['requests'] || []
+  let requestToFind = req.session.data['current-request']
+  let requests = req.session.data['requests']
   let current = requests.filter(request => request.id === requestToFind)
   // Pass it through to each page as local data
   res.locals.request = current[0]

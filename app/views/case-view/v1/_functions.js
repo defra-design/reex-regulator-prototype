@@ -1,5 +1,6 @@
 // Add default data
 function defaultData(req) {
+  req.session.data['current-request'] = "00000489",
   req.session.data['requests'] = [
     {
       "id": "00000489",
