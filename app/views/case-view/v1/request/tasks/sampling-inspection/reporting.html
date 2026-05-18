@@ -3,10 +3,6 @@
 {% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will somebody be responsible for compliance with the reporting requirements detailed within Schedule 8 Part 3 (26)?' %}
 
 {% block questions %}
-  <h1 class="govuk-heading-l">
-    {{ title | safe }}
-  </h1>
-
   {% set notes %}
     {{ govukTextarea({
       name: 'reportingNotes',
