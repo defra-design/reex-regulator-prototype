@@ -67,19 +67,6 @@
             classes: 'govuk-tag--'+('red' if request.businessPlan == 'No')+('orange' if request.businessPlan == 'More information needed')+('govuk-tag--blue' if not request.businessPlan)
           } if request.businessPlan != 'Yes'
         }
-      },
-      {
-        title: {
-          html: 'Estabilished in the UK'
-        },
-        href: 'tasks/preliminary/uk',
-        status: {
-          html: 'Completed' if request.uk == 'Yes',
-          tag: {
-            html: ('Failed' if request.uk == 'No')+('Queried' if request.uk == 'More information needed')+('Not started' if not request.uk),
-            classes: 'govuk-tag--'+('red' if request.uk == 'No')+('orange' if request.uk == 'More information needed')+('govuk-tag--blue' if not request.uk)
-          } if request.uk != 'Yes'
-        }
       }
     ]
   }) }}
@@ -376,7 +363,7 @@ Add a hacky way to make determination if either:
       noDetermination[0].classList.add('govuk-!-display-none');
     } else if (statuses[i].textContent.includes('Completed')) {
       completed++
-      if (completed === 21) {
+      if (completed === 20) {
         determination[0].classList.remove('govuk-!-display-none');
         noDetermination[0].classList.add('govuk-!-display-none');
       }

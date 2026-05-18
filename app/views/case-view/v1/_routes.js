@@ -113,11 +113,6 @@ router.post('/request/tasks/preliminary/fitAndProper', (req, res) => {
 
 // Prelim 3
 router.post('/request/tasks/preliminary/businessPlan', (req, res) => {
-  res.redirect('uk');
-})
-
-// Prelim 4
-router.post('/request/tasks/preliminary/uk', (req, res) => {
   res.redirect('../sampling-inspection/alreadyIssued');
 })
 

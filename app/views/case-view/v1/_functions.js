@@ -15,8 +15,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2184",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000268",
@@ -31,8 +30,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "3276",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000293",
@@ -47,8 +45,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2184",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000579",
@@ -63,8 +60,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "3276",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000614",
@@ -79,8 +75,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2184",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000668",
@@ -95,8 +90,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "3276",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000778",
@@ -111,8 +105,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2184",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000813",
@@ -127,8 +120,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "3276",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000833",
@@ -143,8 +135,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "2184",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     },
     {
       "id": "000901",
@@ -159,8 +150,7 @@ function defaultData(req) {
       "regulator": "England",
       "charge": "3276",
       "chargePaidOnline": "No",
-      "chargeRef": "PR/PK/EXP 000568587647654",
-      "uk":"Yes"
+      "chargeRef": "PR/PK/EXP 000568587647654"
     }
   ]
 }
