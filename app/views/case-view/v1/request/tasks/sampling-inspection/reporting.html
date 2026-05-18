@@ -1,14 +1,11 @@
 {% extends '../_tasks-layout.html' %}
 
-{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Reporting' %}
+{% set title = '<span class="govuk-caption-l">Sampling and inspection plan<span class="govuk-visually-hidden"> - </span></span> Will somebody be responsible for compliance with the reporting requirements detailed within Schedule 8 Part 3 (26)?' %}
 
 {% block questions %}
   <h1 class="govuk-heading-l">
     {{ title | safe }}
   </h1>
-
-  <p>what training or experience makes the responsible person suitable</p>
-  <p>what contingencies will be in place should there be any staff absence or departure</p>
 
   {% set notes %}
     {{ govukTextarea({
@@ -29,9 +26,12 @@
     value: request.reporting,
     fieldset: {
       legend: {
-        html: 'Will somebody be responsible for compliance with the reporting requirements detailed within Schedule 8 Part 3 (26)?',
-        classes: 'govuk-fieldset__legend--m'
+        html: title,
+        classes: 'govuk-fieldset__legend--l'
       }
+    },
+    hint: {
+      html: 'Consider what training or experience makes the responsible person suitable, the contingencies in place should there be any staff absence or departure, and how data will be quality checked.'
     },
     items: [
       {
