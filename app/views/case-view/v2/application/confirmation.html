@@ -1,0 +1,33 @@
+{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
+
+{% set title = 'application completed' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: currentPrototype+'/'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  <p>The determination has been saved and the applicant informed of the decision.</p>
+
+  <p class="govuk-!-margin-bottom-2">Before moving on to another application:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>add any intel concerns to Memex</li>
+    <li>update the technical checklist where necessary</li>
+    <li>add to the RAG database</li>
+  </ul>
+
+  <p><a href="../">Return to all applications</a></p>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

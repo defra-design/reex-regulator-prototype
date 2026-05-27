@@ -1,0 +1,123 @@
+{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
+
+{% set pErn = 'PRN' if application.orgType == 'Reprocessor' else 'PERN' %}
+{% set title = 'Application summary' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: currentPrototype+'/'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    {% include './_nav.html' %}
+
+    <div class="govuk-grid-column-full govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-l govuk-visually-hidden">
+        {{ title }}
+      </h1>
+
+      <h2 class="govuk-heading-m">
+        Application details
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              html: 'PRN tonnage'
+            },
+            value: {
+              html: 'Up to 500 tonnes'
+            }
+          },
+          {
+            key: {
+              html: 'Authority to issue'
+            },
+            value: {
+              html: '<ul class="govuk-list"><li>Jim Armstrong</li><li>Willow Armstrong</li></ul>'
+            }
+          },
+          {
+            key: {
+              html: 'Sampling and inspection plan'
+            },
+            value: {
+              html: '<a href="#0">example.pdf</a>'
+            }
+          }
+        ]
+      }) }}
+
+
+      <h2 class="govuk-heading-m">
+        Business plan
+      </h2>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              html: 'New reprocessing infrastructure and maintaining existing infrastructure'
+            },
+            value: {
+              html: '80% of PRN income <br>Details of how I&rsquo;ll spend the income'
+            }
+          },
+          {
+            key: {
+              html: 'Building converted into accommodation'
+            },
+            value: {
+              html: '20% of PRN income <br>Details of how I&rsquo;ll spend the income'
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+    <div class="govuk-grid-column-one-third-from-desktop">
+      <aside class="app-side__wrapper">
+        <div class="app-side">
+          <div class="app-side__actions">
+            {{ govukButton({
+              html: 'Make determination',
+              href: '#0'
+            }) }}
+            <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
+            <a class="govuk-link app-link--destructive app-link--right" href="#0">Withdraw</a>
+            <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+            <ul class="govuk-list govuk-!-margin-0">
+              <li>
+                <a class="govuk-link govuk-link--no-visited-state" href="#0" target="_blank">Assign application</a>
+              </li>
+              <li>
+                <a target="_blank" class="govuk-link govuk-link--no-visited-state" href="#0">Override due date</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="app-side">
+          <div class="app-c-metadata">
+            <dl class="app-c-metadata__list">
+              <dt class="app-c-metadata__title">Status</dt>
+              <dd class="app-c-metadata__description">{{ application.status }}</dd>
+              <dt class="app-c-metadata__title">Assigned to</dt>
+              <dd class="app-c-metadata__description">{{ application.owner | d('You') }}</dd>
+              <dt class="app-c-metadata__title">Due on</dt>
+              <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
+            </dl>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+{% endblock %}

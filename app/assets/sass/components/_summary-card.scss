@@ -1,0 +1,28 @@
+.app-summary-card--none {
+	border-width: 0 0 1px 0;
+
+	&:last-of-type {
+		border-bottom: 0;
+	}
+
+	.govuk-summary-card__title-wrapper,
+	.govuk-summary-card__content {
+		padding: 0;
+	}
+
+	.govuk-summary-card__content {
+		@include govuk-responsive-margin(6, "bottom");
+	}
+
+	.govuk-summary-card__title-wrapper {
+		background-color: unset;
+	}
+
+	.govuk-summary-card__title {
+		@include govuk-font-size($size: 24);
+	}
+
+	.govuk-summary-card__actions {
+		font-weight: normal;
+	}
+}

@@ -1,0 +1,191 @@
+{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
+
+{% set title = 'All applications' %}
+
+{% block serviceBanner %}{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-quarter-from-desktop">
+      {%- set filterOptionsHtml %}
+
+        {{ govukInput({
+          id: "keywords",
+          name: "keywords",
+          label: {
+            text: "Keywords",
+            classes: "govuk-label--m"
+          }
+        }) }}
+
+        {{ govukCheckboxes({
+          idPrefix: "type",
+          name: "type",
+          classes: "govuk-checkboxes--small",
+          fieldset: {
+            legend: {
+              text: "Type",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "1",
+              text: "Blue (18)",
+              checked: true
+            },
+            {
+              value: "2",
+              text: "Yellow (5)",
+              checked: true
+            },
+            {
+              value: "3",
+              text: "Red (2)"
+            }
+          ]
+        }) }}
+
+        {{ govukCheckboxes({
+          idPrefix: "status",
+          name: "status",
+          classes: "govuk-checkboxes--small",
+          fieldset: {
+            legend: {
+              text: "Status",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          items: [
+            {
+              value: "complete",
+              text: "Completed (2)",
+              checked: true
+            },
+            {
+              value: "incomplete",
+              text: "Incomplete (5)"
+            },
+            {
+              value: "inprogress",
+              text: "In progress (3)",
+              checked: false
+            }
+          ]
+        }) }}
+      {% endset -%}
+
+      {{ mojFilter({
+        heading: {
+          text: "Filter"
+        },
+
+        submit: {
+          attributes: {
+              "data-test-id": "submit-button"
+          }
+        },
+
+        optionsHtml: filterOptionsHtml
+      }) }}
+    </div>
+    <div class="govuk-grid-column-three-quarters-from-desktop">
+
+      {# Create empty object for radios #}
+      {% set applications = [] %}
+
+      {# Loop through types and add into the object #}
+      {% for application in data['applications'] | sort(attribute='payment') %}
+        {% set applications = applications | push (
+          [
+            {
+              html: '<a href="application/'+('duly-making' if application.status == 'Not started' else 'summary')+'?current-application='+application.id+'">'+application.id+'</a>'
+            },
+            {
+              html: application.orgName
+            },
+            {
+              html: application.type+': <br>'+application.material
+            },
+            {
+              html: (application.payment | date('add', 84, 'days')) | date('D MMM YYYY') if application.payment else '',
+              format: 'numeric'
+            },
+            {
+              html: '<strong class="govuk-tag '
+              + ('govuk-tag--blue' if application.status == 'In progress' )
+              + ('govuk-tag--green' if application.status == 'Approved' )
+              + ('govuk-tag--red' if application.status == 'Rejected' )
+              + ('govuk-tag--grey' if application.status == 'Not started' )
+              +'">'
+              + application.status
+              +'</strong>',
+              format: 'numeric'
+            }
+          ]
+        ) %}
+      {% endfor %}
+
+      {% set caption = title+'<span class="govuk-caption-m"><span class="govuk-visually-hidden"> - </span>Showing 1-10 of 277</span>' %}
+
+      <style>
+        .govuk-table__header:last-of-type {
+          min-width: 112px;
+        }
+      </style>
+      {{ govukTable({
+        caption: caption | safe,
+        captionClasses: 'govuk-table__caption--l',
+        firstCellIsHeader: true,
+        head: [
+          {
+            html: 'Application ID'
+          },
+          {
+            html: 'Organisation name'
+          },
+          {
+            html: 'Application type'
+          },
+          {
+            html: 'Due date',
+            format: 'numeric'
+          },
+          {
+            html: 'Status',
+            format: 'numeric'
+          }
+        ],
+        rows: applications
+      }) }}
+
+
+      {{ govukPagination({
+        next: {
+          href: "#0"
+        },
+        items: [
+          {
+            number: 1,
+            href: "#0",
+            current: true
+          },
+          {
+            number: 2,
+            href: "#0"
+          },
+          {
+            ellipsis: true
+          },
+          {
+            number: 28,
+            href: "#"
+          }
+        ]
+      }) }}
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

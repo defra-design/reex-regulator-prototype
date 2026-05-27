@@ -1,0 +1,57 @@
+{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
+
+{% set title = 'Contact log' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: './'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block sideNav %}
+  {% include './_nav.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l govuk-visually-hidden">
+    {{ title }}
+  </h1>
+
+  <style>
+    .govuk-task-list__item:first-of-type {
+      border-top: 0;
+    }
+  </style>
+
+  <ul class="govuk-task-list">
+    {% for contact in application.contacts %}
+      <li class="govuk-task-list__item g//ovuk-task-list__item--with-link">
+        <div class="govuk-task-list__name-and-hint">
+          {{ contact.type }} ({{ contact.date | date }})
+
+          <div class="govuk-task-list__hint">
+            Response due: {{ contact.due | date }}
+            <br>
+            {{ contact.reason }}
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+    <li class="govuk-task-list__item g//ovuk-task-list__item--with-link">
+      <div class="govuk-task-list__name-and-hint">
+        <b>Application submitted</b>
+
+        <div class="govuk-task-list__hint">
+          2:17pm on {{ d | date('subtract', 5, 'days') | date('D MMMM YYYY') }}
+        </div>
+      </div>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

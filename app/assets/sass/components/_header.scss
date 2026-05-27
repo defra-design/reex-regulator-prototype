@@ -1,4 +1,8 @@
 // Override some setting as we're not using the GOV.UK logo
+.govuk-header {
+	border-bottom: 5px solid govuk-functional-colour('surface-border');
+}
+
 .govuk-header__logo {
 	padding-top: 12px;
 }

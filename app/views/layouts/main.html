@@ -11,6 +11,9 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 	{{ (title+' –' if title) | striptags | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
 {% endblock %}
 
+{% block headIcons %}
+	<link rel="icon" sizes="48x48" href="/public/images/favicon.ico">
+{% endblock %}
 
 {% block header %}
 	<div class="govuk-header">
@@ -25,7 +28,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 	{# Create a service banner following the header with a toggle to show #}
 	{% block serviceBanner %}
-		<div class="app-service-banner {{ 'app-service-banner--visibile' if showBanner == true }}">
+		<div class="app-service-banner">
 			<div class="app-service-banner__container govuk-width-container">
 
 				{# Setup blocks for back link and banner content #}

@@ -20,7 +20,7 @@
 
 
 
-      {% set version = "1" %}
+      {% set version = "2" %}
       <h2 class="govuk-heading-m">
         Version {{version}}
         {{ govukTag({
@@ -29,30 +29,28 @@
         }) }}
       </h2>
 
-      <p>Initial barebones look at accessing a request and processing it, with previous steps for the old process automated.</p>
+      <p>What has changed.</p>
 
       {{ govukButton({
         text: 'View prototype',
-        href: 'v'+version+'/start?branded=false'
+        href: 'v'+version+'/start?branded=true'
       }) }}
 
-      <p><a href="v{{version}}/start?branded=true">View a branded version</a>, this is just a proof of concept for using Frontend settings to rebrand.</p>
 
 
 
 
 
-
-      {# {% set v1HTML %}
+      {% set v1HTML %}
         {% set version = "1" %}
-        <p>Information about this version</p>
-
-        <p><a href="#0">View the research outputs on Miro</a>.</p>
+        <p>Initial barebones look at accessing a request and processing it, with previous steps for the old process automated.</p>
 
         {{ govukButton({
           text: 'View prototype',
-          href: '#0'
+          href: 'v'+version+'/start?branded=false'
         }) }}
+
+        <p><a href="v{{version}}/start?branded=true">View a branded version</a>, this is just a proof of concept for using Frontend settings to rebrand.</p>
       {% endset %}
 
       {{ govukAccordion({
@@ -68,7 +66,7 @@
             }
           }
         ]
-      }) }} #}
+      }) }}
 
     </div>
   </div>
