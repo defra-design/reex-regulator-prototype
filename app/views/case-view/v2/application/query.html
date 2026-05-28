@@ -1,4 +1,4 @@
-{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
+{% extends 'layouts/main.html' %}
 
 {% set title = 'Query' %}
 
@@ -21,6 +21,7 @@
   {{ govukCheckboxes({
     idPrefix: 'query-questions',
     name: 'query-questions',
+    classes: 'govuk-checkboxes--small',
     fieldset: {
       legend: {
         html: 'Which areas do you want to query?',

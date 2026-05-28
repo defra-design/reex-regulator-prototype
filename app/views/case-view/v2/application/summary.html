@@ -1,4 +1,4 @@
-{% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
+{% extends 'layouts/main.html' %}
 
 {% set pErn = 'PRN' if application.orgType == 'Reprocessor' else 'PERN' %}
 {% set title = 'Application summary' %}
@@ -96,10 +96,10 @@
             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             <ul class="govuk-list govuk-!-margin-0">
               <li>
-                <a class="govuk-link govuk-link--no-visited-state" href="#0" target="_blank">Assign application</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="#0">Assign application</a>
               </li>
               <li>
-                <a target="_blank" class="govuk-link govuk-link--no-visited-state" href="#0">Override due date</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="#0">Override due date</a>
               </li>
             </ul>
           </div>
