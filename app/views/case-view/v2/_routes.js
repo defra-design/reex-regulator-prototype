@@ -70,6 +70,13 @@ router.post('/application/duly-making', (req, res) => {
   res.redirect('summary');
 })
 
+router.get('/application/summary', (req, res, next) => {
+  // Clear the notification banners
+  delete req.session.data['notification']
+  delete req.session.data['queried']
+  next()
+})
+
 router.post('/application/tasks/determination', (req, res) => {
   let applicationToEdit = req.application
   if (req.session.data['determination'] == 'No') {
@@ -111,8 +118,10 @@ router.post('/application/query', (req, res) => {
   // Update the status of the application
   applicationToEdit[0].status = 'Queried'
 
-  // Move onto the contact log
-  res.redirect('audit-log');
+  // Enable success banner and go back to summary
+  req.session.data['notification'] = 'true'
+  req.session.data['queried'] = 'true'
+  res.redirect('summary');
 })
 
 

@@ -1,0 +1,17 @@
+{# Temp notification banner for any changes #}
+{% if data['notification'] %}
+  <div class="govuk-grid-column-full">
+    {% if data['queried'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Query sent
+        </h3>
+        <p>The status of the application has been updated, you will receive a notification when the operator resubmits.</p>
+      {% endset %}
+    {% endif %}
+    {{ govukNotificationBanner({
+      html: html,
+      type: 'success'
+    }) }}
+  </div>
+{% endif %}
