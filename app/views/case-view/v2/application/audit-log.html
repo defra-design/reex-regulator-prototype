@@ -5,7 +5,7 @@
 {% block backLink %}
   {{ govukBackLink({
     html: 'Go back to all applications',
-    href: './'
+    href: currentPrototype+'/'
   }) }}
 {% endblock %}
 
@@ -29,16 +29,57 @@
   </style>
 
   <ul class="govuk-task-list">
-    {% for contact in application.contacts %}
-      <li class="govuk-task-list__item g//ovuk-task-list__item--with-link">
+    {% for item in application.audit %}
+      <li class="govuk-task-list__item">
         <div class="govuk-task-list__name-and-hint">
-          {{ contact.type }} ({{ contact.date | date }})
+          {% if item.type == 'query' %}
+            <b>Query sent and status updated</b>
+          {% elif item.type == 'status' %}
+            <b>Status updated from {{ item.old | lower }} to {{ item.new | lower }}</b>
+          {% endif %}
 
           <div class="govuk-task-list__hint">
-            Response due: {{ contact.due | date }}
-            <br>
-            {{ contact.reason }}
+            Current User on {{ item.date | date('D MMMM YYYY [at] h:mma') }}
           </div>
+
+          {% if item.type == 'query' %}
+            {% set queryQuestions %}
+              <ul class="govuk-list">
+                {% for q in item.questions %}
+                  <li>{{ q }}</li>
+                {% endfor %}
+              </ul>
+            {% endset -%}
+
+            {% set queryDetails %}
+              {{ govukSummaryList({
+                classes: 'govuk-summary-list--no-border',
+                rows: [
+                  {
+                    key: {
+                      html: 'Question'+('s' if item.questions | length > 1)+' queried'
+                    },
+                    value: {
+                      html: queryQuestions
+                    }
+                  },
+                  {
+                    key: {
+                      html: 'Query details'
+                    },
+                    value: {
+                      html: item.reason
+                    }
+                  }
+                ]
+              }) }}
+            {% endset -%}
+            {{ govukDetails({
+              summaryHtml: 'Show query details',
+              html: queryDetails,
+              classes: 'govuk-!-margin-top-2 govuk-!-margin-bottom-0'
+            }) }}
+          {% endif %}
         </div>
       </li>
     {% endfor %}
@@ -47,7 +88,7 @@
         <b>Application submitted</b>
 
         <div class="govuk-task-list__hint">
-          2:17pm on {{ d | date('subtract', 5, 'days') | date('D MMMM YYYY') }}
+          {{ d | date('subtract', 5, 'days') | date('D MMMM YYYY') }} at 2:17pm
         </div>
       </div>
     </li>

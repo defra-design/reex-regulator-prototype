@@ -111,7 +111,7 @@
               <dt class="app-c-metadata__title">Status</dt>
               <dd class="app-c-metadata__description">{{ application.status }}</dd>
               <dt class="app-c-metadata__title">Assigned to</dt>
-              <dd class="app-c-metadata__description">{{ application.owner | d('You') }}</dd>
+              <dd class="app-c-metadata__description">{{ application.owner | d('Unassigned') }}</dd>
               <dt class="app-c-metadata__title">Due on</dt>
               <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
             </dl>

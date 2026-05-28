@@ -47,8 +47,26 @@ router.post('/application/duly-making', (req, res) => {
     paymentDate = new Date().toISOString().slice(0, 10)
   }
 
-  applicationToEdit[0].status = 'In progress'
+  // Setup the object with a new audit log
+  const newAudit = Object.assign({
+    type: 'status',
+    old: applicationToEdit[0].status,
+    new: 'Duly made'
+  })
+
+  // If there is no audit log create an empty object
+  if (!applicationToEdit[0].audit) {
+    applicationToEdit[0].audit = []
+  }
+
+  // Pass the new log into the audit
+  applicationToEdit[0].audit.unshift(newAudit)
+
+  // Save the new status and payment date
+  applicationToEdit[0].status = 'Duly made'
   applicationToEdit[0].payment = paymentDate
+
+
   res.redirect('summary');
 })
 
@@ -69,29 +87,32 @@ router.get('/application/contact', (req, res, next) => {
   next()
 })
 
-// Store each contact in log
-router.post('/application/contact', (req, res) => {
+// Store each query in log
+router.post('/application/query', (req, res) => {
   // Setup the object with a new ID and the answers given by user
-  const newContact = Object.assign({
-    type: req.session.data['contact-type'],
+  const newQuery = Object.assign({
+    type: 'query',
     date: new Date(),
-    due: req.session.data['contact-response-due-year']+'-'+req.session.data['contact-response-due-month']+'-'+req.session.data['contact-response-due-day'],
-    reason: req.session.data['contact-reason']
+    questions: req.session.data['query-questions'],
+    reason: req.session.data['query-reason']
   })
 
   // Grab the current application
   let applicationToEdit = req.application
 
-  // If there are no contacts create an empty object
-  if (!applicationToEdit[0].contacts) {
-    applicationToEdit[0].contacts = []
+  // If there is no audit log create an empty object
+  if (!applicationToEdit[0].audit) {
+    applicationToEdit[0].audit = []
   }
 
   // Pass the new contact into the application
-  applicationToEdit[0].contacts.unshift(newContact)
+  applicationToEdit[0].audit.unshift(newQuery)
+
+  // Update the status of the application
+  applicationToEdit[0].status = 'Queried'
 
   // Move onto the contact log
-  res.redirect('contact-log');
+  res.redirect('audit-log');
 })
 
 
