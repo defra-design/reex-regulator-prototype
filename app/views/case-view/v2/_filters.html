@@ -324,7 +324,11 @@
         </summary>
         <div class="app-c-filter-section__content">
           {# Create empty object for options #}
-          {% set orgs = [] %}
+          {% set orgs = [{
+            value: '',
+            text: 'Choose organisation',
+            selected: true
+          }] %}
 
           {# Loop through types and add into the object #}
           {% for application in data['applications'] %}
