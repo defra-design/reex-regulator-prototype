@@ -33,7 +33,7 @@
               html: application.type+': <br>'+application.material
             },
             {
-              html: (application.payment | date('add', 84, 'days')) | date('D MMM YYYY') if application.payment else '',
+              html: (application.due | date('D MMM YYYY')) if application.due else '',
               format: 'numeric'
             },
             {

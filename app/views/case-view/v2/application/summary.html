@@ -84,48 +84,52 @@
       }) }}
 
     </div>
-    <div class="govuk-grid-column-one-third-from-desktop">
-      <aside class="app-side__wrapper">
-        <div class="app-side">
-          <div class="app-side__actions">
-            {% if application.owner == 'you' %}
-              {{ govukButton({
-                html: 'Make determination',
-                href: 'determination'
-              }) }}
-              <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
-              <a class="govuk-link app-link--destructive app-link--right" href="withdraw">Withdraw</a>
-            {% else %}
-              {{ govukButton({
-                html: 'Assign to yourself',
-                href: 'assign-to-me'
-              }) }}
-            {% endif %}
-            <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-            <ul class="govuk-list govuk-!-margin-0">
-              <li>
-                <a class="govuk-link govuk-link--no-visited-state" href="assign">Assign application</a>
-              </li>
-              <li>
-                <a class="govuk-link govuk-link--no-visited-state" href="override-sla">Override due date</a>
-              </li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="app-side">
-          <div class="app-c-metadata">
-            <dl class="app-c-metadata__list">
-              <dt class="app-c-metadata__title">Status</dt>
-              <dd class="app-c-metadata__description">{{ application.status }}</dd>
-              <dt class="app-c-metadata__title">Assigned to</dt>
-              <dd class="app-c-metadata__description">{{ application.owner | title | d('Unassigned') }}</dd>
-              <dt class="app-c-metadata__title">Due on</dt>
-              <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
-            </dl>
+
+    {% if application.status != 'Withdrawn' %}
+      <div class="govuk-grid-column-one-third-from-desktop">
+        <aside class="app-side__wrapper">
+          <div class="app-side">
+            <div class="app-side__actions">
+              {% if application.owner == 'you' %}
+                {{ govukButton({
+                  html: 'Make determination',
+                  href: 'determination'
+                }) }}
+                <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
+                <a class="govuk-link app-link--destructive app-link--right" href="withdraw">Withdraw</a>
+              {% else %}
+                {{ govukButton({
+                  html: 'Assign to yourself',
+                  href: 'assign-to-me'
+                }) }}
+              {% endif %}
+              <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+              <ul class="govuk-list govuk-!-margin-0">
+                <li>
+                  <a class="govuk-link govuk-link--no-visited-state" href="assign">Assign application</a>
+                </li>
+                <li>
+                  <a class="govuk-link govuk-link--no-visited-state" href="override-sla">Override due date</a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </aside>
-    </div>
+
+          <div class="app-side">
+            <div class="app-c-metadata">
+              <dl class="app-c-metadata__list">
+                <dt class="app-c-metadata__title">Status</dt>
+                <dd class="app-c-metadata__description">{{ application.status }}</dd>
+                <dt class="app-c-metadata__title">Assigned to</dt>
+                <dd class="app-c-metadata__description">{{ application.owner | title | d('Unassigned') }}</dd>
+                <dt class="app-c-metadata__title">Due on</dt>
+                <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
+              </dl>
+            </div>
+          </div>
+        </aside>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}

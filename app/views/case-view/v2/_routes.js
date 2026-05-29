@@ -239,6 +239,8 @@ router.post('/application/withdraw', (req, res) => {
 
   // Update the application status
   applicationToEdit[0].status = 'Withdrawn'
+  applicationToEdit[0].due = ''
+  applicationToEdit[0].assignment = ''
 
   res.redirect('withdrawn')
 })
