@@ -32,10 +32,14 @@
     {% for item in application.audit %}
       <li class="govuk-task-list__item">
         <div class="govuk-task-list__name-and-hint">
-          {% if item.type == 'query' %}
-            <b>Query sent and status updated</b>
+          {% if item.type == 'payment' %}
+            <b>Payment date set as {{ item.payment | date }}</b>
+          {% elif item.type == 'due' %}
+            <b>Due date {{ ('changed from '+item.old | date+' to '+item.new | date) if item.old else ('set as '+item.new | date) }}</b>
           {% elif item.type == 'status' %}
             <b>Status updated from {{ item.old | lower }} to {{ item.new | lower }}</b>
+          {% elif item.type == 'query' %}
+          <b>Query sent and status updated</b>
           {% elif item.type == 'owner' %}
             <b>Assignment changed from {{ item.old }} to {{ item.new }}</b>
           {% endif %}
@@ -44,7 +48,7 @@
             You on {{ item.date | date('D MMMM YYYY [at] h:mma') }}
           </div>
 
-          {% if item.type == 'query' %}
+          {% if item.type == 'query' or (item.type == 'due' and item.old) %}
             {% set queryQuestions %}
               <ul class="govuk-list">
                 {% for q in item.questions %}
@@ -76,9 +80,14 @@
                 ]
               }) }}
             {% endset -%}
+
+            {% set reason %}
+              <p>{{ item.reason }}</p>
+            {% endset -%}
+
             {{ govukDetails({
-              summaryHtml: 'Show query details',
-              html: queryDetails,
+              summaryHtml: 'Show details',
+              html: queryDetails if item.type == 'query' else reason,
               classes: 'govuk-!-margin-top-2 govuk-!-margin-bottom-0'
             }) }}
           {% endif %}

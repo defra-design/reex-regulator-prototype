@@ -18,58 +18,37 @@
     {{ title | safe }}
   </h1>
 
-  {# {{ govukCheckboxes({
-    idPrefix: 'query-questions',
-    name: 'query-questions',
-    classes: 'govuk-checkboxes--small',
+  {{ govukDateInput({
+    id: 'sla',
+    namePrefix: 'sla',
     fieldset: {
       legend: {
-        html: 'Which areas do you want to query?',
-        classes: 'govuk-fieldset__legend--s'
+        html: 'When do you want to set the due date to?',
+        classes: 'govuk-fieldset__legend--m'
       }
     },
     hint: {
-      html: 'This will unlock the questions for the operator to resubmit'
-    },
-    items: [
-      {
-        html: 'Authority to issue',
-        value: 'Authority to issue'
-      },
-      {
-        html: 'Business plan',
-        value: 'Business plan'
-      },
-      {
-        html: 'PRN tonnage',
-        value: 'PRN tonnage'
-      },
-      {
-        html: 'Sampling and inspection plan',
-        value: 'Sampling and inspection plan'
-      }
-    ]
+      html: 'For example, '+(d | date('D M YYYY'))
+    }
   }) }}
 
   {{ govukTextarea({
-    name: 'query-reason',
-    id: 'query-reason',
+    name: 'sla-reason',
+    id: 'sla-reason',
+    rows: 3,
     label: {
-      html: 'Reason for query',
-      classes: 'govuk-label--s'
-    },
-    hint: {
-      html: 'This will be included in the email to the operator'
+      html: 'Reason for changing the due date',
+      classes: 'govuk-label--m'
     }
-  }) }} #}
+  }) }}
 {% endblock %}
 
-{# {% block buttons %}
+{% block buttons %}
   <div class="govuk-button-group">
     {{ govukButton({
-      html: 'Send query'
+      html: 'Save due date'
     }) }}
 
     <a class="govuk-link" href="javascript:history.back()">Cancel</a>
   </div>
-{% endblock %} #}
+{% endblock %}

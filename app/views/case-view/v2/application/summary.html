@@ -88,7 +88,7 @@
       <aside class="app-side__wrapper">
         <div class="app-side">
           <div class="app-side__actions">
-            {% if application.owner == 'You' %}
+            {% if application.owner == 'you' %}
               {{ govukButton({
                 html: 'Make determination',
                 href: 'determination'
@@ -119,7 +119,7 @@
               <dt class="app-c-metadata__title">Status</dt>
               <dd class="app-c-metadata__description">{{ application.status }}</dd>
               <dt class="app-c-metadata__title">Assigned to</dt>
-              <dd class="app-c-metadata__description">{{ application.owner | d('Unassigned') }}</dd>
+              <dd class="app-c-metadata__description">{{ application.owner | title | d('Unassigned') }}</dd>
               <dt class="app-c-metadata__title">Due on</dt>
               <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
             </dl>
