@@ -43,6 +43,8 @@
           Query sent and status updated
           {% elif item.type == 'owner' %}
             Assignment changed from {{ item.old }} to {{ item.new }}
+          {% elif item.type == 'withdrawn' %}
+            Application withdrawn
           {% endif %}
           </b>
 
