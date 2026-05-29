@@ -1,0 +1,58 @@
+{% extends './_tasks-layout.html' %}
+
+{% set title = 'Has the operator met the requirements to comply under the Packaging Waste Regulations 2024?' %}
+
+{% block questions %}
+  {% set rejectNotes %}
+    {{ govukTextarea({
+      name: 'determinationRejectNotes',
+      id: 'determinationRejectNotes',
+      rows: 3,
+      label: {
+        html: 'Enter why and what regulations they cannot comply with',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {% set approveNotes %}
+    {{ govukTextarea({
+      name: 'determinationApproveNotes',
+      id: 'determinationApproveNotes',
+      value: request.determinationRejectNotes,
+      rows: 3,
+      label: {
+        html: 'Enter any conditions the operator needs to meet as part of their accreditation',
+        classes: 'govuk-label--s'
+      }
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'determination',
+    name: 'determination',
+    fieldset: {
+      legend: {
+        html: title | safe,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yes',
+        value: 'Yes',
+        conditional: {
+          html: approveNotes
+        }
+      },
+      {
+        html: 'No',
+        value: 'No',
+        conditional: {
+          html: rejectNotes
+        }
+      }
+    ]
+  }) }}
+{% endblock %}

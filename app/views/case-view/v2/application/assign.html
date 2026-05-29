@@ -1,0 +1,109 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Who do you want to assign the application to?' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: './'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  {% set officerSearch %}
+    {{ govukSelect({
+      id: 'assign-name',
+      name: 'assign-name',
+      classes: 'js-autocomplete',
+      label: {
+        html: 'Officer&rsquo;s name'
+      },
+      items: [
+        {
+          value: '',
+          text: 'Choose officer',
+          selected: true
+        },
+        {
+          value: 'Donna Ogden',
+          text: 'Donna Ogden'
+        },
+        {
+          value: 'Lucas Fraser',
+          text: 'Lucas Fraser'
+        },
+        {
+          value: 'Jack Murray',
+          text: 'Jack Murray'
+        },
+        {
+          value: 'David May',
+          text: 'David May'
+        },
+        {
+          value: 'Jonathan Slater',
+          text: 'Jonathan Slater'
+        },
+        {
+          value: 'Jessica Ince',
+          text: 'Jessica Ince'
+        },
+        {
+          value: 'Natalie Roberts',
+          text: 'Natalie Roberts'
+        },
+        {
+          value: 'Jennifer Grant',
+          text: 'Jennifer Grant'
+        },
+        {
+          value: 'Owen Buckland',
+          text: 'Owen Buckland'
+        },
+        {
+          value: 'Alexandra Bower',
+          text: 'Alexandra Bower'
+        }
+      ]
+    }) }}
+  {% endset -%}
+
+  {{ govukRadios({
+    idPrefix: 'assign',
+    name: 'assign',
+    fieldset: {
+      legend: {
+       html: title,
+       classes: 'govuk-fieldset__legend--l',
+       isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Yourself',
+        value: 'Yourself'
+      },
+      {
+        html: 'Another officer',
+        value: 'Another officer',
+        conditional: {
+          html: officerSearch
+        }
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Assign application'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
+{% endblock %}

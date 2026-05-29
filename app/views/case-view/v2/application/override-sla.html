@@ -1,0 +1,75 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Override due date' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: './'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  {# {{ govukCheckboxes({
+    idPrefix: 'query-questions',
+    name: 'query-questions',
+    classes: 'govuk-checkboxes--small',
+    fieldset: {
+      legend: {
+        html: 'Which areas do you want to query?',
+        classes: 'govuk-fieldset__legend--s'
+      }
+    },
+    hint: {
+      html: 'This will unlock the questions for the operator to resubmit'
+    },
+    items: [
+      {
+        html: 'Authority to issue',
+        value: 'Authority to issue'
+      },
+      {
+        html: 'Business plan',
+        value: 'Business plan'
+      },
+      {
+        html: 'PRN tonnage',
+        value: 'PRN tonnage'
+      },
+      {
+        html: 'Sampling and inspection plan',
+        value: 'Sampling and inspection plan'
+      }
+    ]
+  }) }}
+
+  {{ govukTextarea({
+    name: 'query-reason',
+    id: 'query-reason',
+    label: {
+      html: 'Reason for query',
+      classes: 'govuk-label--s'
+    },
+    hint: {
+      html: 'This will be included in the email to the operator'
+    }
+  }) }} #}
+{% endblock %}
+
+{# {% block buttons %}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Send query'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
+{% endblock %} #}

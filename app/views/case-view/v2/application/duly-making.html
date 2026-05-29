@@ -178,7 +178,7 @@
     }
   }) }}
 
-  {{ govukCheckboxes({
+  {# {{ govukCheckboxes({
     idPrefix: 'duly-making',
     name: 'duly-making',
     fieldset: {
@@ -193,11 +193,11 @@
         value: 'Application and plans in acceptable state'
       }
     ]
-  }) }}
+  }) }} #}
 {% endblock %}
 
 {% block buttons %}
   {{ govukButton({
-    html: 'Save and start application'
+    html: 'Complete duly making'
   }) }}
 {% endblock %}

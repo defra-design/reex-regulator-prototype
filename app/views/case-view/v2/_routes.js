@@ -35,6 +35,11 @@ router.all('/application*', (req, res, next) => {
   res.locals.application = current[0]
   // Store it for use in later routes
   req.application = current
+
+  // If there is no audit log create an empty object
+  if (!current[0].audit) {
+    current[0].audit = []
+  }
   next()
 })
 
@@ -54,11 +59,6 @@ router.post('/application/duly-making', (req, res) => {
     new: 'Duly made'
   })
 
-  // If there is no audit log create an empty object
-  if (!applicationToEdit[0].audit) {
-    applicationToEdit[0].audit = []
-  }
-
   // Pass the new log into the audit
   applicationToEdit[0].audit.unshift(newAudit)
 
@@ -66,15 +66,100 @@ router.post('/application/duly-making', (req, res) => {
   applicationToEdit[0].status = 'Duly made'
   applicationToEdit[0].payment = paymentDate
 
-
-  res.redirect('summary');
+  // Enable success banner and go back to summary
+  req.session.data['notification'] = 'true'
+  req.session.data['duly-made'] = 'true'
+  res.redirect('summary')
 })
 
 router.get('/application/summary', (req, res, next) => {
   // Clear the notification banners
   delete req.session.data['notification']
+  delete req.session.data['duly-made']
   delete req.session.data['queried']
   next()
+})
+
+router.get('/application/assign-to-me', (req, res) => {
+  // Grab the current application
+  let applicationToEdit = req.application
+
+  // Setup the object with a new owner
+  const newOwner = Object.assign({
+    type: 'owner',
+    old: applicationToEdit[0].owner || 'unassigned',
+    new: 'you'
+  })
+
+  // Pass the new owner into the audit log
+  applicationToEdit[0].audit.unshift(newOwner)
+
+  // Save the new owner to the application
+  applicationToEdit[0].owner = 'you'
+
+  if (applicationToEdit[0].status != 'In progress') {
+    // Setup the object with a new audit log
+    const newStatus = Object.assign({
+      type: 'status',
+      old: applicationToEdit[0].status,
+      new: 'In progress'
+    })
+
+    // Pass the new status into the audit log
+    applicationToEdit[0].audit.unshift(newStatus)
+
+    // Save the new status to the application
+    applicationToEdit[0].status = 'In progress'
+  }
+
+  // Enable success banner and go back to summary
+  req.session.data['notification'] = 'true'
+  req.session.data['assigned'] = 'true'
+  res.redirect('summary')
+})
+
+router.post('/application/assign', (req, res) => {
+  // Grab the current application
+  let applicationToEdit = req.application
+
+  if (req.session.data['assign'] == 'Another officer') {
+    owner = req.session.data['assign-name'] || 'Jonathan Slater'
+  } else {
+    owner = 'you'
+  }
+
+  // Setup the object with a new owner
+  const newOwner = Object.assign({
+    type: 'owner',
+    old: applicationToEdit[0].owner || 'unassigned',
+    new: owner
+  })
+
+  // Pass the new owner into the audit log
+  applicationToEdit[0].audit.unshift(newOwner)
+
+  // Save the new owner to the application
+  applicationToEdit[0].owner = owner
+
+  if (applicationToEdit[0].status != 'In progress') {
+    // Setup the object with a new audit log
+    const newStatus = Object.assign({
+      type: 'status',
+      old: applicationToEdit[0].status,
+      new: 'In progress'
+    })
+
+    // Pass the new status into the audit log
+    applicationToEdit[0].audit.unshift(newStatus)
+
+    // Save the new status to the application
+    applicationToEdit[0].status = 'In progress'
+  }
+
+  // Enable success banner and go back to summary
+  req.session.data['notification'] = 'true'
+  req.session.data['assigned'] = 'true'
+  res.redirect('summary')
 })
 
 router.post('/application/tasks/determination', (req, res) => {
@@ -84,7 +169,7 @@ router.post('/application/tasks/determination', (req, res) => {
   } else {
     applicationToEdit[0].status = 'Approved'
   }
-  res.redirect('../confirmation');
+  res.redirect('../confirmation')
 })
 
 
@@ -96,6 +181,9 @@ router.get('/application/contact', (req, res, next) => {
 
 // Store each query in log
 router.post('/application/query', (req, res) => {
+  // Grab the current application
+  let applicationToEdit = req.application
+
   // Setup the object with a new ID and the answers given by user
   const newQuery = Object.assign({
     type: 'query',
@@ -103,14 +191,6 @@ router.post('/application/query', (req, res) => {
     questions: req.session.data['query-questions'],
     reason: req.session.data['query-reason']
   })
-
-  // Grab the current application
-  let applicationToEdit = req.application
-
-  // If there is no audit log create an empty object
-  if (!applicationToEdit[0].audit) {
-    applicationToEdit[0].audit = []
-  }
 
   // Pass the new contact into the application
   applicationToEdit[0].audit.unshift(newQuery)
@@ -121,7 +201,7 @@ router.post('/application/query', (req, res) => {
   // Enable success banner and go back to summary
   req.session.data['notification'] = 'true'
   req.session.data['queried'] = 'true'
-  res.redirect('summary');
+  res.redirect('summary')
 })
 
 

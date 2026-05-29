@@ -1,7 +1,23 @@
 {# Temp notification banner for any changes #}
 {% if data['notification'] %}
   <div class="govuk-grid-column-full">
-    {% if data['queried'] %}
+    {% if data['duly-made'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Duly made
+        </h3>
+        <p>The status of the application has been updated, you can <a href="assign-to-me">assign the application to yourself</a> or <a href="assign">assign to another operator</a>.</p>
+      {% endset %}
+
+    {% elif data['assigned'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Application assigned
+        </h3>
+        <p>{{ 'You can now progress the application' if application.owner == 'You' else 'The operator has been notified' }}</p>
+      {% endset %}
+
+    {% elif data['queried'] %}
       {% set html %}
         <h3 class="govuk-notification-banner__heading">
           Query sent
@@ -9,6 +25,7 @@
         <p>The status of the application has been updated, you will receive a notification when the operator resubmits.</p>
       {% endset %}
     {% endif %}
+
     {{ govukNotificationBanner({
       html: html,
       type: 'success'

@@ -36,10 +36,12 @@
             <b>Query sent and status updated</b>
           {% elif item.type == 'status' %}
             <b>Status updated from {{ item.old | lower }} to {{ item.new | lower }}</b>
+          {% elif item.type == 'owner' %}
+            <b>Assignment changed from {{ item.old }} to {{ item.new }}</b>
           {% endif %}
 
           <div class="govuk-task-list__hint">
-            Current User on {{ item.date | date('D MMMM YYYY [at] h:mma') }}
+            You on {{ item.date | date('D MMMM YYYY [at] h:mma') }}
           </div>
 
           {% if item.type == 'query' %}

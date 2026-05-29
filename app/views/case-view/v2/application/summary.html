@@ -88,19 +88,26 @@
       <aside class="app-side__wrapper">
         <div class="app-side">
           <div class="app-side__actions">
-            {{ govukButton({
-              html: 'Make determination',
-              href: '#0'
-            }) }}
-            <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
-            <a class="govuk-link app-link--destructive app-link--right" href="#0">Withdraw</a>
+            {% if application.owner == 'You' %}
+              {{ govukButton({
+                html: 'Make determination',
+                href: 'determination'
+              }) }}
+              <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
+              <a class="govuk-link app-link--destructive app-link--right" href="withdraw">Withdraw</a>
+            {% else %}
+              {{ govukButton({
+                html: 'Assign to yourself',
+                href: 'assign-to-me'
+              }) }}
+            {% endif %}
             <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
             <ul class="govuk-list govuk-!-margin-0">
               <li>
-                <a class="govuk-link govuk-link--no-visited-state" href="#0">Assign application</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="assign">Assign application</a>
               </li>
               <li>
-                <a class="govuk-link govuk-link--no-visited-state" href="#0">Override due date</a>
+                <a class="govuk-link govuk-link--no-visited-state" href="override-sla">Override due date</a>
               </li>
             </ul>
           </div>
