@@ -1,8 +1,8 @@
 // Override some setting as we're not using the GOV.UK brand
 .app-service-banner {
-	background: linear-gradient(0deg, govuk-functional-colour('body-background') 75%, govuk-functional-colour('surface-border') 0);
+	// background: linear-gradient(0deg, govuk-functional-colour('body-background') 75%, govuk-functional-colour('surface-border') 0);
 	border: 0;
-	margin-top: -5px;
+	margin-top: -10px;
 
 	* {
 		color: white;

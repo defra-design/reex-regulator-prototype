@@ -1,6 +1,6 @@
 {% extends 'layouts/main.html' %}
 
-{% set title = 'Withdraw' %}
+{% set title = 'Withdraw application' %}
 
 {% block backLink %}
   {{ govukBackLink({
@@ -18,58 +18,25 @@
     {{ title | safe }}
   </h1>
 
-  {# {{ govukCheckboxes({
-    idPrefix: 'query-questions',
-    name: 'query-questions',
-    classes: 'govuk-checkboxes--small',
-    fieldset: {
-      legend: {
-        html: 'Which areas do you want to query?',
-        classes: 'govuk-fieldset__legend--s'
-      }
-    },
-    hint: {
-      html: 'This will unlock the questions for the operator to resubmit'
-    },
-    items: [
-      {
-        html: 'Authority to issue',
-        value: 'Authority to issue'
-      },
-      {
-        html: 'Business plan',
-        value: 'Business plan'
-      },
-      {
-        html: 'PRN tonnage',
-        value: 'PRN tonnage'
-      },
-      {
-        html: 'Sampling and inspection plan',
-        value: 'Sampling and inspection plan'
-      }
-    ]
-  }) }}
+  <p>Something something, you should only do this when x y and z.</p>
 
   {{ govukTextarea({
-    name: 'query-reason',
-    id: 'query-reason',
+    name: 'withdraw-reason',
+    id: 'withdraw-reason',
     label: {
-      html: 'Reason for query',
-      classes: 'govuk-label--s'
-    },
-    hint: {
-      html: 'This will be included in the email to the operator'
+      html: 'Reason for withdrawing',
+      classes: 'govuk-label--m'
     }
-  }) }} #}
+  }) }}
 {% endblock %}
 
-{# {% block buttons %}
+{% block buttons %}
   <div class="govuk-button-group">
     {{ govukButton({
-      html: 'Send query'
+      text: 'Withdraw application',
+      classes: 'govuk-button--warning'
     }) }}
 
     <a class="govuk-link" href="javascript:history.back()">Cancel</a>
   </div>
-{% endblock %} #}
+{% endblock %}

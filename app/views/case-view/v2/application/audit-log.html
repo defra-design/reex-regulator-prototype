@@ -32,17 +32,19 @@
     {% for item in application.audit %}
       <li class="govuk-task-list__item">
         <div class="govuk-task-list__name-and-hint">
+          <b>
           {% if item.type == 'payment' %}
-            <b>Payment date set as {{ item.payment | date }}</b>
+            Payment date set as {{ item.payment | date }}
           {% elif item.type == 'due' %}
-            <b>Due date {{ ('changed from '+item.old | date+' to '+item.new | date) if item.old else ('set as '+item.new | date) }}</b>
+            Due date {{ ('changed from '+item.old | date+' to '+item.new | date) if iold else ('set as '+item.new | date) }}</b>
           {% elif item.type == 'status' %}
-            <b>Status updated from {{ item.old | lower }} to {{ item.new | lower }}</b>
+            Status updated from {{ item.old | lower }} to {{ item.new | lower }}
           {% elif item.type == 'query' %}
-          <b>Query sent and status updated</b>
+          Query sent and status updated
           {% elif item.type == 'owner' %}
-            <b>Assignment changed from {{ item.old }} to {{ item.new }}</b>
+            Assignment changed from {{ item.old }} to {{ item.new }}
           {% endif %}
+          </b>
 
           <div class="govuk-task-list__hint">
             You on {{ item.date | date('D MMMM YYYY [at] h:mma') }}
@@ -94,12 +96,12 @@
         </div>
       </li>
     {% endfor %}
-    <li class="govuk-task-list__item g//ovuk-task-list__item--with-link">
+    <li class="govuk-task-list__item">
       <div class="govuk-task-list__name-and-hint">
         <b>Application submitted</b>
 
         <div class="govuk-task-list__hint">
-          {{ d | date('subtract', 5, 'days') | date('D MMMM YYYY') }} at 2:17pm
+          {{ d | date('subtract', 10, 'days') | date('D MMMM YYYY') }} at 2:17pm
         </div>
       </div>
     </li>

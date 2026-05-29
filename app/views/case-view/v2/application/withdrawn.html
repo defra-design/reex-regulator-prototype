@@ -1,0 +1,26 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Application withdrawn' %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: currentPrototype+'/'
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title }}
+  </h1>
+
+  <p>The operator has been informed of the decision.</p>
+
+  <p><a href="../" class="govuk-link--no-visited-state">Return to all applications</a></p>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

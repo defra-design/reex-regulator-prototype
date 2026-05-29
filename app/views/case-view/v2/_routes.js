@@ -223,6 +223,26 @@ router.post('/application/override-sla', (req, res) => {
   res.redirect('summary')
 })
 
+router.post('/application/withdraw', (req, res) => {
+  // Grab the current application
+  let applicationToEdit = req.application
+
+  // Setup the object with new log for audit
+  const log = Object.assign({
+    type: 'withdrawn',
+    date: new Date(),
+    reason: req.session.data['withdraw-reason']
+  })
+
+  // Pass the new due log into the audit
+  applicationToEdit[0].audit.unshift(log)
+
+  // Update the application status
+  applicationToEdit[0].status = 'Withdrawn'
+
+  res.redirect('withdrawn')
+})
+
 router.post('/application/tasks/determination', (req, res) => {
   let applicationToEdit = req.application
   if (req.session.data['determination'] == 'No') {
