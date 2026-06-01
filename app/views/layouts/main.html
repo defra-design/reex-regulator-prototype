@@ -34,22 +34,20 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 				</div> #}
 			</div>
 
+			{# Pull in the navigation menu set in routes #}
+			{% set menuItems = [] %}
+			{% for i in siteNav %}
+				{% set menuItems = menuItems | push ({
+					text: i.name,
+					href: i.link
+				}) %}
+			{% endfor %}
+			{# If you want an active class:
+			active: true if title == i.name #}
+
 			{{ govukServiceNavigation({
 				serviceName: serviceName,
-				navigation: [
-					{
-						href: '#',
-						text: 'Applications'
-					},
-					{
-						href: '#',
-						text: 'Manage team members'
-					},
-					{
-						href: '#',
-						text: 'Sign out'
-					}
-				] if not hideNav
+				navigation: menuItems if siteNav
 			}) }}
 		</div>
 	</header>

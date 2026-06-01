@@ -11,6 +11,22 @@ router.get('*', (req, res, next) => {
 
   res.locals.currentPage = res.locals.currentPrototype+req.path
 
+  // Add main nav items
+  res.locals['siteNav'] = [
+    {
+      name: 'Applications',
+      link: res.locals.currentPrototype+'/'
+    },
+    {
+      name: 'Manage team members',
+      link: '#0'
+    },
+    {
+      name: 'Sign out',
+      link: '#0'
+    }
+  ]
+
   if (!req.session.data['applications']) {
     func.defaultData(req)
   }
