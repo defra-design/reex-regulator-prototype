@@ -161,6 +161,10 @@ const assignApplication = function (req, res) {
     applicationToEdit[0].status = 'In progress'
   }
 
+  // Delete the answers so it doesn't break reassign
+  delete req.session.data['assign']
+  delete req.session.data['assign-name']
+
   // Enable success banner and go back to summary
   req.session.data['notification'] = 'true'
   req.session.data['assigned'] = 'true'

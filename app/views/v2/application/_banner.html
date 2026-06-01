@@ -3,7 +3,11 @@
   <span class="govuk-caption-m govuk-!-display-inline">({{ application.orgId }})</span>
 </h2>
 
-<div style="display: flex; gap: 20px;">
-  <div><p><strong class="govuk-!-margin-right-1">Type:</strong> {{ application.orgType }}</p></div>
-  <div><p><strong class="govuk-!-margin-right-1">Material:</strong> {{ application.material }}</p></div>
-</div>
+<dl class="app-service-banner__meta">
+  <dt>Status:</dt>
+    <dd>{{ application.status }}</dd>
+  <dt>Assigned to:</dt>
+    <dd>{{ application.owner | d('Unassigned') | title }}</dd>
+  <dt>Due on:</dt>
+    <dd>{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
+</dl>

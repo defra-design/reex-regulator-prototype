@@ -33,23 +33,23 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 					</a>
 				</div> #}
 			</div>
-
-			{# Pull in the navigation menu set in routes #}
-			{% set menuItems = [] %}
-			{% for i in siteNav %}
-				{% set menuItems = menuItems | push ({
-					text: i.name,
-					href: i.link
-				}) %}
-			{% endfor %}
-			{# If you want an active class:
-			active: true if title == i.name #}
-
-			{{ govukServiceNavigation({
-				serviceName: serviceName,
-				navigation: menuItems if siteNav
-			}) }}
 		</div>
+
+		{# Pull in the navigation menu set in routes #}
+		{% set menuItems = [] %}
+		{% for i in siteNav %}
+			{% set menuItems = menuItems | push ({
+				text: i.name,
+				href: i.link
+			}) %}
+		{% endfor %}
+		{# If you want an active class:
+		active: true if title == i.name #}
+
+		{{ govukServiceNavigation({
+			serviceName: serviceName,
+			navigation: menuItems if siteNav
+		}) }}
 	</header>
 
 	{# Create a service banner following the header with a toggle to show #}
@@ -66,30 +66,45 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 	{% endblock %}
 {% endblock %}
 
+{% block container %}
+<div class="hods-page__body">
+	<div class="govuk-width-container hods-page__container hods-width-container {%- if containerClasses %} {{ containerClasses }}{% endif %}" {{- govukAttributes(containerAttributes) }}>
+		{% block containerStart %}{% block beforeContent %}{% endblock %}{% endblock %}
 
-{# Setup form question pages by default, override by using content block if not needed #}
-{% block content %}
-	<div class="govuk-grid-row">
-		{% block sideNav %}{% endblock %}
-		<div class="govuk-grid-column-full govuk-grid-column-three-quarters-from-desktop">
+		{% block main %}
+			<main class="govuk-main-wrapper {%- if mainClasses %} {{ mainClasses }}{% endif %}" id="main-content" {%- if mainLang %} lang="{{ mainLang }}"{% endif %} {{- govukAttributes(mainAttributes) }}>
 
-			{# Forms all post to themselves, action controlled by _routes.js in each prototype #}
-			<form method="post" novalidate>
+				{# Setup form question pages by default, override by using content block if not needed #}
+				{% block content %}
+					<div class="govuk-grid-row">
+						{% block sideNav %}{% endblock %}
+						<div class="govuk-grid-column-full govuk-grid-column-three-quarters-from-desktop">
 
-				{# Use the questions block on each page without needing to add in the rest of form structure #}
-				{% block questions %}{% endblock %}
+							{# Forms all post to themselves, action controlled by _routes.js in each prototype #}
+							<form method="post" novalidate>
 
-				{# Set default button to continue, use buttons block to override #}
-				{% block buttons %}
-					{{ govukButton({
-						text: 'Continue'
-					}) }}
+								{# Use the questions block on each page without needing to add in the rest of form structure #}
+								{% block questions %}{% endblock %}
+
+								{# Set default button to continue, use buttons block to override #}
+								{% block buttons %}
+									{{ govukButton({
+										text: 'Continue'
+									}) }}
+								{% endblock %}
+
+							</form>
+
+						</div>
+					</div>
 				{% endblock %}
 
-			</form>
+			</main>
+		{% endblock %}
 
-		</div>
+		{% block containerEnd %}{% endblock %}
 	</div>
+</div>
 {% endblock %}
 
 

@@ -6,9 +6,25 @@
 	&__container {
 		// padding: 1px 40px 5px;
 		padding-top: 1px;
-		@include govuk-responsive-padding(6, "right");
 		@include govuk-responsive-padding(1, "bottom");
-		@include govuk-responsive-padding(6, "left");
 		margin-top: -1px;
+	}
+
+	&__meta {
+		@include govuk-font-size(19);
+		margin: 0 0 govuk-spacing(3) 0;
+
+		@include govuk-media-query($from: tablet) {
+			display: flex;
+		}
+
+		dt {
+			font-weight: bold;
+			margin: 0 govuk-spacing(1) 0 0;
+		}
+
+		dd {
+			margin: 0 govuk-spacing(3) 0 0;
+		}
 	}
 }
