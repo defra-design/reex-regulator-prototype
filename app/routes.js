@@ -7,9 +7,6 @@ const router = govukPrototypeKit.requests.setupRouter()
 const config = require('govuk-prototype-kit/lib/config').getConfig()
 
 
-
-
-
 router.use('/', (req, res, next) => {
 	// If the prototype is running locally…
 	if (req.get('host').includes('localhost')) {
@@ -23,14 +20,13 @@ router.use('/', (req, res, next) => {
 	next()
 })
 
-
 // Import routes from different prototype folders
-router.use("/:prototype/v:version", (req, res, next) => {
+router.use("/v:version", (req, res, next) => {
 	// Save the current prototype path for use later
-	res.locals.currentPrototype = '/'+req.params.prototype+'/v'+req.params.version
+	res.locals.currentPrototype = '/v'+req.params.version
 
 	// If there's a routes file import it
 	try {
-		return require(`./views/${req.params.prototype}/v${req.params.version}/_routes`)(req, res, next)
+		return require(`./views/v${req.params.version}/_routes`)(req, res, next)
 	} catch (e) { next() }
 })

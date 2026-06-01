@@ -1,0 +1,12 @@
+.hods-footer__container {
+	display: block;
+	ul {
+		padding-left: 0;
+	}
+}
+
+.hods-footer__navigation + .hods-footer__navigation {
+	margin-top: 40px;
+	padding-top: 40px;
+	border-top: 1px solid govuk-functional-colour("border");
+}

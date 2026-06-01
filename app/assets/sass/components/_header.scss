@@ -1,12 +1,29 @@
 // Override some setting as we're not using the GOV.UK logo
-.govuk-header {
-	border-bottom: 10px solid govuk-functional-colour('surface-border');
+.hods-header {
+	border-bottom: 10px solid govuk-functional-colour('brand');
+
+	&__main {
+		gap: 1.5rem;
+		padding: 15px 0 0;
+	}
+
+	&__logo {
+		display: unset;
+		width: auto;
+		height: auto;
+		margin-right: unset;
+		margin-bottom: unset;
+		line-height: unset;
+	}
 }
 
-.govuk-header__logo {
-	padding-top: 12px;
-}
-
-.govuk-header__homepage-link {
-	word-spacing: initial;
+.app-organisation-logo {
+	display: block;
+	height: auto;
+	width: auto;
+	@include govuk-font($size: 19, $line-height: 1);
+	text-decoration: none;
+	padding-left: 50px;
+	border-left: 2px solid govuk-functional-colour('brand');
+	background: url(/plugin-assets/govuk-frontend/dist/govuk/assets/images/govuk-crest.svg) 4px 1px/auto 34px no-repeat;
 }

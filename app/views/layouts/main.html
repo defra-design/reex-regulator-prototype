@@ -2,7 +2,10 @@
 For guidance on how to use layouts see:
 https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 #}
-{% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
+
+{# {% extends "govuk-prototype-kit/layouts/govuk-branded.html" %} #}
+{% extends "home-office-kit-layout.html" %}
+{% set bodyClasses = 'hods-page' %}
 
 
 {# Add the title(h1) to page title if it's set, add to each page with:
@@ -16,15 +19,40 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {% endblock %}
 
 {% block header %}
-	<div class="govuk-header">
-		<div class="govuk-header__container govuk-width-container">
-			<div class="govuk-header__logo">
-				<a href="/" class="govuk-header__homepage-link">
-					{{ serviceName }}
-				</a>
+	<header class="hods-header hods-page__header" role="banner" data-module="hods-header">
+		<div class="hods-header__container hods-width-container">
+			<div class="hods-header__main">
+				<div class="hods-header__logo">
+					<div class="app-organisation-logo">
+						Department for Environment,<br>Food &amp; Rural Affairs
+					</div>
+				</div>
+				{# <div class="hods-header__title">
+					<a class="hods-header__link hods-header__link--active hods-header__link--service-name" href="/">
+						{{ serviceName }}
+					</a>
+				</div> #}
 			</div>
+
+			{{ govukServiceNavigation({
+				serviceName: serviceName,
+				navigation: [
+					{
+						href: '#',
+						text: 'Applications'
+					},
+					{
+						href: '#',
+						text: 'Manage team members'
+					},
+					{
+						href: '#',
+						text: 'Sign out'
+					}
+				] if not hideNav
+			}) }}
 		</div>
-	</div>
+	</header>
 
 	{# Create a service banner following the header with a toggle to show #}
 	{% block serviceBanner %}
@@ -68,42 +96,59 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 
 
 {% block footer %}
-	{# Remove GOVUK/crown items and add in Defra logo #}
-	<div class="govuk-footer">
-		<div class="govuk-width-container">
-			<div class="govuk-footer__meta">
-				<div class="govuk-footer__meta-item">
-					<div class="app-organisation-logo">
-						<div class="app-organisation-logo__container">
-							<span class="app-organisation-logo__name">Department<br>for Environment,<br>Food &amp; Rural Affairs</span>
-						</div>
-					</div>
+	<footer class="hods-footer" role="contentinfo">
+		<div class="hods-footer__inner">
+			<div
+				class="hods-footer__container hods-width-container"
+			>
+				<div class="hods-footer__content">
+					A Department for Environment, Food &amp; Rural Affairs Digital, Data and Technology
+					service
 				</div>
-				<div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-					<h2 class="govuk-visually-hidden">Support links</h2>
-					<ul class="govuk-footer__inline-list">
+				<div class="hods-footer__navigation">
+					<ul id="navigation" class="hods-footer__navigation-list">
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="#0">
+								Accessibility statement
+							</a>
+						</li>
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="#º">
+								Cookies
+							</a>
+						</li>
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="#0">
+								Feedback
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="hods-footer__navigation">
+					<ul class="hods-footer__navigation-list">
 						{% if local %}
-						<li class="govuk-footer__inline-list-item">
-							<a class="govuk-footer__link" href="/manage-prototype">
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="/manage-prototype">
 								Manage prototype
 							</a>
 						</li>
 						{% endif %}
-						<li class="govuk-footer__inline-list-item">
-							<a class="govuk-footer__link" href="/manage-prototype/clear-data">
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="/manage-prototype/clear-data">
 								Clear data
 							</a>
 						</li>
 						{% if local and data['prototype-url'] %}
-						<li class="govuk-footer__inline-list-item">
-							<a class="govuk-footer__link" href="{{data['prototype-url'] + currentURL}}" target="blank">
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="{{data['prototype-url'] + currentURL}}" target="blank">
 								View hosted page (opens in new tab)
 							</a>
 						</li>
 						{% endif %}
 						{% if data['repository-url'] %}
-						<li class="govuk-footer__inline-list-item">
-							<a class="govuk-footer__link" href="{{data['repository-url']}}" target="blank">
+						<li class="hods-footer__navigation-item">
+							<a class="hods-footer__link" href="{{data['repository-url']}}" target="blank">
 								View repository (opens in new tab)
 							</a>
 						</li>
@@ -112,7 +157,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 				</div>
 			</div>
 		</div>
-	</div>
+	</footer>
 {% endblock %}
 
 

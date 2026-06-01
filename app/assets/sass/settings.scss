@@ -3,16 +3,13 @@ $govuk-suppressed-warnings: (
 	"govuk-text-colour"
 );
 
-// We can't use Transport so setup a sans font family using system fonts
-$govuk-font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+// This imports Roboto as the font
+@import "node_modules/home-office-kit/sass/settings";
 
 // Update some of the brand colours as it's an internal product and shouldn't look like gov.uk
 $govuk-functional-colours: (
 	(
-		"brand": (
-			name: "green",
-			variant: "shade-50"
-		),
+		"brand": #00a33b,
 		// The background colour of the template. This is intended to be the same
 		// as `surface-background` for the purposes of making the Footer and Cookie
 		// banner components merge seamlessly with the template.

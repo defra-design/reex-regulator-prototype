@@ -1,31 +1,14 @@
 // Override some setting as we're not using the GOV.UK brand
 .app-service-banner {
-	// background: linear-gradient(0deg, govuk-functional-colour('body-background') 75%, govuk-functional-colour('surface-border') 0);
+	background: #E7F4EB;
 	border: 0;
-	margin-top: -10px;
-
-	* {
-		color: white;
-	}
 
 	&__container {
-		background: govuk-functional-colour('brand');
 		// padding: 1px 40px 5px;
 		padding-top: 1px;
 		@include govuk-responsive-padding(6, "right");
 		@include govuk-responsive-padding(1, "bottom");
 		@include govuk-responsive-padding(6, "left");
 		margin-top: -1px;
-	}
-
-	.govuk-back-link,
-	.govuk-breadcrumbs__link,
-	.govuk-breadcrumbs__list-item {
-		color: white;
-		@include govuk-link-style-inverse;
-
-		&:before {
-			border-color: white;
-		}
 	}
 }
