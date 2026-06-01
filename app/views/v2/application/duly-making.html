@@ -170,7 +170,11 @@
 {% endblock %}
 
 {% block buttons %}
-  {{ govukButton({
-    html: 'Complete duly making'
-  }) }}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Complete duly making'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
 {% endblock %}

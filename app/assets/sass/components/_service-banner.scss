@@ -13,6 +13,8 @@
 	&__meta {
 		@include govuk-font-size(19);
 		margin: 0 0 govuk-spacing(3) 0;
+		display: grid;
+		grid-template-columns: auto auto;
 
 		@include govuk-media-query($from: tablet) {
 			display: flex;
@@ -25,6 +27,7 @@
 
 		dd {
 			margin: 0 govuk-spacing(3) 0 0;
+
 		}
 	}
 }
