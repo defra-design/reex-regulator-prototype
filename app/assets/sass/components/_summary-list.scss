@@ -1,0 +1,6 @@
+// Reduce spacing on no border summary lists
+.govuk-summary-list--no-border {
+	dt, dd {
+		padding-top: 0;
+	}
+}

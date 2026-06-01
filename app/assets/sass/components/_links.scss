@@ -1,6 +1,6 @@
 .app-link--destructive {
 	color: $govuk-error-colour;
-	@include govuk-font(19);
+	@include govuk-font-size(19);
 
 	&:link,
 	&:visited,
@@ -15,6 +15,6 @@
 }
 
 .app-link--right {
-	@include govuk-font(19);
+	@include govuk-font-size(19);
 	float: right;
 }

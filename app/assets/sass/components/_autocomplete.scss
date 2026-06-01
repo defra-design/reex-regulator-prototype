@@ -123,7 +123,7 @@
 .autocomplete__hint,
 .autocomplete__input,
 .autocomplete__option {
-	@include govuk-font(19);
+	@include govuk-font-size(19);
 }
 
 .autocomplete__hint,

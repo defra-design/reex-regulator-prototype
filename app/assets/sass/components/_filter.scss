@@ -129,7 +129,6 @@
 
 	margin: 0;
 
-	font-family: "GDS Transport", arial, sans-serif;
 	font-size: 1.1875rem;
 	font-weight: 400;
 
@@ -366,7 +365,6 @@ body.app-filter-panel--locked {
 .app-c-filter-panel__button {
 	padding-left: 0;
 
-	font-family: "GDS Transport", arial, sans-serif;
 	font-size: 1.1875rem;
 	font-weight: 700; /* V2 was 400 */
 
@@ -484,7 +482,7 @@ body.app-filter-panel--locked {
 }
 
 .app-results-indicator {
-	@include govuk-font(16);
+	@include govuk-font-size(16);
 }
 
 .app-c-filter-section {
@@ -518,7 +516,7 @@ body.app-filter-panel--locked {
 	padding: 0;
 	margin: 0 0 govuk-spacing(3);
 
-	@include govuk-font($size: 19);
+	@include govuk-font-size($size: 19);
 
 	color: $govuk-text-colour;
 
@@ -551,27 +549,20 @@ body.app-filter-panel--locked {
 
 .app-active-filters__remove-filter {
 	display: flex;
-
 	align-items: center;
-
 	padding: govuk-spacing(1) govuk-spacing(2);
-
 	color: $govuk-text-colour;
-
 	text-align: left;
-
 	text-decoration: none;
-
 	cursor: pointer;
-
-	background-color: govuk-colour("light-grey");
+	background-color: govuk-colour("white");
 	border: 1px solid $govuk-border-colour;
 	border-radius: 0.3125em;
 
 	&::before {
 		position: relative;
 		// Amend position as we're not using Transport
-		top: -2px; // top: 1px;
+		top: 0; // top: 1px;
 
 		display: inline-block;
 
@@ -612,12 +603,9 @@ body.app-filter-panel--locked {
 }
 
 .app-active-filters__remove-filter-text {
+	@include govuk-font-size($size: 19, $line-height: 1);
 	display: inline;
-
-	@include govuk-font($size: 19, $weight: regular);
-
 	color: $govuk-text-colour;
-
 	text-decoration: inherit;
 }
 

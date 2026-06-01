@@ -1,9 +1,9 @@
 <h2 class="govuk-heading-m govuk-!-margin-top-4 govuk-!-margin-bottom-1">
   {{ application.orgName }}
+  <span class="govuk-caption-m govuk-!-display-inline">({{ application.orgId }})</span>
 </h2>
 
 <div style="display: flex; gap: 20px;">
-  <div><p><strong class="govuk-!-margin-right-1">Organisation ID:</strong> {{ application.orgId }}</p></div>
-  <div><p><strong class="govuk-!-margin-right-1">Application type:</strong> {{ application.type }}</p></div>
+  <div><p><strong class="govuk-!-margin-right-1">Type:</strong> {{ application.orgType }}</p></div>
   <div><p><strong class="govuk-!-margin-right-1">Material:</strong> {{ application.material }}</p></div>
 </div>

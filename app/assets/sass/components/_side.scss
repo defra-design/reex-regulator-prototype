@@ -38,13 +38,13 @@
 	}
 
 	.govuk-link {
-		@include govuk-font(19);
+		@include govuk-font-size(19);
 	}
 }
 
 
 .app-c-metadata {
-	@include govuk-font(19);
+	@include govuk-font-size(19);
 }
 
 .app-c-metadata__list {
@@ -59,7 +59,8 @@
 }
 
 .app-c-metadata__title {
-	@include govuk-font($size: 19, $weight: bold);
+	@include govuk-font-size(19);
+	font-weight: bold;
 }
 
 .app-c-metadata__description {

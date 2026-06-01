@@ -1,7 +1,7 @@
 .app-button--download {
 	$border-width: 1px;
 
-	@include govuk-font($size: 16);
+	@include govuk-font-size($size: 16);
 	background-color: govuk-functional-colour("body-background");
 	border-width: $border-width;
 	border-color: govuk-functional-colour("input-border");

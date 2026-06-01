@@ -15,7 +15,7 @@
 @import "components/service-nav";
 @import "components/side";
 @import "components/side-nav";
-@import "components/summary-card";
+@import "components/summary-list";
 
 .unbranded {
 	background-color: govuk-functional-colour('surface-background');
@@ -34,4 +34,10 @@
 // Override the display as it breaks the page
 .hods-page {
 	display: block;
+}
+
+// Override any MOJ or Home Office components using Transport
+[class^="moj-"],
+[class^="hods-"] {
+	font-family: inherit;
 }

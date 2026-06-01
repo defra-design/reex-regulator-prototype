@@ -28,7 +28,32 @@
       </h2>
 
       {{ govukSummaryList({
+      classes: 'govuk-summary-list--no-border',
         rows: [
+          {
+            key: {
+              html: 'Site address'
+            },
+            value: {
+              html: application.siteAddress
+            }
+          },
+          {
+            key: {
+              html: 'Type'
+            },
+            value: {
+              html: application.type
+            }
+          },
+          {
+            key: {
+              html: 'Material'
+            },
+            value: {
+              html: application.material
+            }
+          },
           {
             key: {
               html: 'PRN tonnage'
@@ -62,6 +87,7 @@
       </h2>
 
       {{ govukSummaryList({
+        classes: 'govuk-summary-list--no-border',
         rows: [
           {
             key: {
@@ -118,11 +144,11 @@
           <div class="app-side">
             <div class="app-c-metadata">
               <dl class="app-c-metadata__list">
-                <dt class="app-c-metadata__title">Status</dt>
+                <dt class="app-c-metadata__title">Status:</dt>
                 <dd class="app-c-metadata__description">{{ application.status }}</dd>
-                <dt class="app-c-metadata__title">Assigned to</dt>
-                <dd class="app-c-metadata__description">{{ application.owner | title | d('Unassigned') }}</dd>
-                <dt class="app-c-metadata__title">Due on</dt>
+                <dt class="app-c-metadata__title">Assigned to:</dt>
+                <dd class="app-c-metadata__description">{{ application.owner | d('Unassigned') | title }}</dd>
+                <dt class="app-c-metadata__title">Due on:</dt>
                 <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
               </dl>
             </div>
