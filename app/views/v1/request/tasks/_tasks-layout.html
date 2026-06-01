@@ -1,6 +1,6 @@
 {% extends 'layouts/main.html' if data['branded'] == 'true' else 'layouts/unbranded.html' %}
 
-{% block backLink %}
+{% block bannerBack %}
   {{ govukBackLink({
     html: 'Go back to all requests',
     href: currentPrototype+'/'

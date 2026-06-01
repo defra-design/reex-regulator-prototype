@@ -2,7 +2,12 @@
 
 {% set title = 'Application summary' %}
 
-
+{# {% block bannerBack %}
+  {{ govukBackLink({
+    html: 'Go back to all applications',
+    href: currentPrototype+'/'
+  }) }}
+{% endblock %} #}
 
 {% block bannerContent %}
   {% include './_banner.html' %}

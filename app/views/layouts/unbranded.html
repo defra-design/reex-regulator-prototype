@@ -1,11 +1,11 @@
-{% extends "./main.html" %}
+{% extends "govuk-prototype-kit/layouts/govuk-branded.html" %}
 {% set bodyClasses = "unbranded" %}
 
 {% block header %}
 	<div class="govuk-width-container">
 		<div class="govuk-grid-row">
 			<div class="govuk-grid-column-full">
-				{% block backLink %}{% endblock %}
+				{% block bannerBack %}{% endblock %}
 
 				{% block bannerContent %}{% endblock %}
 			</div>

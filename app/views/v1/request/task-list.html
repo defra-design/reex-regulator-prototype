@@ -3,7 +3,7 @@
 {% set pErn = 'PRN' if request.orgType == 'Reprocessor' else 'PERN' %}
 {% set title = 'Tasks' %}
 
-{% block backLink %}
+{% block bannerBack %}
   {{ govukBackLink({
     html: 'Go back to all requests',
     href: currentPrototype+'/'
