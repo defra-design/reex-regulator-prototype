@@ -1,14 +1,8 @@
 {% extends 'layouts/main.html' %}
 
-{% set pErn = 'PRN' if application.orgType == 'Reprocessor' else 'PERN' %}
 {% set title = 'Application summary' %}
 
-{% block backLink %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
-  }) }}
-{% endblock %}
+
 
 {% block bannerContent %}
   {% include './_banner.html' %}

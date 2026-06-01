@@ -105,47 +105,7 @@ router.get('/application/summary', (req, res, next) => {
   next()
 })
 
-router.get('/application/assign-to-me', (req, res) => {
-  // Grab the current application
-  let applicationToEdit = req.application
-
-  // Setup the object with a new owner
-  const newOwner = Object.assign({
-    type: 'owner',
-    date: new Date(),
-    old: applicationToEdit[0].owner || 'unassigned',
-    new: 'you'
-  })
-
-  // Pass the new owner into the audit log
-  applicationToEdit[0].audit.unshift(newOwner)
-
-  // Save the new owner to the application
-  applicationToEdit[0].owner = 'you'
-
-  if (applicationToEdit[0].status != 'In progress') {
-    // Setup the object with a status
-    const newStatus = Object.assign({
-      type: 'status',
-      date: new Date(),
-      old: applicationToEdit[0].status,
-      new: 'In progress'
-    })
-
-    // Pass the new status into the audit log
-    applicationToEdit[0].audit.unshift(newStatus)
-
-    // Save the new status to the application
-    applicationToEdit[0].status = 'In progress'
-  }
-
-  // Enable success banner and go back to summary
-  req.session.data['notification'] = 'true'
-  req.session.data['assigned'] = 'true'
-  res.redirect('summary')
-})
-
-router.post('/application/assign', (req, res) => {
+const assignApplication = function (req, res) {
   // Grab the current application
   let applicationToEdit = req.application
 
@@ -189,6 +149,14 @@ router.post('/application/assign', (req, res) => {
   req.session.data['notification'] = 'true'
   req.session.data['assigned'] = 'true'
   res.redirect('summary')
+}
+
+router.get('/application/assign-to-me', (req, res) => {
+  assignApplication(req, res)
+})
+
+router.post('/application/assign', (req, res) => {
+  assignApplication(req, res)
 })
 
 router.post('/application/override-sla', (req, res) => {
@@ -245,24 +213,6 @@ router.post('/application/withdraw', (req, res) => {
   res.redirect('withdrawn')
 })
 
-router.post('/application/tasks/determination', (req, res) => {
-  let applicationToEdit = req.application
-  if (req.session.data['determination'] == 'No') {
-    applicationToEdit[0].status = 'Rejected'
-  } else {
-    applicationToEdit[0].status = 'Approved'
-  }
-  res.redirect('../confirmation')
-})
-
-
-// Set contact log side nav as active while adding to log
-router.get('/application/contact', (req, res, next) => {
-  res.locals.currentPage = res.locals.currentPrototype+'/application/contact-log'
-  next()
-})
-
-// Store each query in log
 router.post('/application/query', (req, res) => {
   // Grab the current application
   let applicationToEdit = req.application
@@ -285,6 +235,12 @@ router.post('/application/query', (req, res) => {
   req.session.data['notification'] = 'true'
   req.session.data['queried'] = 'true'
   res.redirect('summary')
+})
+
+router.post('/application/determination', (req, res) => {
+  let applicationToEdit = req.application
+  applicationToEdit[0].status = req.session.data['determination'] || 'Approved'
+  res.redirect('confirmation')
 })
 
 

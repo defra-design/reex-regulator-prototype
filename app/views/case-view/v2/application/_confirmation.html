@@ -14,7 +14,7 @@
         <h3 class="govuk-notification-banner__heading">
           Application assigned
         </h3>
-        <p>{{ 'You can now progress the application' if application.owner == 'You' else 'The operator has been notified' }}</p>
+        <p>{{ 'You can now progress the application' if application.owner == 'you' else 'The operator has been notified' }}</p>
       {% endset %}
 
     {% elif data['due-date'] %}

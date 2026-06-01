@@ -1,33 +1,12 @@
-{% extends './_tasks-layout.html' %}
+{% extends 'layouts/main.html' %}
 
-{% set title = 'Has the operator met the requirements to comply under the Packaging Waste Regulations 2024?' %}
+{% set title = 'What is your determination of the application?' %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
 
 {% block questions %}
-  {% set rejectNotes %}
-    {{ govukTextarea({
-      name: 'determinationRejectNotes',
-      id: 'determinationRejectNotes',
-      rows: 3,
-      label: {
-        html: 'Enter why and what regulations they cannot comply with',
-        classes: 'govuk-label--s'
-      }
-    }) }}
-  {% endset -%}
-
-  {% set approveNotes %}
-    {{ govukTextarea({
-      name: 'determinationApproveNotes',
-      id: 'determinationApproveNotes',
-      value: request.determinationRejectNotes,
-      rows: 3,
-      label: {
-        html: 'Enter any conditions the operator needs to meet as part of their accreditation',
-        classes: 'govuk-label--s'
-      }
-    }) }}
-  {% endset -%}
-
   {{ govukRadios({
     idPrefix: 'determination',
     name: 'determination',
@@ -40,18 +19,16 @@
     },
     items: [
       {
-        html: 'Yes',
-        value: 'Yes',
-        conditional: {
-          html: approveNotes
-        }
+        html: 'Approved',
+        value: 'Approved'
       },
       {
-        html: 'No',
-        value: 'No',
-        conditional: {
-          html: rejectNotes
-        }
+        html: 'Refused',
+        value: 'Refused'
+      },
+      {
+        html: 'Rejected',
+        value: 'Rejected'
       }
     ]
   }) }}

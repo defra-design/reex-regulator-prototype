@@ -2,13 +2,6 @@
 
 {% set title = 'Application withdrawn' %}
 
-{% block backLink %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
-  }) }}
-{% endblock %}
-
 {% block bannerContent %}
   {% include './_banner.html' %}
 {% endblock %}
