@@ -11,7 +11,7 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 {# Add the title(h1) to page title if it's set, add to each page with:
 {% set title = 'Example' %} #}
 {% block pageTitle %}
-	{{ (title+' –' if title) | striptags | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
+	{{ (title+' –' if title) | striptags | safe }} {{ (application.orgName+' –' if application) | safe }} {{ (serviceName+' –' if serviceName) | striptags | safe}} GOV.UK
 {% endblock %}
 
 {% block headIcons %}
