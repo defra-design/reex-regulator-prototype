@@ -5,7 +5,7 @@ function defaultData(req) {
     {
       "id": "000197",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Plastic",
       "orgName": "GreenLoop Recovery",
       "orgId": "ORG-123-001",
@@ -20,7 +20,7 @@ function defaultData(req) {
     {
       "id": "000268",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Plastic",
       "orgName": "EcoCycle Industries",
       "orgId": "ORG-123-002",
@@ -35,7 +35,7 @@ function defaultData(req) {
     {
       "id": "000293",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Fiber-based composite materials",
       "orgName": "RenewEarth Solutions",
       "orgId": "ORG-123-003",
@@ -50,7 +50,7 @@ function defaultData(req) {
     {
       "id": "000579",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Glass",
       "orgName": "BlueBin Environmental",
       "orgId": "ORG-123-004",
@@ -65,7 +65,7 @@ function defaultData(req) {
     {
       "id": "000614",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Steel",
       "orgName": "EverCycle Resource Management",
       "orgId": "ORG-123-005",
@@ -80,7 +80,7 @@ function defaultData(req) {
     {
       "id": "000668",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Plastic",
       "orgName": "UrbanRenew Processing",
       "orgId": "ORG-123-006",
@@ -95,7 +95,7 @@ function defaultData(req) {
     {
       "id": "000778",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Plastic",
       "orgName": "TerraReclaim Systems",
       "orgId": "ORG-123-007",
@@ -110,7 +110,7 @@ function defaultData(req) {
     {
       "id": "000813",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Wood",
       "orgName": "SecondLife Materials Co.",
       "orgId": "ORG-123-008",
@@ -125,7 +125,7 @@ function defaultData(req) {
     {
       "id": "000833",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Paper and board",
       "orgName": "PureStream Recycling Group",
       "orgId": "ORG-123-009",
@@ -140,7 +140,7 @@ function defaultData(req) {
     {
       "id": "000901",
       "status": "Not started",
-      "type": "Renew accreditation",
+      "type": "Reaccredit",
       "material": "Aluminium",
       "orgName": "ReNova Waste & Recovery",
       "orgId": "ORG-123-010",
