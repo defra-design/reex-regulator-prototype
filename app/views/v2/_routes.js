@@ -129,6 +129,7 @@ router.get('/application/summary', (req, res, next) => {
   // Clear the notification banners
   delete req.session.data['notification']
   delete req.session.data['duly-made']
+  delete req.session.data['assigned']
   delete req.session.data['queried']
   next()
 })
