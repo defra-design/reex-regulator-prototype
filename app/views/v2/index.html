@@ -38,7 +38,7 @@
                 <dl>
                   <dt class="govuk-visually-hidden">Organisation:</dt>
                     <dd>{{ a.orgName }} ({{ a.orgId }})</dd>
-                  {% if a.status != 'Not started' %}
+                  {% if a.status != 'Not started' and not a.complete %}
                     <dt>Assigned to:</dt>
                       <dd>{{ a.owner | d('Unassigned') | title }}</dd>
                     <dt>Due on:</dt>
@@ -51,41 +51,6 @@
         {% endfor %}
 
       </ul>
-
-      {# Create empty object for radios #}
-      {% set applications = [] %}
-
-      {# Loop through types and add into the object #}
-      {% for application in data['applications'] | sort(attribute='payment') %}
-        {% set applications = applications | push (
-          [
-            {
-              html: '<a href="application/'+('duly-making' if application.status == 'Not started' else 'summary')+'?current-application='+application.id+'">'+application.id+'</a>'
-            },
-            {
-              html: application.orgName
-            },
-            {
-              html: application.type+': <br>'+application.material
-            },
-            {
-              html: (application.due | date('D MMM YYYY')) if application.due else '',
-              format: 'numeric'
-            },
-            {
-              html: '<strong class="govuk-tag '
-              + ('govuk-tag--blue' if application.status == 'In progress' )
-              + ('govuk-tag--green' if application.status == 'Approved' )
-              + ('govuk-tag--red' if application.status == 'Rejected' )
-              + ('govuk-tag--grey' if application.status == 'Not started' )
-              +'">'
-              + application.status
-              +'</strong>',
-              format: 'numeric'
-            }
-          ]
-        ) %}
-      {% endfor %}
 
 
 

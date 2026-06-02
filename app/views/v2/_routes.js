@@ -239,6 +239,7 @@ router.post('/application/withdraw', (req, res) => {
 
   // Update the application status
   applicationToEdit[0].status = 'Withdrawn'
+  applicationToEdit[0].complete = true
   applicationToEdit[0].due = ''
   applicationToEdit[0].assignment = ''
 
@@ -272,6 +273,7 @@ router.post('/application/query', (req, res) => {
 router.post('/application/determination', (req, res) => {
   let applicationToEdit = req.application
   applicationToEdit[0].status = req.session.data['determination'] || 'Approved'
+  applicationToEdit[0].complete = true
   res.redirect('confirmation')
 })
 

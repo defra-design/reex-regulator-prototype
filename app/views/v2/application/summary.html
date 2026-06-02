@@ -120,7 +120,7 @@
     </div>
 
 
-    {% if application.status == 'Duly made' or application.status == 'In progress' or application.status == 'Queried' %}
+    {% if not application.complete %}
       <div class="govuk-grid-column-one-third-from-desktop">
         <aside class="app-side__wrapper">
           <div class="app-side">
