@@ -27,8 +27,26 @@
                 {{ a.id }}
               </a>
 
+              {% if a.status == 'Approved' %}
+                {% set tagColour = 'green' %}
+              {% elif a.status == 'Duly made' %}
+                {% set tagColour = 'purple' %}
+              {% elif a.status == 'In progress' %}
+                {% set tagColour = 'blue' %}
+              {% elif a.status == 'Queried' %}
+                {% set tagColour = 'yellow' %}
+              {% elif a.status == 'Refused' %}
+                {% set tagColour = 'red' %}
+              {% elif a.status == 'Rejected' %}
+                {% set tagColour = 'red' %}
+              {% elif a.status == 'Withdrawn' %}
+                {% set tagColour = 'orange' %}
+              {% elif a.status == 'Not started' %}
+                {% set tagColour = 'grey' %}
+              {% endif %}
+
               <div class="govuk-task-list__status" id="application-{{ loop.index }}-status">
-                <strong class="govuk-tag govuk-tag--yellow">
+                <strong class="govuk-tag govuk-tag--{{ tagColour }}">
                   {{ a.status }}
                 </strong>
               </div>
