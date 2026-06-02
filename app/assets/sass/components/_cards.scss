@@ -3,10 +3,10 @@
 		background-color: govuk-colour("white");
 		border: 1px solid govuk-functional-colour("border");
 		box-sizing: border-box;
-		@include govuk-responsive-padding(4, "top");
-		@include govuk-responsive-padding(3, "right");
-		@include govuk-responsive-padding(4, "bottom");
-		@include govuk-responsive-padding(3, "left");
+		@include govuk-responsive-padding(3, "top");
+		@include govuk-responsive-padding(4, "right");
+		@include govuk-responsive-padding(3, "bottom");
+		@include govuk-responsive-padding(4, "left");
 		@include govuk-responsive-margin(3, "bottom");
 	}
 
