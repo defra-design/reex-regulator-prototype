@@ -59,6 +59,18 @@ router.all('/application*', (req, res, next) => {
   next()
 })
 
+router.get('/application/', (req, res) => {
+  // Grab the current application
+  let current = req.application
+
+  // If there is no audit log create an empty object
+  if (current[0].status == 'Not started') {
+    res.redirect('duly-making')
+  } else {
+    res.redirect('summary')
+  }
+})
+
 router.post('/application/duly-making', (req, res) => {
   // Grab the current application
   let applicationToEdit = req.application
@@ -77,7 +89,7 @@ router.post('/application/duly-making', (req, res) => {
   // Setup the object with payment date
   const payment = Object.assign({
     type: 'payment',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     payment: paymentDate
   })
   // Pass the new status into the audit log
@@ -86,7 +98,7 @@ router.post('/application/duly-making', (req, res) => {
   // Setup the object with due date
   const due = Object.assign({
     type: 'due',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     new: dueDate
   })
   // Pass the new status into the audit log
@@ -95,7 +107,7 @@ router.post('/application/duly-making', (req, res) => {
   // Setup the object with a status
   const newStatus = Object.assign({
     type: 'status',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     old: applicationToEdit[0].status,
     new: 'Duly made'
   })
@@ -134,7 +146,7 @@ const assignApplication = function (req, res) {
   // Setup the object with a new owner
   const newOwner = Object.assign({
     type: 'owner',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     old: applicationToEdit[0].owner || 'unassigned',
     new: owner
   })
@@ -149,7 +161,7 @@ const assignApplication = function (req, res) {
     // Setup the object with a status
     const newStatus = Object.assign({
       type: 'status',
-      date: new Date(),
+      date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
       old: applicationToEdit[0].status,
       new: 'In progress'
     })
@@ -193,7 +205,7 @@ router.post('/application/override-sla', (req, res) => {
   // Setup the object with new due date
   const due = Object.assign({
     type: 'due',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     old: applicationToEdit[0].due,
     new: dueDate,
     reason: req.session.data['sla-reason']
@@ -218,7 +230,7 @@ router.post('/application/withdraw', (req, res) => {
   // Setup the object with new log for audit
   const log = Object.assign({
     type: 'withdrawn',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     reason: req.session.data['withdraw-reason']
   })
 
@@ -240,7 +252,7 @@ router.post('/application/query', (req, res) => {
   // Setup the object with a new ID and the answers given by user
   const newQuery = Object.assign({
     type: 'query',
-    date: new Date(),
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
     questions: req.session.data['query-questions'],
     reason: req.session.data['query-reason']
   })

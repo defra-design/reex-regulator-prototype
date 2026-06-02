@@ -1,16 +1,31 @@
-.hods-footer__container {
-	display: block;
-	ul {
-		padding-left: 0;
+.hods-footer {
+	border-top: 0;
+
+	&__container {
+		display: block;
+		border-top: 0;
+		margin: 0 auto;
+
+		ul {
+			padding-left: 0;
+		}
+	}
+
+	&__content {
+		margin-bottom: 5px;
 	}
 }
 
-.hods-footer__content {
-	margin-bottom: 5px;
+// Swap the padding so it doesn't look broken
+.hods-footer__navigation-item {
+	padding-left: 0;
+	@include govuk-responsive-padding(4, "right");
 }
 
+
+// Prototype seperator
 .hods-footer__navigation + .hods-footer__navigation {
-	margin-top: 40px;
-	padding-top: 40px;
+	margin-top: 20px;
+	padding-top: 20px;
 	border-top: 1px solid govuk-functional-colour("border");
 }

@@ -1,16 +1,13 @@
 <div class="app-filter">
-  <h2 class="app-filter__heading govuk-heading-m">
+  <h2 class="app-filter__heading govuk-heading-m govuk-visually-hidden">
     Filter applications
   </h2>
 
   <div class="app-active-filters">
     <div class="app-active-filters__header">
-      <h3 class="govuk-heading-s app-active-filters__heading">
+      <h3 class="govuk-heading-s">
         Active filters
       </h3>
-      <p>
-        <a class="app-c-filter-summary__clear-filters govuk-link--no-visited-state" href="#0">Clear all</a>
-      </p>
     </div>
 
     <ul class="app-active-filters__remove-filters">
@@ -31,6 +28,9 @@
         </a>
       </li>
     </ul>
+    <p>
+      <a class="app-c-filter-summary__clear-filters govuk-link--no-visited-state" href="#0">Clear all filters</a>
+    </p>
   </div>
 
 
@@ -162,8 +162,7 @@
               },
               {
                 html: 'Exporter reaccreditation',
-                value: 'Exporter reaccreditation',
-                checked: true
+                value: 'Exporter reaccreditation'
               }
             ]
           }) }}
@@ -356,9 +355,6 @@
 
       <div class="app-c-filter-panel__actions ">
         <button type="submit" formnovalidate="formnovalidate" class="govuk-button app-c-filter-panel__action--submit" data-module="govuk-button" data-prevent-double-click="true" name="utm_medium" value="apply_filters_bottom" form="find-search-form" data-govuk-button-init="">Apply filters</button>
-
-        <a class="app-c-filter-panel__action--clear govuk-link--no-visited-state" href="/results?utm_medium=clear_all_filters_bottom&amp;utm_source=results">Clear all</a>
-
       </div>
     </section>
   </div>

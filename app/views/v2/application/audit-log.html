@@ -2,6 +2,26 @@
 
 {% set title = 'Audit log' %}
 
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: 'Audit log'
+      }
+    ]
+  }) }}
+{% endblock %}
+
 {% block bannerContent %}
   {% include './_banner.html' %}
 {% endblock %}
@@ -12,7 +32,7 @@
 
 {% block questions %}
   <h1 class="govuk-heading-l govuk-visually-hidden">
-    {{ title }}
+    {{ title | safe }}
   </h1>
 
   <style>

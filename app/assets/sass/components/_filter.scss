@@ -16,10 +16,10 @@
 .app-filter {
 	@include govuk-clearfix;
 
-	@include govuk-media-query($until: tablet) {
-		padding: 0 govuk-spacing(3);
-		margin-bottom: govuk-spacing(4);
-	}
+	// @include govuk-media-query($until: tablet) {
+	// 	padding: 0 govuk-spacing(3);
+	// 	margin-bottom: govuk-spacing(4);
+	// }
 
 	&__heading {
 		font-size: 24px;
@@ -159,7 +159,7 @@
 
 .app-c-filter-section__content .govuk-checkboxes__label::before,
 .app-c-filter-section__content .govuk-radios__label::before {
-	background-color: white;
+	background-color: govuk-colour("white");
 }
 
 .app-search-top-row {

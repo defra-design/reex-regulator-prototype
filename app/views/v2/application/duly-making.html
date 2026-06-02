@@ -2,19 +2,21 @@
 
 {% set title = 'Duly making' %}
 
-{# {% block bannerBack %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id+': Duly making'
+      }
+    ]
   }) }}
-{% endblock %} #}
-
-{# {% block bannerBack %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
-  }) }}
-{% endblock %} #}
+{% endblock %}
 
 {# {% block bannerContent %}
   {% include './_banner.html' %}
@@ -22,7 +24,7 @@
 
 {% block questions %}
   <h1 class="govuk-heading-l">
-    {{ title }}
+    {{ title | safe }}
   </h1>
 
   <h2 class="govuk-heading-m">

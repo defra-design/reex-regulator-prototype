@@ -5,6 +5,7 @@
 
 @import "components/autocomplete";
 @import "components/buttons";
+@import "components/cards";
 @import "components/filter";
 @import "components/footer";
 @import "components/header";
@@ -26,11 +27,6 @@
 	}
 }
 
-// Updated breadcrumbs margin to match back link
-.govuk-breadcrumbs {
-	margin-top: 10px;
-}
-
 .hods-page {
 	// Override the display as it breaks the page
 	display: block;
@@ -40,4 +36,12 @@
 [class^="moj-"],
 [class^="hods-"] {
 	font-family: inherit;
+}
+
+.govuk-radios__label,
+.govuk-checkboxes__label
+ {
+	&::before {
+		background: govuk-colour("white");
+	}
 }

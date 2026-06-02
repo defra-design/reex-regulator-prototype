@@ -6,26 +6,8 @@ $govuk-suppressed-warnings: (
 // This imports Roboto as the font
 @import "node_modules/home-office-kit/sass/settings";
 
-// Update some of the brand colours as it's an internal product and shouldn't look like gov.uk
 $govuk-functional-colours: (
 	(
-		"brand": #00a33b,
-		// The background colour of the template. This is intended to be the same
-		// as `surface-background` for the purposes of making the Footer and Cookie
-		// banner components merge seamlessly with the template.
-		"template-background": (
-				name: "green",
-				variant: "tint-95"
-			),
-		// 'Surfaces' are our name for components that have different colour
-		// palettes to typical page content. This is the generic surface.
-		"surface-background": (
-				name: "green",
-				variant: "tint-95"
-			),
-		"surface-text": (
-			name: "black"
-		),
-		"surface-border": #00a33b
+		"brand": #00a33b
 	)
 );

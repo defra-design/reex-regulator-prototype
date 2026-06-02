@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-m govuk-!-margin-top-4 govuk-!-margin-bottom-1">
+<h2 class="govuk-heading-m govuk-!-margin-bottom-1">
   {{ application.orgName }}
   <span class="govuk-caption-m govuk-!-display-inline">({{ application.orgId }})</span>
 </h2>
@@ -9,5 +9,5 @@
   <dt>Assigned to:</dt>
     <dd>{{ application.owner | d('Unassigned') | title }}</dd>
   <dt>Due on:</dt>
-    <dd>{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
+    <dd>{{ application.due | date('D MMM YYYY') }}</dd>
 </dl>

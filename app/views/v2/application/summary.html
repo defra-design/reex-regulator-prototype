@@ -2,12 +2,21 @@
 
 {% set title = 'Application summary' %}
 
-{# {% block bannerBack %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: true,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id
+      }
+    ]
   }) }}
-{% endblock %} #}
+{% endblock %}
 
 {% block bannerContent %}
   {% include './_banner.html' %}
@@ -20,7 +29,7 @@
 
     <div class="govuk-grid-column-full govuk-grid-column-two-thirds-from-desktop">
       <h1 class="govuk-heading-l govuk-visually-hidden">
-        {{ title }}
+        {{ title | safe }}
       </h1>
 
       <h2 class="govuk-heading-m">
@@ -111,7 +120,7 @@
     </div>
 
 
-    {% if application.status != 'Withdrawn' %}
+    {% if application.status == 'Duly made' or application.status == 'In progress' or application.status == 'Queried' %}
       <div class="govuk-grid-column-one-third-from-desktop">
         <aside class="app-side__wrapper">
           <div class="app-side">
@@ -126,7 +135,8 @@
               {% else %}
                 {{ govukButton({
                   html: 'Assign to yourself',
-                  href: 'assign-to-me'
+                  href: 'assign-to-me',
+                  classes: 'govuk-!-margin-0'
                 }) }}
               {% endif %}
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">

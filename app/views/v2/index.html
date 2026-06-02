@@ -15,6 +15,42 @@
       {% include './_filters.html' %}
     </div>
     <div class="govuk-grid-column-three-quarters-from-desktop">
+      <h2 class="govuk-heading-s">
+        Showing 1-10 of 277
+      </h2>
+      <ul class="govuk-task-list app-cards">
+
+        {% for a in data['applications'] %}
+          <li class="govuk-task-list__item govuk-task-list__item--with-link">
+            <div class="govuk-task-list__name-and-hint">
+              <a href="application/?current-application={{ a.id }}" class="govuk-task-list__link govuk-link--no-visited-state" aria-describedby="address-{{ loop.index }}-hint application-{{ loop.index }}-status">
+                {{ a.id }}
+              </a>
+
+              <div class="govuk-task-list__status" id="application-{{ loop.index }}-status">
+                <strong class="govuk-tag govuk-tag--yellow">
+                  {{ a.status }}
+                </strong>
+              </div>
+
+              <div id="application-{{ loop.index }}-hint" class="govuk-task-list__hint">
+                <p>{{ a.type }}: {{ a.material }}</p>
+                <dl>
+                  <dt class="govuk-visually-hidden">Organisation:</dt>
+                    <dd>{{ a.orgName }} ({{ a.orgId }})</dd>
+                  {% if a.status != 'Not started' %}
+                    <dt>Assigned to:</dt>
+                      <dd>{{ a.owner | d('Unassigned') | title }}</dd>
+                    <dt>Due on:</dt>
+                      <dd>{{ a.due | date('D MMM YYYY') }}</dd>
+                    {% endif %}
+                </dl>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+
+      </ul>
 
       {# Create empty object for radios #}
       {% set applications = [] %}
@@ -51,38 +87,6 @@
         ) %}
       {% endfor %}
 
-      {% set caption = '<span class="govuk-caption-m"><span class="govuk-visually-hidden"> - </span>Showing 1-10 of 277</span>' %}
-
-      <style>
-        .govuk-table__header:last-of-type {
-          min-width: 112px;
-        }
-      </style>
-      {{ govukTable({
-        caption: caption | safe,
-        captionClasses: 'govuk-table__caption--l',
-        firstCellIsHeader: true,
-        head: [
-          {
-            html: 'Application ID'
-          },
-          {
-            html: 'Organisation name'
-          },
-          {
-            html: 'Application type'
-          },
-          {
-            html: 'Due date',
-            format: 'numeric'
-          },
-          {
-            html: 'Status',
-            format: 'numeric'
-          }
-        ],
-        rows: applications
-      }) }}
 
 
       {{ govukPagination({

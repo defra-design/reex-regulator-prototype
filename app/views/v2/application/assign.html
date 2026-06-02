@@ -2,12 +2,25 @@
 
 {% set title = 'Who do you want to assign the application to?' %}
 
-{# {% block bannerBack %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: 'Assign application'
+      }
+    ]
   }) }}
-{% endblock %} #}
+{% endblock %}
 
 {% block bannerContent %}
   {% include './_banner.html' %}

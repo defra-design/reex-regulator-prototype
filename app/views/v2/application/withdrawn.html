@@ -2,12 +2,25 @@
 
 {% set title = 'Application withdrawn' %}
 
-{# {% block bannerBack %}
-  {{ govukBackLink({
-    html: 'Go back to all applications',
-    href: currentPrototype+'/'
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: title | safe
+      }
+    ]
   }) }}
-{% endblock %} #}
+{% endblock %}
 
 {% block bannerContent %}
   {% include './_banner.html' %}
@@ -15,7 +28,7 @@
 
 {% block questions %}
   <h1 class="govuk-heading-l">
-    {{ title }}
+    {{ title | safe }}
   </h1>
 
   <p>The operator has been informed of the decision.</p>
