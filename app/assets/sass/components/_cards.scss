@@ -10,17 +10,21 @@
 		@include govuk-responsive-margin(3, "bottom");
 	}
 
-	.govuk-task-list__item--with-link:hover {
-		background: govuk-colour("light-grey");
+	.govuk-task-list__item--with-link{
+		&:hover {
+			border-color: govuk-functional-colour("link-hover");
+			outline: 1px solid govuk-functional-colour("link-hover");
+		}
+
+		&:active,
+		&:focus {
+			outline: 3px solid $govuk-focus-colour;
+			outline-offset: 0;
+		}
 	}
 
 	.govuk-task-list__link {
 		font-weight: bold;
-
-		&:hover {
-			background: none;
-			outline: none;
-		}
 	}
 
 	.govuk-task-list__status {
