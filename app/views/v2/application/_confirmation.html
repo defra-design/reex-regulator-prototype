@@ -40,11 +40,11 @@
   </div>
 {% endif %}
 
-{% if application.status == 'Withdrawn' %}
+{% if application.complete %}
   <div class="govuk-grid-column-full">
     {% set html %}
       <h3 class="govuk-notification-banner__heading">
-        This application was withdrawn on {{ d | date }}
+        This application was {{ application.status | lower }} on {{ d | date }}
       </h3>
     {% endset %}
     {{ govukNotificationBanner({

@@ -6,8 +6,10 @@
 <dl class="app-service-banner__meta">
   <dt>Status:</dt>
     <dd>{{ application.status }}</dd>
+  {% if not application.complete %}
   <dt>Assigned to:</dt>
     <dd>{{ application.owner | d('Unassigned') | title }}</dd>
   <dt>Due on:</dt>
     <dd>{{ application.due | date('D MMM YYYY') }}</dd>
+  {% endif %}
 </dl>
