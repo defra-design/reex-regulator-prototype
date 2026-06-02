@@ -77,14 +77,15 @@ router.post('/application/duly-making', (req, res) => {
 
   // Setup the payment date from answer or fallback to today
   if (req.session.data['payment-year'] && req.session.data['payment-month'] && req.session.data['payment-day']) {
-    paymentDate = req.session.data['payment-year']+'-'+parseInt(req.session.data['payment-month']).toLocaleString(undefined, {minimumIntegerDigits: 2})+'-'+parseInt(req.session.data['payment-day']).toLocaleString(undefined, {minimumIntegerDigits: 2})
+    answer = req.session.data['payment-year']+'-'+parseInt(req.session.data['payment-month']).toLocaleString(undefined, {minimumIntegerDigits: 2})+'-'+parseInt(req.session.data['payment-day']).toLocaleString(undefined, {minimumIntegerDigits: 2})
+    paymentDate = new Date(answer)
   } else {
-    paymentDate = new Date().toISOString().slice(0, 10)
+    paymentDate = new Date()
   }
 
   // Setup the due date based on payment date
-  let dueDate = new Date()
-  dueDate.setDate(dueDate.getDate() + 84);
+  let dueDate = paymentDate
+  dueDate.setDate(dueDate.getDate()+84);
 
   // Setup the object with payment date
   const payment = Object.assign({
@@ -224,29 +225,6 @@ router.post('/application/override-sla', (req, res) => {
   res.redirect('summary')
 })
 
-router.post('/application/withdraw', (req, res) => {
-  // Grab the current application
-  let applicationToEdit = req.application
-
-  // Setup the object with new log for audit
-  const log = Object.assign({
-    type: 'withdrawn',
-    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
-    reason: req.session.data['withdraw-reason']
-  })
-
-  // Pass the new due log into the audit
-  applicationToEdit[0].audit.unshift(log)
-
-  // Update the application status
-  applicationToEdit[0].status = 'Withdrawn'
-  applicationToEdit[0].complete = true
-  applicationToEdit[0].due = ''
-  applicationToEdit[0].assignment = ''
-
-  res.redirect('withdrawn')
-})
-
 router.post('/application/query', (req, res) => {
   // Grab the current application
   let applicationToEdit = req.application
@@ -271,10 +249,52 @@ router.post('/application/query', (req, res) => {
   res.redirect('summary')
 })
 
-router.post('/application/determination', (req, res) => {
+router.post('/application/withdraw', (req, res) => {
+  // Grab the current application
   let applicationToEdit = req.application
+
+  // Setup the object with new log for audit
+  const log = Object.assign({
+    type: 'status',
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+    old: applicationToEdit[0].status,
+    new: 'Withdrawn',
+    details: req.session.data['withdraw-reason']
+  })
+
+  // Pass the new due log into the audit
+  applicationToEdit[0].audit.unshift(log)
+
+  // Update the application
+  applicationToEdit[0].status = 'Withdrawn'
+  applicationToEdit[0].complete = true
+  applicationToEdit[0].due = 'n/a'
+  delete applicationToEdit[0].assignment
+
+  res.redirect('withdrawn')
+})
+
+router.post('/application/determination', (req, res) => {
+  // Grab the current application
+  let applicationToEdit = req.application
+
+  // Setup the object with new log for audit
+  const log = Object.assign({
+    type: 'status',
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+    old: applicationToEdit[0].status,
+    new: req.session.data['determination'] || 'Approved'
+  })
+
+  // Pass the new due log into the audit
+  applicationToEdit[0].audit.unshift(log)
+
+  // Update the application
   applicationToEdit[0].status = req.session.data['determination'] || 'Approved'
   applicationToEdit[0].complete = true
+  applicationToEdit[0].due = 'n/a'
+  delete applicationToEdit[0].assignment
+
   res.redirect('confirmation')
 })
 
