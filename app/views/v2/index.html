@@ -60,7 +60,7 @@
                     <dt>Assigned to:</dt>
                       <dd>{{ a.owner | d('Unassigned') | title }}</dd>
                     <dt>Due on:</dt>
-                      <dd>{{ a.due | date('D MMM YYYY') }}</dd>
+                      <dd>{{ a.due | date('D MMM YYYY') }} {{ '(Overdue)' | highlight if (a.due | date('fromNow')).includes('ago')}}</dd>
                     {% endif %}
                 </dl>
               </div>

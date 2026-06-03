@@ -21,5 +21,5 @@ addFilter('currency', function(num) {
 })
 
 addFilter('highlight', function (content) {
-	return '<span class="app-highlight">' + content + '</span>'
+	return '<strong class="hods-highlight">' + content + '</strong>'
 }, { renderAsHtml: true })
