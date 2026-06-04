@@ -105,7 +105,7 @@ function defaultData(req) {
           "type":"query",
           "date":"04/06/2026, 11:42:46",
           "questions":["Sampling and inspection plan"],
-          "reason":"The wrong file has been uploaded"
+          "reason":"It looks like you’ve uploaded the wrong document. Please upload and submit your sampling and inspection plan again."
         },
         {
           "type":"status",
