@@ -13,7 +13,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 5,000 tonnes",
       "regulator": "England",
       "charge": "2184",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230010001PL",
       "due": "n/a"
     },
     {
@@ -27,7 +27,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 10,000 tonnes",
       "regulator": "England",
       "charge": "3276",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230020001PL",
       "due": "n/a"
     },
     {
@@ -41,7 +41,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 5,000 tonnes",
       "regulator": "England",
       "charge": "2184",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER123000001FC",
       "due": "n/a"
     },
     {
@@ -55,7 +55,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 10,000 tonnes",
       "regulator": "England",
       "charge": "3276",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230040001GR",
       "due": "n/a"
     },
     {
@@ -69,7 +69,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 5,000 tonnes",
       "regulator": "England",
       "charge": "2184",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230050001ST",
       "due": "n/a"
     },
     {
@@ -83,7 +83,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 10,000 tonnes",
       "regulator": "England",
       "charge": "3276",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230060001PL",
       "due": "n/a"
     },
     {
@@ -97,7 +97,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 5,000 tonnes",
       "regulator": "England",
       "charge": "2184",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230070001PL",
       "due": "n/a"
     },
     {
@@ -111,7 +111,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 10,000 tonnes",
       "regulator": "England",
       "charge": "3276",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230080001WO",
       "due": "n/a"
     },
     {
@@ -125,7 +125,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 5,000 tonnes",
       "regulator": "England",
       "charge": "2184",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230090001PA",
       "due": "n/a"
     },
     {
@@ -139,7 +139,7 @@ function defaultData(req) {
       "tonnageBand": "Up to 10,000 tonnes",
       "regulator": "England",
       "charge": "3276",
-      "chargeRef": "PR/PK/EXP 000568587647654",
+      "chargeRef": "A27ER1230100001AL",
       "due": "n/a"
     }
   ]
