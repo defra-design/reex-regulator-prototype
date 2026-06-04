@@ -6,15 +6,15 @@
         <h3 class="govuk-notification-banner__heading">
           Duly made
         </h3>
-        <p>The status of the application has been updated, you can <a href="assign-to-me">assign the application to yourself</a> or <a href="assign">assign to another operator</a>.</p>
+        <p>The status of this application has been updated to duly made.<br> <a href="assign-to-me">Assign this application to yourself</a> or <a href="assign">assign it to somebody else</a>.</p>
       {% endset %}
 
     {% elif data['assigned'] %}
       {% set html %}
         <h3 class="govuk-notification-banner__heading">
-          Application assigned
+          The application has been assigned
         </h3>
-        <p>{{ 'You can now progress the application' if application.owner == 'you' else 'The operator has been notified' }}</p>
+        <p>{{ 'You can now work on this application.' if application.owner == 'you' else 'The officer has been notified.' }}</p>
       {% endset %}
 
     {% elif data['due-date'] %}
@@ -29,7 +29,7 @@
         <h3 class="govuk-notification-banner__heading">
           Query sent
         </h3>
-        <p>The status of the application has been updated, you will receive a notification when the operator resubmits.</p>
+        <p>The status of this application has been updated to queried.<br> You&rsquo;ll receive a notification when the operator resubmits their application.</p>
       {% endset %}
     {% endif %}
 

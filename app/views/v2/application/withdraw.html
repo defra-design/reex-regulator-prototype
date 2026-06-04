@@ -1,6 +1,6 @@
 {% extends 'layouts/main.html' %}
 
-{% set title = 'Withdraw application' %}
+{% set title = 'Delete this application' %}
 
 {% block bannerBack %}
   {{ govukBreadcrumbs({
@@ -37,7 +37,7 @@
     name: 'withdraw-reason',
     id: 'withdraw-reason',
     label: {
-      html: 'Reason for withdrawing',
+      html: 'Reason for deletion',
       classes: 'govuk-label--m'
     }
   }) }}
@@ -46,7 +46,7 @@
 {% block buttons %}
   <div class="govuk-button-group">
     {{ govukButton({
-      text: 'Withdraw application',
+      text: 'Delete application',
       classes: 'govuk-button--warning'
     }) }}
 
