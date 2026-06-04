@@ -23,3 +23,13 @@ addFilter('currency', function(num) {
 addFilter('highlight', function (content) {
 	return '<strong class="hods-highlight">' + content + '</strong>'
 }, { renderAsHtml: true })
+
+addFilter('arrayToGovukList', (array, type) => {
+	let items = new Array()
+
+	array.forEach((item) => {
+		items.push('<li>'+item+'</li>')
+	})
+
+	return '<ul class="govuk-list '+type+'">'+items.join('')+'</ul>'
+})

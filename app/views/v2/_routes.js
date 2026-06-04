@@ -236,9 +236,18 @@ router.post('/application/query', (req, res) => {
     questions: req.session.data['query-questions'],
     reason: req.session.data['query-reason']
   })
-
   // Pass the new contact into the application
   applicationToEdit[0].audit.unshift(newQuery)
+
+  // Setup the object with a status
+  const newStatus = Object.assign({
+    type: 'status',
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+    old: applicationToEdit[0].status,
+    new: 'Queried'
+  })
+  // Pass the new status into the audit log
+  applicationToEdit[0].audit.unshift(newStatus)
 
   // Update the status of the application
   applicationToEdit[0].status = 'Queried'
@@ -246,6 +255,37 @@ router.post('/application/query', (req, res) => {
   // Enable success banner and go back to summary
   req.session.data['notification'] = 'true'
   req.session.data['queried'] = 'true'
+  res.redirect('summary')
+})
+
+router.get('/application/query-response', (req, res) => {
+  // Grab the current application
+  let applicationToEdit = req.application
+
+  // Setup the audit object with a response from the operator
+  const response = Object.assign({
+    type: 'response',
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+    previous: 'example.pdf',
+    new: 'si-plan.pdf'
+  })
+  // Pass the new response into the audit log
+  applicationToEdit[0].audit.unshift(response)
+
+  // Setup the object with a status
+  const newStatus = Object.assign({
+    type: 'status',
+    date: new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' }),
+    old: applicationToEdit[0].status,
+    new: 'In progress'
+  })
+  // Pass the new status into the audit log
+  applicationToEdit[0].audit.unshift(newStatus)
+
+  // Update the status of the application and change the SIP
+  applicationToEdit[0].status = 'In progress'
+  applicationToEdit[0].sip = 'si-plan.pdf'
+
   res.redirect('summary')
 })
 

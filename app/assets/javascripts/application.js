@@ -5,6 +5,17 @@
 
 window.GOVUKPrototypeKit.documentReady(() => {
 
+  // Hide dismissible element on dismiss link click
+  let dismiss = document.getElementById('js-dismiss')
+  let dismissible = document.getElementById('js-dismissible')
+  try {
+    dismiss.onclick = () => {
+      dismissible.style.display = 'none';
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
 
   // Upgrade any select with `.js-autocomplete` class
   let autocompletes = document.querySelectorAll('.js-autocomplete')

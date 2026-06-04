@@ -68,7 +68,7 @@
               html: 'PRN tonnage'
             },
             value: {
-              html: 'Up to 500 tonnes'
+              html: application.tonnageBand
             }
           },
           {
@@ -76,7 +76,7 @@
               html: 'Authority to issue'
             },
             value: {
-              html: '<ul class="govuk-list"><li>Jim Armstrong</li><li>Willow Armstrong</li></ul>'
+              html: material.authorised | sort | arrayToGovukList()
             }
           },
           {
@@ -84,7 +84,7 @@
               html: 'Sampling and inspection plan'
             },
             value: {
-              html: '<a href="#0">example.pdf</a>'
+              html: '<a href="#0">'+application.sip+'</a>'
             }
           }
         ]
@@ -167,4 +167,26 @@
       </div>
     {% endif %}
   </div>
+
+{% endblock %}
+
+{% block containerEnd %}
+  {% if application.status == 'Queried' %}
+    {% set prototypeOptions %}
+      <ul class="govuk-list">
+        <li>
+          <a href="query-response">Update the application to after the operator has responded</a>
+        </li>
+      </ul>
+    {% endset -%}
+
+    {{ govukNotificationBanner({
+      attributes: {
+        'id': 'js-dismissible'
+      },
+      titleHtml: 'Prototype options <a href="#0" id="js-dismiss">Hide</a>',
+      html: prototypeOptions,
+      classes: 'app-notification-banner--prototype-options'
+    }) }}
+  {% endif %}
 {% endblock %}

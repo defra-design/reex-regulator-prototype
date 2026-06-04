@@ -85,7 +85,7 @@
           html: 'PRN tonnage'
         },
         value: {
-          html: 'Up to 500 tonnes'
+          html: application.tonnageBand
         }
       },
       {
@@ -93,7 +93,7 @@
           html: 'Authority to issue'
         },
         value: {
-          html: '<ul class="govuk-list"><li>Jim Armstrong</li><li>Willow Armstrong</li></ul>'
+          html: material.authorised | sort | arrayToGovukList()
         }
       },
       {
@@ -101,7 +101,7 @@
           html: 'Sampling and inspection plan'
         },
         value: {
-          html: '<a href="#0">example.pdf</a>'
+          html: '<a href="#0">'+application.sip+'</a>'
         }
       }
     ]

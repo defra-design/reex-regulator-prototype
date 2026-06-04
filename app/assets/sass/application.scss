@@ -44,3 +44,21 @@
 		background: govuk-colour("white");
 	}
 }
+
+// Prototype options banner
+.app-notification-banner--prototype-options {
+	background-color: govuk-colour("purple");
+	border: 5px solid govuk-colour("purple");
+	@include govuk-responsive-margin(9, "top");
+
+	#js-dismiss {
+		float: right;
+		&:link,
+		&:hover,
+		&:visited {
+			color: govuk-colour("white");
+		}
+	}
+
+	a { @extend .govuk-link--no-visited-state; }
+}
