@@ -9,17 +9,17 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
+      <h1 class="govuk-heading-l govuk-!-margin-bottom-4">
         {{ title | safe }}
       </h1>
-      <p>Exploring the for regulator caseworking service, viewing and managing applications.</p>
+      <p class="govuk-body-l">Exploring the for regulator caseworking service, viewing and managing applications.</p>
 
       {% set version = "2" %}
       <h2 class="govuk-heading-m">
         Version {{version}}
         {{ govukTag({
-          classes: 'govuk-tag--blue govuk-!-margin-left-2',
-          text: 'Done'
+          classes: 'govuk-tag--yellow govuk-!-margin-left-2',
+          text: 'In review'
         }) }}
       </h2>
 
