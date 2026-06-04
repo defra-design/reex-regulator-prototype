@@ -26,9 +26,15 @@
 	}
 }
 
-.hods-page {
-	// Override the display as it breaks the page
-	display: block;
+html {
+	// HODS is applying a backgroud as important to the html, override it
+	background: govuk-functional-colour('template-background') !important;
+}
+
+.hods-page__body {
+	// Move the background declaration here to stop it looking rubbish on short pages
+	// Don't use the page class at all as it's buggy and uses !important rules
+	background: #F5F5F5;
 }
 
 // Override any MOJ or Home Office components using Transport
