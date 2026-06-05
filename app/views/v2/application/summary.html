@@ -76,7 +76,7 @@
               html: 'Authority to issue'
             },
             value: {
-              html: material.authorised | sort | arrayToGovukList()
+              html: application.authorised | sort | arrayToGovukList()
             }
           },
           {
@@ -125,7 +125,7 @@
         <aside class="app-side__wrapper">
           <div class="app-side">
             <div class="app-side__actions">
-              {% if application.owner == 'you' %}
+              {% if application.owner == 'Alexandra Svein' %}
                 {{ govukButton({
                   html: 'Make determination',
                   href: 'determination'
@@ -142,7 +142,7 @@
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
               <ul class="govuk-list govuk-!-margin-0">
                 <li>
-                  <a class="govuk-link govuk-link--no-visited-state" href="assign">Assign the application</a>
+                  <a class="govuk-link govuk-link--no-visited-state" href="assign">{{ 'Assign' if application.assigned == 'unassigned' else 'Reassign' }} the application</a>
                 </li>
                 <li>
                   <a class="govuk-link govuk-link--no-visited-state" href="override-sla">Change the due date</a>

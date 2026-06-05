@@ -144,7 +144,7 @@ const assignApplication = function (req, res) {
   if (req.session.data['assign'] == 'Another officer') {
     owner = req.session.data['assign-name'] || 'Jonathan Slater'
   } else {
-    owner = 'you'
+    owner = 'Alexandra Svein'
   }
 
   // Setup the object with a new owner

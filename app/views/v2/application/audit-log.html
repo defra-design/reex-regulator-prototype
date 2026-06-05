@@ -62,7 +62,7 @@
           </b>
 
           <div class="govuk-task-list__hint">
-            {{ 'You on' if item.type != 'response' and item.old != 'Queried' }} {{ item.date | date('D MMMM YYYY [at] h:mma') }}
+            {{ 'Alexandra Svein on' if item.type != 'response' and item.old != 'Queried' }} {{ item.date | date('D MMMM YYYY [at] h:mma') }}
           </div>
 
           {% if item.type == 'query' or item.type == 'response' or (item.type == 'due' and item.old) %}
