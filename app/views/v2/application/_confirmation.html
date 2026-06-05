@@ -18,11 +18,11 @@
       {% endset %}
 
     {% elif data['due-date'] %}
-    {% set html %}
-      <h3 class="govuk-notification-banner__heading">
-        Due date updated
-      </h3>
-    {% endset %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Due date updated
+        </h3>
+      {% endset %}
 
     {% elif data['queried'] %}
       {% set html %}
