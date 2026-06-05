@@ -99,7 +99,7 @@ function defaultData(req) {
       "chargeRef": "A27ER123000001FC",
       "payment":"2026-08-24T00:00:00.000Z",
       "due": "2026-08-24T00:00:00.000Z",
-      "owner":"you",
+      "owner":"Alexandra Svein",
       "audit":[
         {
           "type":"query",

@@ -142,7 +142,7 @@
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
               <ul class="govuk-list govuk-!-margin-0">
                 <li>
-                  <a class="govuk-link govuk-link--no-visited-state" href="assign">{{ 'Assign' if not application.assigned else 'Reassign' }} the application</a>
+                  <a class="govuk-link govuk-link--no-visited-state" href="assign">{{ 'Reassign' if application.owner else 'Assign' }} the application</a>
                 </li>
                 <li>
                   <a class="govuk-link govuk-link--no-visited-state" href="override-sla">Change the due date</a>
