@@ -35,6 +35,7 @@ html {
 	// Move the background declaration here to stop it looking rubbish on short pages
 	// Don't use the page class at all as it's buggy and uses !important rules
 	background: #F5F5F5;
+	overflow: auto;
 }
 
 // Override any MOJ or Home Office components using Transport
