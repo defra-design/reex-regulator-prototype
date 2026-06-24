@@ -1,0 +1,41 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Application '+(application.status | lower) %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: title | safe
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p>This decision has been saved.</p>
+
+  <p>You now need to send the operator the relevant notice.</p>
+
+  <p><a href="../" class="govuk-link--no-visited-state">Return to all applications</a></p>
+{% endblock %}
+
+{% block buttons %}{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Change the due date' %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: title | safe
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  {{ govukDateInput({
+    id: 'sla',
+    namePrefix: 'sla',
+    fieldset: {
+      legend: {
+        html: 'What do you want to set as the due date?',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    }
+  }) }}
+
+  {{ govukTextarea({
+    name: 'sla-reason',
+    id: 'sla-reason',
+    rows: 3,
+    label: {
+      html: 'Reason for changing the due date',
+      classes: 'govuk-label--m'
+    }
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Save due date'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
+{% endblock %}

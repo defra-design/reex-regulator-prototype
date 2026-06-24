@@ -1,0 +1,155 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Application summary' %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: true,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    {% include './_confirmation.html' %}
+    {% include './_nav.html' %}
+
+    <div class="govuk-grid-column-full govuk-grid-column-two-thirds-from-desktop">
+      <h1 class="govuk-heading-l govuk-visually-hidden">
+        {{ title | safe }}
+      </h1>
+
+      <h2 class="govuk-heading-m">
+        Application details
+      </h2>
+
+      {{ mojAlert({
+        variant: 'success',
+        title: 'Organisation details confirmed with Companies House',
+        dismissible: false
+      }) }}
+
+      {{ govukSummaryList({
+      classes: 'govuk-summary-list--no-border',
+        rows: [
+          {
+            key: {
+              html: 'Site address'
+            },
+            value: {
+              html: application.siteAddress
+            }
+          },
+          {
+            key: {
+              html: 'Type'
+            },
+            value: {
+              html: application.type
+            }
+          },
+          {
+            key: {
+              html: 'Material'
+            },
+            value: {
+              html: application.material
+            }
+          },
+          {
+            key: {
+              html: 'PRN tonnage'
+            },
+            value: {
+              html: application.tonnageBand
+            }
+          },
+          {
+            key: {
+              html: 'Authority to issue'
+            },
+            value: {
+              html: application.authorised | sort | arrayToGovukList()
+            }
+          },
+          {
+            key: {
+              html: 'Sampling and inspection plan'
+            },
+            value: {
+              html: '<a href="#0">'+application.sip+'</a>'
+            }
+          }
+        ]
+      }) }}
+
+
+      <h2 class="govuk-heading-m">
+        Business plan
+      </h2>
+
+      {{ govukSummaryList({
+        classes: 'govuk-summary-list--no-border',
+        rows: [
+          {
+            key: {
+              html: 'New reprocessing infrastructure and maintaining existing infrastructure'
+            },
+            value: {
+              html: '80% of PRN income <br>I&rsquo;ll spend the income to...'
+            }
+          },
+          {
+            key: {
+              html: 'Building converted into accommodation'
+            },
+            value: {
+              html: '20% of PRN income <br>I&rsquo;ll spend the income to...'
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+
+
+    {% if not application.complete %}
+      {% include './_actions.html' %}
+    {% endif %}
+  </div>
+
+{% endblock %}
+
+{% block containerEnd %}
+  {% if application.status == 'Queried' %}
+    {% set prototypeOptions %}
+      <ul class="govuk-list">
+        <li>
+          <a href="query-response">Update the application to after the operator has responded</a>
+        </li>
+      </ul>
+    {% endset -%}
+
+    {{ govukNotificationBanner({
+      attributes: {
+        'id': 'js-dismissible'
+      },
+      titleHtml: 'Prototype options <a href="#0" id="js-dismiss">Hide</a>',
+      html: prototypeOptions,
+      classes: 'app-notification-banner--prototype-options'
+    }) }}
+  {% endif %}
+{% endblock %}

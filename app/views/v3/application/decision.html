@@ -1,0 +1,51 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'What is the decision of the application?' %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: 'Decision'
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  {{ govukRadios({
+    idPrefix: 'decision',
+    name: 'decision',
+    fieldset: {
+      legend: {
+        html: title | safe,
+        classes: 'govuk-fieldset__legend--l',
+        isPageHeading: true
+      }
+    },
+    items: [
+      {
+        html: 'Approved',
+        value: 'Approved'
+      },
+      {
+        html: 'Refused',
+        value: 'Refused'
+      }
+    ]
+  }) }}
+{% endblock %}

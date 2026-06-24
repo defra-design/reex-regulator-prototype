@@ -1,0 +1,90 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Duly make the application' %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: 'Duly making'
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p>Once you&rsquo;ve reviewed the application add the payment date to calculate the due date.</p>
+
+  <h2 class="govuk-heading-m">
+    Payment details
+  </h2>
+
+  {{ govukSummaryList({
+  classes: 'govuk-summary-list--no-border',
+    rows: [
+      {
+        key: {
+          html: 'Charge'
+        },
+        value: {
+          html: application.charge | currency
+        }
+      },
+      {
+        key: {
+          html: 'Paid online'
+        },
+        value: {
+          html: 'Yes'
+        }
+      } if application.chargePaidOnline == 'Yes' else {
+        key: {
+          html: 'Payment reference'
+        },
+        value: {
+          html: application.chargeRef
+        }
+      }
+    ]
+  }) }}
+
+
+  {{ govukDateInput({
+    id: 'payment',
+    namePrefix: 'payment',
+    fieldset: {
+      legend: {
+        html: 'Date of payment',
+        classes: 'govuk-fieldset__legend--s'
+      }
+    }
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Complete duly making'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
+{% endblock %}

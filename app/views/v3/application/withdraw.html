@@ -1,0 +1,55 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Withdraw this application' %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: title | safe
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p>You should only withdraw the application if asked to do so by the operator.</p>
+
+  {{ govukTextarea({
+    name: 'withdraw-reason',
+    id: 'withdraw-reason',
+    label: {
+      html: 'Reason for withdrawing',
+      classes: 'govuk-label--m'
+    }
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  <div class="govuk-button-group">
+    {{ govukButton({
+      text: 'Withdraw application',
+      classes: 'govuk-button--warning'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
+{% endblock %}

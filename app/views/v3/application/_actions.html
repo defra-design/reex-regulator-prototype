@@ -1,0 +1,59 @@
+<div class="govuk-grid-column-one-third-from-desktop">
+  <aside class="app-side__wrapper">
+    <div class="app-side">
+      <div class="app-side__actions">
+        {% if application.status == 'Not started' or application.due == 'n/a' %}
+          {{ govukButton({
+            html: 'Duly make',
+            href: 'duly-making'
+          }) }}
+          <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
+          <a class="govuk-link app-link--destructive app-link--right" href="withdraw">Withdraw</a>
+        {% elif application.owner == 'Alexandra Svein' %}
+          {{ govukButton({
+            html: 'Log decision',
+            href: 'decision'
+          }) }}
+          <a class="govuk-link govuk-link--no-visited-state" href="query">Query</a>
+          <a class="govuk-link app-link--destructive app-link--right" href="withdraw">Withdraw</a>
+        {% else %}
+          {{ govukButton({
+            html: 'Assign to yourself and start' if application.status == 'Duly made' else 'Assign to yourself',
+            href: 'assign-to-me',
+            classes: 'govuk-!-margin-0'
+          }) }}
+        {% endif %}
+
+        {% if application.dulyMade %}
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+          <ul class="govuk-list govuk-!-margin-0">
+            <li>
+              <a class="govuk-link govuk-link--no-visited-state" href="assign">{{ 'Reassign' if application.owner else 'Assign' }} the application</a>
+            </li>
+            {% if application.owner %}
+              <li>
+                <a class="govuk-link govuk-link--no-visited-state" href="unassign?unassign=true">Unassign the application</a>
+              </li>
+            {% endif %}
+            <li>
+              <a class="govuk-link govuk-link--no-visited-state" href="override-sla">Change the due date</a>
+            </li>
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
+    {# <div class="app-side">
+      <div class="app-c-metadata">
+        <dl class="app-c-metadata__list">
+          <dt class="app-c-metadata__title">Status:</dt>
+          <dd class="app-c-metadata__description">{{ application.status }}</dd>
+          <dt class="app-c-metadata__title">Assigned to:</dt>
+          <dd class="app-c-metadata__description">{{ application.owner | d('Unassigned') | title }}</dd>
+          <dt class="app-c-metadata__title">Due on:</dt>
+          <dd class="app-c-metadata__description">{{ request.payment | date('add', 84, 'days') | date('D MMM YYYY') }}</dd>
+        </dl>
+      </div>
+    </div> #}
+  </aside>
+</div>

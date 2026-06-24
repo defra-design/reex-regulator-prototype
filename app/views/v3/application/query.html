@@ -1,0 +1,96 @@
+{% extends 'layouts/main.html' %}
+
+{% set title = 'Query' %}
+
+{% block bannerBack %}
+  {{ govukBreadcrumbs({
+    classes: '',
+    collapseOnMobile: false,
+    items: [
+      {
+        html: 'Applications',
+        href: currentPrototype+'/'
+      },
+      {
+        html: application.id,
+        href: 'summary'
+      },
+      {
+        html: title | safe
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% block bannerContent %}
+  {% include './_banner.html' %}
+{% endblock %}
+
+{% block questions %}
+  <h1 class="govuk-heading-l">
+    {{ title | safe }}
+  </h1>
+
+  <p>Unlock parts of the application which need to be updated. You will receive a notification once the operator resubmits.</p>
+
+  {{ govukCheckboxes({
+    idPrefix: 'query-questions',
+    name: 'query-questions',
+    classes: 'govuk-checkboxes--small',
+    fieldset: {
+      legend: {
+        html: 'Which areas do you want to query?',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    },
+    hint: {
+      html: 'This will unlock the questions for the operator to resubmit'
+    },
+    items: [
+      {
+        html: 'Authority to issue',
+        value: 'Authority to issue'
+      },
+      {
+        html: 'Business plan',
+        value: 'Business plan'
+      },
+      {
+        html: 'PRN tonnage',
+        value: 'PRN tonnage'
+      },
+      {
+        html: 'Sampling and inspection plan',
+        value: 'Sampling and inspection plan'
+      }
+    ]
+  }) }}
+
+  {{ govukTextarea({
+    name: 'query-reason',
+    id: 'query-reason',
+    label: {
+      html: 'Reason for the query',
+      classes: 'govuk-label--m'
+    },
+    hint: {
+      html: 'This will be included in the email to the operator'
+    }
+  }) }}
+{% endblock %}
+
+{% block buttons %}
+  {% if not application.owner %}
+    {{ govukInsetText({
+      html: 'Sending the query will also assign the application to you'
+    }) }}
+  {% endif %}
+
+  <div class="govuk-button-group">
+    {{ govukButton({
+      html: 'Send query'
+    }) }}
+
+    <a class="govuk-link" href="javascript:history.back()">Cancel</a>
+  </div>
+{% endblock %}

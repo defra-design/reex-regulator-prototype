@@ -14,7 +14,7 @@
       </h1>
       <p class="govuk-body-l">Exploring the regulator caseworking service, viewing and managing applications.</p>
 
-      {% set version = "2" %}
+      {% set version = "3" %}
       <h2 class="govuk-heading-m">
         Version {{version}}
         {{ govukTag({
@@ -23,19 +23,43 @@
         }) }}
       </h2>
 
-      <p>Removes the ability to view and process tasks, moves the system to be more of an  application tracker. Adds the ability to assign an application to yourself or another, withdraw, query, and override the due date.</p>
-
-      <p>Brings in Defra branding and aims to match functionality with what has been developed so far.</p>
+      <p class="govuk-!-margin-bottom-2">Updates based on feedback from user research and stakeholder review, including:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>submission date added to card for applications that have not been duly made</li>
+        <li>organisation name more prominent on cards</li>
+        <li>
+          duly making process updated to start from application summary, which:
+          <ul class="govuk-list govuk-list--bullet">
+            <li>gives access to other actions like query and withdraw</li>
+            <li>means the application has to be manually moved to in progress, either when assigning to yourself or another, or if assigned to you and still in duly making</li>
+          </ul>
+        <li>adding an option to unassign a case</li>
+        <li>withdraw option added to applications</li>
+        <li>changing language from determination to decision</li>
+        <li>removing rejected option from decisions</li>
+      </ul>
 
       {{ govukButton({
         text: 'View prototype',
-        href: 'v'+version+'/start?branded=true'
+        href: 'v'+version+'/start'
       }) }}
 
 
 
 
 
+
+      {% set v2HTML %}
+        {% set version = "2" %}
+        <p>Removes the ability to view and process tasks, moves the system to be more of an  application tracker. Adds the ability to assign an application to yourself or another, withdraw, query, and override the due date.</p>
+
+        <p>Brings in Defra branding and aims to match functionality with what has been developed so far.</p>
+
+        {{ govukButton({
+          text: 'View prototype',
+          href: 'v'+version+'/start?branded=false'
+        }) }}
+      {% endset %}
 
       {% set v1HTML %}
         {% set version = "1" %}
@@ -51,6 +75,14 @@
         id: 'previous',
         classes: 'govuk-!-margin-top-9',
         items: [
+          {
+            heading: {
+              html: 'Version 2 <strong class="govuk-tag govuk-tag--green govuk-!-margin-left-2">Researched</strong>'
+            },
+            content: {
+              html: v1HTML
+            }
+          },
           {
             heading: {
               html: 'Version 1 <strong class="govuk-tag govuk-tag--green govuk-!-margin-left-2">Researched</strong>'

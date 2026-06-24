@@ -1,0 +1,67 @@
+{# Temp notification banner for any changes #}
+{% if data['notification'] %}
+  <div class="govuk-grid-column-full">
+    {% if data['duly-made'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Duly made
+        </h3>
+        <p>The status of this application has been updated to duly made.
+          {# {% if not application.owner %}
+          <br> <a href="assign-to-me">Assign this application to yourself</a> or <a href="assign">assign it to somebody else</a>.
+          {% endif %} #}
+        </p>
+      {% endset %}
+
+    {% elif data['unassign'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          The application has been unassigned
+        </h3>
+      {% endset %}
+
+    {% elif data['assigned'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          The application has been assigned
+        </h3>
+        <p>{{ 'You can now work on this application.' if application.owner == 'Alexandra Svein' else 'The officer has been notified.' }}</p>
+      {% endset %}
+
+    {% elif data['due-date'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Due date updated
+        </h3>
+      {% endset %}
+
+    {% elif data['queried'] %}
+      {% set html %}
+        <h3 class="govuk-notification-banner__heading">
+          Query sent
+        </h3>
+        <p>The status of this application has been updated to queried.
+          <br> You&rsquo;ll receive a notification when the operator resubmits their application.
+        </p>
+      {% endset %}
+    {% endif %}
+
+    {{ govukNotificationBanner({
+      html: html,
+      type: 'success'
+    }) }}
+  </div>
+{% endif %}
+
+{% if application.complete %}
+  <div class="govuk-grid-column-full">
+    {% set html %}
+      <h3 class="govuk-notification-banner__heading">
+        This application was {{ application.status | lower }} on {{ d | date }}
+      </h3>
+    {% endset %}
+    {{ govukNotificationBanner({
+      html: html
+    }) }}
+  </div>
+{% endif %}

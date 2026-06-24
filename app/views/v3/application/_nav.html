@@ -1,0 +1,17 @@
+<div class="govuk-grid-column-full">
+  {{
+    dwpHorizontalNavigation({
+      selectedItem: currentPage,
+      items: [
+        {
+          text: 'Application summary',
+          href: currentPrototype+'/application/summary'
+        },
+        {
+          text: 'Application history',
+          href: currentPrototype+'/application/history'
+        }
+      ]
+    })
+  }}
+</div>

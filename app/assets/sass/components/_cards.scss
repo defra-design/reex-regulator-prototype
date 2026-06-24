@@ -33,7 +33,7 @@
 	}
 
 	.govuk-task-list__hint {
-		@include govuk-responsive-margin(1	, "top");
+		@include govuk-responsive-margin(2	, "top");
 		p {
 			@include govuk-responsive-margin(1, "bottom");
 		}
