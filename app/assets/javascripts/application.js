@@ -54,4 +54,10 @@ window.GOVUKPrototypeKit.documentReady(() => {
   })
 
 
+  // Mobile toggle of filters
+  document.getElementById('filter-and-sort').onclick = function() {
+    document.getElementById('app-c-filter-panel').classList.toggle('app-c-filter-panel--collapsed');
+  }
+
+
 })

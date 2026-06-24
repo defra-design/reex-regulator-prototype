@@ -278,17 +278,20 @@
 
 	clip-path: unset;
 
-	transform: translateY(-25%) rotate(135deg) scale(1);
+	transform: translateY(30%) rotate(-45deg) scale(1);
 }
 
-.app-c-filter-section[open] .app-c-filter-section__summary::before {
-	transform: translateY(30%) rotate(-45deg) scale(1);
+.app-c-filter-panel--collapsed .app-c-filter-section__summary::before {
+	transform: translateY(-25%) rotate(135deg) scale(1);
 }
 
 .js-enabled .app-c-filter-panel__backdrop {
 	display: none;
 }
 
+.app-c-filter-panel__sections {
+	display: block;
+}
 .js-enabled .app-c-filter-panel--collapsed .app-c-filter-panel__sections {
 	display: none;
 }
