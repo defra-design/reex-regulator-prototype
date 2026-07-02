@@ -31,7 +31,7 @@
     {{ title | safe }}
   </h1>
 
-  <p>Unlock parts of the application which need to be updated. You will receive a notification once the operator resubmits.</p>
+  <p>Unlock parts of the application that need to be updated. You&rsquo;ll get a notification when the operator resubmits.</p>
 
   {{ govukCheckboxes({
     idPrefix: 'query-questions',
@@ -44,7 +44,7 @@
       }
     },
     hint: {
-      html: 'This will unlock the questions for the operator to resubmit'
+      html: 'This will unlock the questions for the operator to resubmit.'
     },
     items: [
       {
@@ -74,7 +74,7 @@
       classes: 'govuk-label--m'
     },
     hint: {
-      html: 'This will be included in the email to the operator'
+      html: 'This will be included in the email to the operator.'
     }
   }) }}
 {% endblock %}
@@ -82,7 +82,7 @@
 {% block buttons %}
   {% if not application.owner %}
     {{ govukInsetText({
-      html: 'Sending the query will also assign the application to you'
+      html: 'When you send the query, the application will also be assigned to you.'
     }) }}
   {% endif %}
 
