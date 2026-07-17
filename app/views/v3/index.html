@@ -71,10 +71,10 @@
                           <dd>{{ a.owner | d('Unassigned') | title }}</dd>
                       {% endif %}
                       {% if a.due == 'n/a' %}
-                        <dt>Submitted on:</dt>
+                        <dt>Submitted:</dt>
                         <dd>{{ a | date('subtract', loop.index*0.1, 'day') | date('D MMM YYYY') }}</dd>
                       {% else %}
-                        <dt>Due on:</dt>
+                        <dt>Due date:</dt>
                           <dd>{{ a.due | date('D MMM YYYY') }} {{ '(Overdue)' | highlight if (a.due | date('fromNow')).includes('ago')}}</dd>
                       {% endif %}
                     {% endif %}

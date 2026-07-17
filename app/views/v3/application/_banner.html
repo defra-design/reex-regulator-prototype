@@ -10,7 +10,7 @@
     <dt>Assigned to:</dt>
       <dd>{{ application.owner | d('Unassigned') | title }}</dd>
     {% if application.due != 'n/a' %}
-      <dt>Due on:</dt>
+      <dt>Due date:</dt>
         <dd>{{ application.due | date('D MMMM YYYY') }}</dd>
     {% endif %}
   {% endif %}

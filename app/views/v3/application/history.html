@@ -62,7 +62,7 @@
           </b>
 
           <div class="govuk-task-list__hint">
-            {{ 'Alexandra Svein on' if item.type != 'response' and item.old != 'Queried' }} {{ item.date | date('D MMMM YYYY [at] h:mma') }}
+            {{ 'Alexandra Svein at' if item.type != 'response' and item.old != 'Queried' }} {{ item.date | date('h:mma [on] D MMMM YYYY') }}
           </div>
 
           {% if item.type == 'query' or item.type == 'response' or (item.type == 'due' and item.old) %}
@@ -140,7 +140,7 @@
         <b>Application submitted</b>
 
         <div class="govuk-task-list__hint">
-          Harry Edge on {{ d | date('subtract', loop.index*1.5, 'day') | date('D MMM YYYY') }} at 2:17pm
+          Harry Edge at 2:17pm on {{ d | date('subtract', loop.index*1.5, 'day') | date('D MMMM YYYY') }}
         </div>
       </div>
     </li>
